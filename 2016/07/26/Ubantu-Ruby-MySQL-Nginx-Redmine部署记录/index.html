@@ -43,7 +43,7 @@
 <meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/20.png">
 <meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/21.png">
 <meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/22.png">
-<meta property="og:updated_time" content="2016-08-25T07:10:06.762Z">
+<meta property="og:updated_time" content="2016-08-25T07:30:36.996Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu + Ruby + MySQL + Nginx + Redmine部署记录">
 <meta name="twitter:description" content="学习Ubuntu和CentOS的不同，第一次用Ubuntu-Server去部署服务器，由于和CentOS有很大的不同，踩了不少坑，因此把部署过程记录分享给大家。">
@@ -385,7 +385,7 @@
 <p>2.打开Gemfile，将source文件替换为淘宝源，保存退出。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># vim /opt/nginx/Gemfile</span></div><div class="line">root<span class="comment"># source 'https://ruby.taobao.org'</span></div></pre></td></tr></table></figure>
 <p>如下图所示<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/19.png" alt="图片19"><br>3.设置数据库基本用户名，密码等</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; CREATE DATABASE redmine CHARACTER SET utf8;</div><div class="line">&gt; CREATE USER <span class="string">'redmine'</span>@<span class="string">'localhost'</span> IDENTIFIED BY <span class="string">'my_password'</span>; root<span class="comment"># 这里的my_password是你的redmine数据库账号的密码</span></div><div class="line">&gt; GRANT ALL PRIVILEGES ON redmine.* TO <span class="string">'redmine'</span>@<span class="string">'localhost'</span>;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; CREATE DATABASE redmine CHARACTER SET utf8;</div><div class="line">&gt; CREATE USER <span class="string">'redmine'</span>@<span class="string">'localhost'</span> IDENTIFIED BY <span class="string">'my_password'</span>; // 这里的my_password是你的redmine数据库账号的密码</div><div class="line">&gt; GRANT ALL PRIVILEGES ON redmine.* TO <span class="string">'redmine'</span>@<span class="string">'localhost'</span>;</div></pre></td></tr></table></figure>
 <p>4.设置连接数据库</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># cp config/databse.yml.example config/database.yml   #获取配置文件</span></div><div class="line">root<span class="comment"># vim config/database.yml</span></div></pre></td></tr></table></figure>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于是用于生产环境，只用修改一处地方即可，修改并保存。<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/20.png" alt="图片20"><br>5.下面开始进行一些依赖包的安装，返回到redmine-3.3.0目录，根据<code>bundle install --without development test</code>的提示来安装，缺少什么就装什么，每装完一个就运行一次这条命令，详细看看报错信息就知道缺少什么依赖包没装。</p>
