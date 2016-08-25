@@ -43,7 +43,7 @@
 <meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/20.png">
 <meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/21.png">
 <meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/22.png">
-<meta property="og:updated_time" content="2016-08-25T07:30:36.996Z">
+<meta property="og:updated_time" content="2016-08-25T07:37:00.021Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu + Ruby + MySQL + Nginx + Redmine部署记录">
 <meta name="twitter:description" content="学习Ubuntu和CentOS的不同，第一次用Ubuntu-Server去部署服务器，由于和CentOS有很大的不同，踩了不少坑，因此把部署过程记录分享给大家。">
@@ -395,7 +395,7 @@
 <p>7.生成redmine的数据库表结构和初始化数据</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># RAILS_ENV=production rake db:migrate    //生成表结构</span></div><div class="line">root<span class="comment"># RAILS_ENV=production rake redmine:load_default_data //初始化数据</span></div></pre></td></tr></table></figure>
 <p><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/22.png" alt="图片22"><br>8.创建上传文件的目录和设置文件夹的权限</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">useradd redmine</div><div class="line">passwd redmine  //设置redmine账户的密码</div><div class="line">mkdir -p tmp tmp/pdf public/plugin_assets/</div><div class="line">chown -R redmine:redmine files <span class="built_in">log</span> tmp public/plugin_assets</div><div class="line">chmod -R 755 files <span class="built_in">log</span> tmp public/plugin_assets/</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># useradd redmine</span></div><div class="line">root<span class="comment"># passwd redmine  //设置redmine账户的密码</span></div><div class="line">root<span class="comment"># mkdir -p tmp tmp/pdf public/plugin_assets/</span></div><div class="line">root<span class="comment"># chown -R redmine:redmine files log tmp public/plugin_assets</span></div><div class="line">root<span class="comment"># chmod -R 755 files log tmp public/plugin_assets/</span></div></pre></td></tr></table></figure>
 <p>9.测试redmine的安装</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># ruby bin/rails server webrick -e production</span></div></pre></td></tr></table></figure>
 <p>10.在nginx目录中将redmine目录迁移过去，重启nginx</p>
