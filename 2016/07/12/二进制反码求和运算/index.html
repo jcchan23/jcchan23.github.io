@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html >
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="JCChan" />
+
+
+
+<meta name="description" content="今天在准备给工作室的小朋友们培训计算机网络的传输层，重新打开谢希仁老师的书，看到UDP检验和的计算时，突然发现自己对这个二进制反码求和运算不是特别熟悉，因此特地花了一个下午的时间去研究。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二进制反码求和运算">
+<meta property="og:url" content="http://yoursite.com/2016/07/12/二进制反码求和运算/index.html">
+<meta property="og:site_name" content="JCChan's Blog">
+<meta property="og:description" content="今天在准备给工作室的小朋友们培训计算机网络的传输层，重新打开谢希仁老师的书，看到UDP检验和的计算时，突然发现自己对这个二进制反码求和运算不是特别熟悉，因此特地花了一个下午的时间去研究。">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/binary_complement_operation/1.jpg">
+<meta property="og:updated_time" content="2016-08-25T06:59:27.193Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二进制反码求和运算">
+<meta name="twitter:description" content="今天在准备给工作室的小朋友们培训计算机网络的传输层，重新打开谢希仁老师的书，看到UDP检验和的计算时，突然发现自己对这个二进制反码求和运算不是特别熟悉，因此特地花了一个下午的时间去研究。">
+<meta name="twitter:image" content="http://o9whp01jf.bkt.clouddn.com/Images/binary_complement_operation/1.jpg">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="JCChan&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>二进制反码求和运算 | JCChan&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/head.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">JCChan</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/categories/随笔">随笔</a></li>
+                        
+                            <li><a href="/categories/chemistry">化学</a></li>
+                        
+                            <li><a href="/categories/maths">数学</a></li>
+                        
+                            <li><a href="/categories/computer">计算机</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" href="https://github.com/jcchan23" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/chen-jian-wen-87" title="知乎"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Networks/">Networks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/装机/">装机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机基础/">计算机基础</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://ce.sysu.edu.cn/hope">厚朴〖HOPE〗工作室</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">化学、数学、计算机</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">JCChan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/head.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">JCChan</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/随笔">随笔</a></li>
+                
+                    <li><a href="/categories/chemistry">化学</a></li>
+                
+                    <li><a href="/categories/maths">数学</a></li>
+                
+                    <li><a href="/categories/computer">计算机</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/jcchan23" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/chen-jian-wen-87" title="知乎"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-二进制反码求和运算" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/12/二进制反码求和运算/" class="article-date">
+      <time datetime="2016-07-12T14:28:50.000Z" itemprop="datePublished">2016-07-12</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      二进制反码求和运算
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Maths/">Maths</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机基础/">计算机基础</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;周四要给工作室的小朋友们继续培训计算机网络，要讲的内容是传输层，于是今天就在准备相应的材料，重新看回谢希仁老师的课本过程中又加深了一点理解，然后看到了当时碰到的第一个难点，<strong>UDP协议的校验和的计算</strong>。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其实本质上来说这个计算原理还是不难的，就是一个二进制反码求和运算，具体来说就是。<br>$$ 0 + 0 = 0 $$</p>
+<p>$$ 1 + 0 = 0 + 1 = 1 $$</p>
+<p>$$ 1 + 1 = 10 $$</p>
+<p>$$其中10中的1加到了下一列去，如果是最高列的1+1，那么得到的10留下0,1移到最低列，与最低位再做一次二进制加法即可。$$<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在谢老师的这本书里，讲到的是一个15字节的UDP数据在发送方怎么进行数据的检验，然后列出了一个二进制的竖式并给出一个结果，然而并没有讲述是怎么计算出来的。经过我不断的努力，终于把二进制计算的过程整个写出来了。之前在数计院上课的时候，老师讲过一个较为之简单的十六进制计算法，对比之下确实是简单很多。好了，先上图。<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/binary_complement_operation/1.jpg" alt="图片1"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;谢老师在课本里面给出的题目是这样子的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">二进制版</div><div class="line">1001 1001 0001 0011 //伪首部源IP地址前16位</div><div class="line">0000 1000 0110 1000 //伪首部源IP地址后16位</div><div class="line">1010 1011 0000 0011 //伪首部目的IP地址前16位</div><div class="line">0000 1110 0000 1011 //伪首部目的IP地址后16位</div><div class="line">0000 0000 0001 0001 //伪首部UDP协议字段代表号17，前面8位是填充0</div><div class="line">0000 0000 0000 1111 //伪首部UDP长度字段</div><div class="line">0000 0100 0011 1111 //UDP头部源IP地址对应的进程端口号</div><div class="line">0000 0000 0000 1101 //UDP头部目的IP地址对应的进程端口号</div><div class="line">0000 0000 0000 1111 //UDP头部UDP长度字段</div><div class="line">0000 0000 0000 0000 //UDP头部UDP检验和</div><div class="line">0101 0100 0100 0101 //数据字段</div><div class="line">0101 0011 0101 0100 //数据字段</div><div class="line">0100 1001 0100 1110 //数据字段</div><div class="line">0100 0111 0000 0000 //数据字段+填充0字段</div><div class="line">   </div><div class="line">十六进制版</div><div class="line">9913        //伪首部源IP地址前16位</div><div class="line">0868        //伪首部源IP地址后16位</div><div class="line">AB03        //伪首部目的IP地址前16位</div><div class="line">0E0B        //伪首部目的IP地址后16位</div><div class="line">0011        //伪首部UDP协议字段代表号17，前面8位是填充0</div><div class="line">000F        //伪首部UDP长度字段</div><div class="line">043F        //UDP头部源IP地址对应的进程端口号</div><div class="line">000D        //UDP头部目的IP地址对应的进程端口号</div><div class="line">000F        //UDP头部UDP长度字段</div><div class="line">0000        //UDP头部UDP检验和</div><div class="line">5445        //数据字段</div><div class="line">5354        //数据字段</div><div class="line">494E        //数据字段</div><div class="line">4700        //数据字段+填充0字段</div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在二进制版中，是<strong>不可以直接从右边第一列开始做竖式相加的</strong>，不要说十进制的竖式相加，二进制的竖式相加都做不到。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正确的做法是：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(1) 让第一行和第二行做二进制反码运算。</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据上述的规则，当碰到1+1=10时，在左邻侧一列下面写个小1(类似以前做十进制进位加法)，然后侧列进行二进制反码运算得出一个数，如果没有进位，就继续与刚才的进位做二进制反码运算，如果有进位，则先把进位的小1写在相邻高侧列的下方，取个位来与其相加。有进位的只有1+1=10的情况，0不论加什么进位都不会有进位，而如果第一次计算没有进位时，只有产生1的情况下才会有进位，总而言之，对于每一列，都只会有<strong>至多一次的进位</strong>，所以不用担心进位会跨列的问题。这样子做要注意的就是不要写错数字了，比如我自己在写这张纸之前已经打过两次草稿了，然而还是会写错。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于高位有1的情况，就是把1挪到最低位，再做一次二进制反码计算，本质来说就是取补码。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(2) 将第一行和第二行的结果与第三行做二进制反码计算，以此类推。</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(3) 运算结果取反，得到校验和。</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在十六进制版中，运算量会大大减小，主要的计算步骤如下：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(1) 从右边第一列开始，按照十进制来计算第一列的值。</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这里第一列算出来是107，写成8位二进制就是01101011。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(2) 根据算出来的结果分成两部分，左边的4位化成十进制，作为下一列进位时加的数，右边4位化成16进制，作为第一列的结果。</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里就是6<sub>10</sub>B<sub>16</sub>，图片误算成D，6作为下一列运算时要加上的对象，B作为第一列的结果。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(3) 十进制计算第二列的结果，加上第一列得到的进位得到第二列的一个十进制数字，化为二进制，根据第二步来进行判断，依次类推。</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这里第二列算到的是24，加上6就是30，化为8位二进制就是00011110，也就是1E，第二列的结果为1，第三列的十进制进位为1。接着可以算到第三列的结果为6，十进制进位为4。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(4) 最高位算出最后的十进制结果后，化为二进制时，右边4位作为最终结果，左边4位移入下一列，用上一步得到的结果96EB，加上0010，得到最后结果，这里图片的最后一步写错了，不应该舍弃。</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最后能得到结果为96ED。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>(5) 结果取反，得到校验码。</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校验码为6912。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;好了这次先针对这个特定的问题提出了解决方案，有时间要好好整理下关于计算机的原码、反码和补码的知识。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/07/26/Ubantu-Ruby-MySQL-Nginx-Redmine部署记录/">
+                    Ubuntu + Ruby + MySQL + Nginx + Redmine部署记录
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/07/11/由VMnet引起的browser-sync故障解决方案/">
+                    由VMnet引起的browser-sync故障解决方案
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"二进制反码求和运算　| JCChan's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/07/12/二进制反码求和运算/" data-title="二进制反码求和运算" data-url="http://yoursite.com/2016/07/12/二进制反码求和运算/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"jcchan23"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/07/26/Ubantu-Ruby-MySQL-Nginx-Redmine部署记录/" title="上一篇: Ubuntu + Ruby + MySQL + Nginx + Redmine部署记录">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/07/11/由VMnet引起的browser-sync故障解决方案/" title="下一篇: 由VMnet引起的browser-sync故障解决方案">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/26/Ubantu-Ruby-MySQL-Nginx-Redmine部署记录/">Ubuntu + Ruby + MySQL + Nginx + Redmine部署记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/12/二进制反码求和运算/">二进制反码求和运算</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/11/由VMnet引起的browser-sync故障解决方案/">由VMnet引起的browser-sync故障解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/Gen8折腾日记（一）/">Gen8折腾日记（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/06/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 JCChan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+             title: "a.article-title, .article-more-link a", 
+             post: ".article-entry a[href], .copyright a[href]", 
+             tags: ".article-tag a", 
+             categories: ".article-category a, a.tag-list-link", 
+             articleNav: "#article-nav a, #post-nav-button a", 
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+             menu: ".header-menu a", 
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

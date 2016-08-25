@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html >
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="JCChan" />
+
+
+
+<meta name="description" content="学习Ubuntu和CentOS的不同，第一次用Ubuntu-Server去部署服务器，由于和CentOS有很大的不同，踩了不少坑，因此把部署过程记录分享给大家。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu + Ruby + MySQL + Nginx + Redmine部署记录">
+<meta property="og:url" content="http://yoursite.com/2016/07/26/Ubantu-Ruby-MySQL-Nginx-Redmine部署记录/index.html">
+<meta property="og:site_name" content="JCChan's Blog">
+<meta property="og:description" content="学习Ubuntu和CentOS的不同，第一次用Ubuntu-Server去部署服务器，由于和CentOS有很大的不同，踩了不少坑，因此把部署过程记录分享给大家。">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/1.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/2.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/3.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/4.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/5.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/6.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/7.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/8.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/9.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/10.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/11.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/12.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/13.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/14.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/15.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/16.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/17.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/18.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/19.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/20.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/21.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/22.png">
+<meta property="og:updated_time" content="2016-08-25T07:10:06.762Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ubuntu + Ruby + MySQL + Nginx + Redmine部署记录">
+<meta name="twitter:description" content="学习Ubuntu和CentOS的不同，第一次用Ubuntu-Server去部署服务器，由于和CentOS有很大的不同，踩了不少坑，因此把部署过程记录分享给大家。">
+<meta name="twitter:image" content="http://o9whp01jf.bkt.clouddn.com/Images/redmine/1.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="JCChan&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Ubuntu + Ruby + MySQL + Nginx + Redmine部署记录 | JCChan&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/head.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">JCChan</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/categories/随笔">随笔</a></li>
+                        
+                            <li><a href="/categories/chemistry">化学</a></li>
+                        
+                            <li><a href="/categories/maths">数学</a></li>
+                        
+                            <li><a href="/categories/computer">计算机</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" href="https://github.com/jcchan23" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/chen-jian-wen-87" title="知乎"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Networks/">Networks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/装机/">装机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机基础/">计算机基础</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://ce.sysu.edu.cn/hope">厚朴〖HOPE〗工作室</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">化学、数学、计算机</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">JCChan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/head.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">JCChan</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/随笔">随笔</a></li>
+                
+                    <li><a href="/categories/chemistry">化学</a></li>
+                
+                    <li><a href="/categories/maths">数学</a></li>
+                
+                    <li><a href="/categories/computer">计算机</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/jcchan23" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/chen-jian-wen-87" title="知乎"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Ubantu-Ruby-MySQL-Nginx-Redmine部署记录" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/26/Ubantu-Ruby-MySQL-Nginx-Redmine部署记录/" class="article-date">
+      <time datetime="2016-07-25T16:03:09.000Z" itemprop="datePublished">2016-07-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Ubuntu + Ruby + MySQL + Nginx + Redmine部署记录
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Computer/">Computer</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;周五的时候老大布置了一个任务下来，要部署一个Redmine用于研发部，同时升级工作室的Redmine，于是正好试试另外一套Linux系统——Ubuntu，毕竟和CentOS的命令差别还是有一点的。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;先说说配置吧。<br>(1) 操作系统：Ubuntus 16.04 LTS，内存2GB，2vCPUs，60GB硬盘，都是一些基本配置。<br>(2) rvm + ruby-2.3.1 + rails<br>(3) MySQL-Server-5.7.0<br>(4) Nginx<br>(5) Redmine-3.3.0<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;接下来开始讲讲部署过程。<br>1.在虚拟机中选好标准配置。<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/1.png" alt="图片1"><br>2.下载<a href="http://www.ubuntu.com/download/server" target="_blank" rel="external">ubuntu-16.04-server-amd64.iso</a>,默认会选择国内大学的ftp站点，因此速度杠杠的，装入虚拟光驱，调整固件从光驱启动，进入以后选择英文安装界面。<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/2.png" alt="图片2"><br>3.由于有CentOS基础，分区的步骤就不再多做详细的介绍，分配一个swap分区，一个boot分区，剩下留给根分区即可。<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/3.png" alt="图片3"><br>4.差不多安装到最后一步的时候，由于默认就是服务器版的，不存在要选择图形界面的问题，<strong>这里与CentOS最大的不同就是Ubuntu要手动安装SSH服务器，不然后面要手动安装</strong>，SSH是远程的时候必须的，安装上。<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/4.png" alt="图片4"><br>5.在Ubuntu安装过程中会有一步让你创建一个账户来控制机器，这里创建了一个账户，所以也就以这个账户登录，这里就有与CentOS的第二点不同，<strong>root账户密码哪去了？</strong>事实上，在这个时候root密码应该是空的，但是当你su进去的时候发现不对。事实上，可以使用sudo passwd root修改root密码，而且在这里是必须这样做，在写博客之前我就曾经用过普通账号进行部署，结果卡在最后一步，<strong>编译的程序由于没有权限无法启动</strong>，所以后面的操作中，建议类似CentOS一样，<strong>直接用root账户进行操作</strong>。这里我还做了一个事情就是用了XShell重新登录，是因为我是在实验室远程回宿舍的电脑，宿舍电脑再打开VMware来操作，<strong>直接操作的话会发现莫名其妙字符输入多，或者是在图形界面下鼠标无法使用的情况</strong>，应该是远程协议使用了TCP的缘故吧，这在Linux里面敲密码是非常麻烦的一个事情。<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/5.png" alt="图片5"></p>
+<p><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/6.png" alt="图片6"><br>6.更新一遍软件包列表，使用命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># apt-get update  //普通用户下为sudo apt-get update，后同，除非特殊注明。</span></div><div class="line">root<span class="comment"># apt-get upgrade</span></div></pre></td></tr></table></figure>
+<p><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/7.png" alt="图片7"><br>7.我个人推荐的安装参考顺序为<strong>rvm→ruby→rails→Nginx→MySQL→Redmine</strong>，因此我也按照这个顺序来介绍部署过程。</p>
+<h3 id="Rvm-Ruby-Rails"><a href="#Rvm-Ruby-Rails" class="headerlink" title="Rvm+Ruby+Rails"></a>Rvm+Ruby+Rails</h3><p>1.rvm是用于管理多个ruby版本的一个管理器，用它安装ruby是最为合适的，虽然可以直接<code>apt-get install ruby</code>，但是这样子做依赖关系就比较麻烦，因此推荐还是从rvm开始安装起。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3</span></div><div class="line">root<span class="comment"># curl -sSL https://get.rvm.io | bash -s stable</span></div><div class="line">root<span class="comment"># curl -L https://raw.githubusercontent.com/wayneeseguin/rvm/master/binscripts/rvm-installer | bash -s stable	//如果上面的连接失败，可以尝试:</span></div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装完以后会显示这个页面代表着安装成功！<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/8.png" alt="图片8"><br>2.载入Rvm环境。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># source /etc/profile.d/rvm.sh</span></div></pre></td></tr></table></figure>
+<p>3.检查Rvm是否安装成功。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># root@shopREDcngua001:~root# rvm -v</span></div><div class="line">rvm 1.27.0 (latest) by Wayne E. Seguin &lt;wayneeseguin@gmail.com&gt;, Michal Papis &lt;mpapis@gmail.com&gt; [https://rvm.io/]</div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这样就代表环境变量设置成功！<br>4.用Rvm安装ruby环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># rvm requirements    //此时会更新一大堆的依赖包，耐心等待即可。</span></div></pre></td></tr></table></figure>
+<p>如下图所示</p>
+<p><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/9.png" alt="图片9"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># rvm install 2.3.0   //安装较为稳定的2.3.0版本，也需要一定时间，耐心等待即可。</span></div></pre></td></tr></table></figure>
+<p>如下图所示<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/10.png" alt="图片10"><br>5.设置ruby默认版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># rvm use 2.3.0 --default</span></div></pre></td></tr></table></figure>
+<p>6.由于某些原因，调整gem安装目录至国内镜像，在这里衷心感谢ruby-china的支持！当然，这里也可以改成淘宝的镜像，有且仅有一个就好！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org</span></div><div class="line">root<span class="comment"># gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org</span></div><div class="line">root<span class="comment"># gem sources -l	//查看在用的gem源</span></div></pre></td></tr></table></figure>
+<p>7.安装bundlers</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># gem install bundler</span></div></pre></td></tr></table></figure>
+<p>8.安装rails</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># gem install rails</span></div></pre></td></tr></table></figure>
+<p>9.检查各个安装包版本<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/11.png" alt="图片11"><br>10.可做适当的升级</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># gem update --system</span></div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;至此第一部分安装已经完毕。</p>
+<h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于nginx和ruby之间，以及passenger之间有依赖关系，查看网络上的安装配置，最后发现不能够直接apt-get install来安装，要从passenger中进行安装，步骤如下。<br>1.安装passenger</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># gem install passenger</span></div></pre></td></tr></table></figure>
+<p>2.安装curl模块</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># apt-get install libcurl4-openssl-dev</span></div></pre></td></tr></table></figure>
+<p>3.使用passenger自带的一个命令来安装nginx，这句命令会自己下载最新版的nginx和编译的passenger module</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># passenger-install-nginx-module</span></div></pre></td></tr></table></figure>
+<p><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/12.png" alt="图片12"><br><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/13.png" alt="图片13"><br>4.这里选择1，自动帮我们安装即可。<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/14.png" alt="图片14"><br>5.安装开始以后会先需要安装PCRE，后面我们手动安装PCRE，所以在这里先跳过。<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/15.png" alt="图片15"><br>6.设定安装目录，默认即可，这一步确认后也是有不少东西安装，耐心等待即可。<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/16.png" alt="图片16"><br>7.安装成功界面！<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/17.png" alt="图片17"><br>8.下面开始手动安装PCRE，切换到/opt/nginx</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># wget https://sourceforge.net/projects/pcre/files/pcre/8.39/pcre-8.39.tar.gz</span></div><div class="line">root<span class="comment"># tar -zxvf pcre-8.39.tar.gz</span></div><div class="line">root<span class="comment"># cd pcre-8.39</span></div><div class="line">root<span class="comment"># ./configure</span></div><div class="line">root<span class="comment"># make &amp; make install	//万幸这个手动安装没有报错</span></div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;后来发现这个安装好像没有成功，因为本次也用不上这个，所以暂时没管它。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;至此nginx安装已经全部完毕。</p>
+<h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><p>1.MySQL是几个安装包里面最为简单的一个，只需一条命令即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># apt-get install mysql-server</span></div></pre></td></tr></table></figure>
+<p>2.安装过程中会有要求输入MySQL的root密码，这个是登录MySQL用的。<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/18.png" alt="图片18"><br>3.测试mysql-server是否安装成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># mysql -u root -p</span></div><div class="line">root<span class="comment"># password:   //输入刚才设置的root密码。</span></div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;达到这里时就代表安装成功！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># mysql&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="Redmine"><a href="#Redmine" class="headerlink" title="Redmine"></a>Redmine</h3><p>1.切换到/opt目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># wget http://www.redmine.org/releases/redmine-3.3.0.tar.gz</span></div><div class="line">root<span class="comment"># tar -zxvf redmine-3.3.0.tar.gz</span></div><div class="line">root<span class="comment"># cd redmine-3.3.0</span></div></pre></td></tr></table></figure>
+<p>2.打开Gemfile，将source文件替换为淘宝源，保存退出。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># vim /opt/nginx/Gemfile</span></div><div class="line">root<span class="comment"># source 'https://ruby.taobao.org'</span></div></pre></td></tr></table></figure>
+<p>如下图所示<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/19.png" alt="图片19"><br>3.设置数据库基本用户名，密码等</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; CREATE DATABASE redmine CHARACTER SET utf8;</div><div class="line">&gt; CREATE USER <span class="string">'redmine'</span>@<span class="string">'localhost'</span> IDENTIFIED BY <span class="string">'my_password'</span>; root<span class="comment"># 这里的my_password是你的redmine数据库账号的密码</span></div><div class="line">&gt; GRANT ALL PRIVILEGES ON redmine.* TO <span class="string">'redmine'</span>@<span class="string">'localhost'</span>;</div></pre></td></tr></table></figure>
+<p>4.设置连接数据库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># cp config/databse.yml.example config/database.yml   #获取配置文件</span></div><div class="line">root<span class="comment"># vim config/database.yml</span></div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于是用于生产环境，只用修改一处地方即可，修改并保存。<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/20.png" alt="图片20"><br>5.下面开始进行一些依赖包的安装，返回到redmine-3.3.0目录，根据<code>bundle install --without development test</code>的提示来安装，缺少什么就装什么，每装完一个就运行一次这条命令，详细看看报错信息就知道缺少什么依赖包没装。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># apt-get install imagemagick //生成图片的依赖库。</span></div><div class="line">root<span class="comment"># gem install mysql2 -v '0.3.21'</span></div><div class="line">root<span class="comment"># apt-get install libmysqlclient-dev</span></div><div class="line">root<span class="comment"># gem install rbpdf-font</span></div><div class="line">root<span class="comment"># gem install rmagick -v '2.15.4</span></div><div class="line">root<span class="comment"># apt-get install libmagickwand-dev</span></div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;直到这一步才算是完成。<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/21.png" alt="图片21"><br>6.Session存储密钥</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># rake generate_secret_token</span></div></pre></td></tr></table></figure>
+<p>7.生成redmine的数据库表结构和初始化数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># RAILS_ENV=production rake db:migrate    //生成表结构</span></div><div class="line">root<span class="comment"># RAILS_ENV=production rake redmine:load_default_data //初始化数据</span></div></pre></td></tr></table></figure>
+<p><img src="http://o9whp01jf.bkt.clouddn.com/Images/redmine/22.png" alt="图片22"><br>8.创建上传文件的目录和设置文件夹的权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">useradd redmine</div><div class="line">passwd redmine  //设置redmine账户的密码</div><div class="line">mkdir -p tmp tmp/pdf public/plugin_assets/</div><div class="line">chown -R redmine:redmine files <span class="built_in">log</span> tmp public/plugin_assets</div><div class="line">chmod -R 755 files <span class="built_in">log</span> tmp public/plugin_assets/</div></pre></td></tr></table></figure>
+<p>9.测试redmine的安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># ruby bin/rails server webrick -e production</span></div></pre></td></tr></table></figure>
+<p>10.在nginx目录中将redmine目录迁移过去，重启nginx</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># vim /opt/nginx/conf/nginx.conf</span></div><div class="line">	</div><div class="line">	server &#123; </div><div class="line">	listen 80;　　　　　　　　　　　　　　　<span class="comment">#监听的端口号 </span></div><div class="line">	server_name localhost　　　　　　　　<span class="comment">#域名，暂时先用IP代替 </span></div><div class="line">	<span class="comment">#access_log logs/host.access.log main; </span></div><div class="line">	</div><div class="line">	location / &#123; </div><div class="line">	root /opt/redmine/public;　　　　<span class="comment">#站点的路径 </span></div><div class="line">	index default.php index.php index.html index.htm; </div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h3 id="Bug集"><a href="#Bug集" class="headerlink" title="Bug集"></a>Bug集</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;理论上来说，上述的安装步骤完成以后，应该是没问题的了。但在实际部署的过程中，还发现了几个bug，需要进行修正。<br>(1) redmine目录的所有者和所属组是redmine，不然其他账号登录的时候会无权限访问，且权限为755</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># chown -R redmine:redmine /opt/redmine</span></div><div class="line">root<span class="comment"># chmod -R 755 /opt/redmine</span></div></pre></td></tr></table></figure>
+<p>(2) 将环境变量配置以及nginx启动放入启动脚本中，这样就不用在开机时再输入这两句调用环境变量了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># vim /etc/rc.local/</span></div><div class="line">root<span class="comment"># source /etc/profile.d/rvm.sh    #调用ruby相关的环境变量</span></div><div class="line">root<span class="comment"># /opt/nginx/sbin/nginx   #手动启动nginx</span></div></pre></td></tr></table></figure>
+<p>(3)rails server拒绝访问的问题<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个也是困扰我最久的一个问题，一开始还以为我部署错了，结果直到看到这篇文章后才发现是路由出了问题，一会儿会附上该文链接。个人的理解是，http流量到了linux以后，转换到了lo网卡，lo网卡的路由由于是127.0.0.1，所以就发给自己了，于是就出不去了，就变成了拒绝访问。这个问题有个典型的特征就是，启动nginx和rails server以后，会发现能curl下来，即</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># curl http://localhost/  #能抓取到nginx的页面</span></div><div class="line">root<span class="comment"># curl http://localhost:3000/ #能抓取到redmine的页面</span></div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但是只能nginx返回成功。</p>
+<p>解决方案：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># ruby bin/rails server webrick -e production -b 0.0.0.0 -p 3000 &amp;   #将rails server启动时使用的路由变成0.0.0.0。</span></div></pre></td></tr></table></figure>
+<p>(4)迁移完redmine目录到nginx上去后无法显示favicon.ico<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个还没找到原因，故还未解决。</p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p>Centos+nginx+redmine+gitosis安装指南<br><a href="http://www.cnblogs.com/csharpsharper/archive/2013/08/11/3250913.html" target="_blank" rel="external">http://www.cnblogs.com/csharpsharper/archive/2013/08/11/3250913.html</a></p>
+<p>如何快速正确的安装ruby,rails运行环境<br><a href="http://ruby-china.org/wiki/install_ruby_guide" target="_blank" rel="external">http://ruby-china.org/wiki/install_ruby_guide</a></p>
+<p>安装rbpdf-font<br><a href="http://www.mamicode.com/info-detail-1218665.html" target="_blank" rel="external">http://www.mamicode.com/info-detail-1218665.html</a></p>
+<p>安装imagemagick magickwand<br><a href="http://blog.sina.com.cn/s/blog_691051e10100y17n.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_691051e10100y17n.html</a></p>
+<p>无需要更改gemfile，让bundle使用淘宝源<br><a href="http://ruby-china.org/topics/26314" target="_blank" rel="external">http://ruby-china.org/topics/26314</a></p>
+<p>解决gem install rmagick error<br><a href="http://robinwu.iteye.com/blog/1199311" target="_blank" rel="external">http://robinwu.iteye.com/blog/1199311</a></p>
+<p>redmine3.0 安装只能本机访问的问题<br><a href="https://site.douban.com/180891/widget/notes/17846704/note/490572314/" target="_blank" rel="external">https://site.douban.com/180891/widget/notes/17846704/note/490572314/</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/07/12/二进制反码求和运算/">
+                    二进制反码求和运算
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Rvm-Ruby-Rails"><span class="toc-number">1.</span> <span class="toc-text">Rvm+Ruby+Rails</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nginx"><span class="toc-number">2.</span> <span class="toc-text">Nginx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL"><span class="toc-number">3.</span> <span class="toc-text">MySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redmine"><span class="toc-number">4.</span> <span class="toc-text">Redmine</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bug集"><span class="toc-number">5.</span> <span class="toc-text">Bug集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考文章"><span class="toc-number">6.</span> <span class="toc-text">参考文章</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Ubuntu + Ruby + MySQL + Nginx + Redmine部署记录　| JCChan's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/07/26/Ubantu-Ruby-MySQL-Nginx-Redmine部署记录/" data-title="Ubuntu + Ruby + MySQL + Nginx + Redmine部署记录" data-url="http://yoursite.com/2016/07/26/Ubantu-Ruby-MySQL-Nginx-Redmine部署记录/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"jcchan23"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/07/12/二进制反码求和运算/" title="下一篇: 二进制反码求和运算">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/26/Ubantu-Ruby-MySQL-Nginx-Redmine部署记录/">Ubuntu + Ruby + MySQL + Nginx + Redmine部署记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/12/二进制反码求和运算/">二进制反码求和运算</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/11/由VMnet引起的browser-sync故障解决方案/">由VMnet引起的browser-sync故障解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/Gen8折腾日记（一）/">Gen8折腾日记（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/06/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 JCChan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+             title: "a.article-title, .article-more-link a", 
+             post: ".article-entry a[href], .copyright a[href]", 
+             tags: ".article-tag a", 
+             categories: ".article-category a, a.tag-list-link", 
+             articleNav: "#article-nav a, #post-nav-button a", 
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+             menu: ".header-menu a", 
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
