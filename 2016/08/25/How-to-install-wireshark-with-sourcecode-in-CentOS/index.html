@@ -15,16 +15,36 @@
 
 
 
-<meta name="description" content="格式参考文档呀！">
+<meta name="description" content="最近一段时间比较忙，每天都要debug空指针异常，身心俱疲，偶尔整理一下自己以前学习Linux的时候做过的一些小项目，重新回顾，收货颇丰。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2016/07/06/hello-world/index.html">
+<meta property="og:title" content="How-to-install-wireshark-with-sourcecode-in-CentOS">
+<meta property="og:url" content="http://yoursite.com/2016/08/25/How-to-install-wireshark-with-sourcecode-in-CentOS/index.html">
 <meta property="og:site_name" content="JCChan's Blog">
-<meta property="og:description" content="格式参考文档呀！">
-<meta property="og:updated_time" content="2016-08-25T07:23:36.856Z">
+<meta property="og:description" content="最近一段时间比较忙，每天都要debug空指针异常，身心俱疲，偶尔整理一下自己以前学习Linux的时候做过的一些小项目，重新回顾，收货颇丰。">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage001.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage002.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage003.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage004.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage005.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage006.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage007.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage008.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage009.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage010.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage011.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage012.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage013.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage014.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage015.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage016.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage017.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage018.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage019.png">
+<meta property="og:updated_time" content="2016-08-25T13:07:42.946Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="格式参考文档呀！">
+<meta name="twitter:title" content="How-to-install-wireshark-with-sourcecode-in-CentOS">
+<meta name="twitter:description" content="最近一段时间比较忙，每天都要debug空指针异常，身心俱疲，偶尔整理一下自己以前学习Linux的时候做过的一些小项目，重新回顾，收货颇丰。">
+<meta name="twitter:image" content="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage001.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +76,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Hello World | JCChan&#39;s Blog</title>
+<title>How-to-install-wireshark-with-sourcecode-in-CentOS | JCChan&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -272,11 +292,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-How-to-install-wireshark-with-sourcecode-in-CentOS" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/07/06/hello-world/" class="article-date">
-      <time datetime="2016-07-05T23:31:26.162Z" itemprop="datePublished">2016-07-06</time>
+      <a href="/2016/08/25/How-to-install-wireshark-with-sourcecode-in-CentOS/" class="article-date">
+      <time datetime="2016-08-25T11:58:49.000Z" itemprop="datePublished">2016-08-25</time>
 </a>
 
 
@@ -291,7 +311,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      How-to-install-wireshark-with-sourcecode-in-CentOS
     </h1>
   
 
@@ -299,8 +319,16 @@
       
       <div class="article-info article-info-post">
         
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Computer/">Computer</a>
+    </div>
+
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -308,15 +336,42 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wireshark为网络管理员常用的一个网络管理工具，通过使用这个软件，我们可以对本机网卡上的经过的数据包进行分析，通常包括了当前TCP/IP协议下几乎所有的数据包，我们可以根据抓取下来的数据包进行分析，从而得出本机附近的网络情况到底如何，以及网络的部分路由情况。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本次所使用的操作系统是<strong>CentOS 6.5桌面图形版</strong>，比较简单，分为两种形式的安装，一种是直接安装，另外一种是源码安装。</p>
+<p>###一、直接安装<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只需要两句命令便可以完成安装，中间需要安装什么就按y</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">root<span class="comment"># yum install wireshark //  安装软件</span></div><div class="line">root<span class="comment"># yum install wireshark-gnode   //  安装软件的桌面显示，便于操作</span></div></pre></td></tr></table></figure>
+<p><img src="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage001.png" alt="图片1"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这种方法能快速安装一系列的软件及其依赖包，我们知道，在Linux中，软件的安装最麻烦的就是依赖包的安装系列，特别是基于编译好的rpm或者deb包，yum安装或者是apt-get安装能比较快捷的解决这个问题，但缺点就是安装源的软件版本一般不会是最新的，或者甚至是没有这样子的安装包，这时候就不能使用yum安装了，就要使用我们的源码安装。</p>
+<p>###二、源码安装<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于软件来说，源码是指编写的程序，比如C语言，C++语言，Java语言等，是可以被人们所能读懂的。而另一种软件的代码是指二进制文件，人们读不懂，但是计算机能够明白它写的是什么，从源码到二进制文件的过程叫做编译，对于源码安装来说，编译过程是最漫长的。源码安装有个最大的好处就是你可以把软件安装到你所需要的地方，而不像yum会安装到各种各样的地方，另外源码安装可以安装软件的最新版本。<br>1.先下载需要的两个安装包，分别是libpcap和wireshark source code。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage002.png" alt="图片2"><br>2.下载解压libpcap和wireshark</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@JCChan 下载]<span class="comment"># tar zxvf libpcap-1.7.4.tar.gz //解压压缩包</span></div><div class="line">[root@JCChan 下载]<span class="comment"># tar xvf wireshark-1.12.8.tar.bz2  //解压压缩包</span></div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如下图所示，可以看到Wireshark软件是由很多个C文件写成的。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage003.png" alt="图片3"></p>
+<p>3.由于libpcap是wireshark的依赖包，因此需要先编译它</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@JCChan 下载]<span class="comment"># cd libpcap-1.7.4</span></div><div class="line">[root@JCChan libpcap-1.7.4]<span class="comment"># ./configure</span></div></pre></td></tr></table></figure>
+<p>出现第一个错误，没有合适的C编译器，不能编译C文件。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage004.png" alt="图片4"><br>解决方案：安装gcc软件环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@JCChan libpcap-1.7.4]<span class="comment"># yum -y install gcc    //安装gcc</span></div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如下图所示<br><img src="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage005.png" alt="图片5"></p>
+<p>4.重新开始编译，出现第二个错误，没有flex软件包。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage006.png" alt="图片6"><br>解决方案：安装flex软件包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@JCChan libpcap-1.7.4]<span class="comment"># yum install flex  //安装flex软件包</span></div></pre></td></tr></table></figure>
+<p>5.继续编译，这次就可以成功编译了。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage007.png" alt="图片7"></p>
+<p>6.开始安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@JCChan libpcap-1.7.4]<span class="comment"># make &amp;&amp; make install</span></div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;出现如下的错误，yacc命令没找到。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage008.png" alt="图片8"><br>解决方案：安装byacc软件包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@JCChan libpcap-1.7.4]<span class="comment"># yum install byacc //安装byacc</span></div></pre></td></tr></table></figure>
+<p>7.再重新安装一次，没有报错误信息，代表libpcap安装成功<br><img src="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage009.png" alt="图片9"></p>
+<p>8.进入wireshark安装包的目录，同样开始编译，出现错误，需要一个c++编译器<br><img src="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage010.png" alt="图片10"><br>解决方案：安装一个c++编译器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@JCChan wireshark-1.12.8]<span class="comment"># yum -y install gcc gcc-c++ gdb    //安装c++编译器</span></div></pre></td></tr></table></figure>
+<p>9.重新编译，出现下一个错误，Qt is not available。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage011.png" alt="图片11"><br>解决方案：安装qt相关的包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@JCChan wireshark-1.12.8]<span class="comment"># yum -y install qt4-dev-tools qt4-doc qt4-qtconfig qt4-demos qt4-designer</span></div></pre></td></tr></table></figure>
+<p>如下图所示<br><img src="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage012.png" alt="图片12"></p>
+<p>10.再次重新编译，继续有错误，这次是要安装gtk+3<br><img src="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage013.png" alt="图片13"><br>解决方案：安装gtk+2，到时使用gtk+2来编译，gtk+3的安装方法暂时还没有找到</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@JCChan wireshark-1.12.8]<span class="comment"># yum -y install gtk*</span></div><div class="line">[root@JCChan wireshark-1.12.8]<span class="comment"># ./configure -with-gtk2</span></div></pre></td></tr></table></figure>
+<p>这样子就能编译成功了。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage014.png" alt="图片14"></p>
+<p>11.开始安装，还是需要比较长的时间的，但是能安装成功！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@JCChan wireshark-1.12.8]<span class="comment"># make &amp;&amp; make install</span></div></pre></td></tr></table></figure>
+<p>如下图所示<br><img src="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage015.png" alt="图片15"><br><img src="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage016.png" alt="图片16"></p>
+<p>12.在当前目录下敲入一下命令，就能打开软件，并且打开到界面了！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@JCChan wireshark-1.12.8]<span class="comment"># ./wireshark</span></div></pre></td></tr></table></figure>
+<p>如下图所示<br><img src="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage017.png" alt="图片17"><br><img src="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage018.png" alt="图片18"></p>
+<p>13.抓包结果测试，可以看到有广播的ARP包以及有SSDP守护进程。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/How-to-install-wireshark-with-sourcecode-in-CentOSimage019.png" alt="图片19"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如今经过一年的洗礼，已经早已Linux图形化界面，然而重新看回这些自己学习Linux时做过的小项目，依旧收获颇丰。</p>
 
       
     </div>
@@ -328,12 +383,12 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/07/07/Gen8折腾日记（一）/">
-                    Gen8折腾日记（一）
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/07/26/Ubantu-Ruby-MySQL-Nginx-Redmine部署记录/">
+                    Ubuntu + Ruby + MySQL + Nginx + Redmine部署记录
                 </a>
             </div>
-        
         
     </nav>
 
@@ -343,7 +398,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+            
         
     </div>
     <style>
@@ -379,7 +434,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Hello World　| JCChan's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"How-to-install-wireshark-with-sourcecode-in-CentOS　| JCChan's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -395,7 +450,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/07/06/hello-world/" data-title="Hello World" data-url="http://yoursite.com/2016/07/06/hello-world/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/08/25/How-to-install-wireshark-with-sourcecode-in-CentOS/" data-title="How-to-install-wireshark-with-sourcecode-in-CentOS" data-url="http://yoursite.com/2016/08/25/How-to-install-wireshark-with-sourcecode-in-CentOS/"></div>
     <script>
         var duoshuoQuery = {short_name:"jcchan23"};
         var loadComment = function(){
@@ -418,15 +473,15 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/07/07/Gen8折腾日记（一）/" title="上一篇: Gen8折腾日记（一）">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2016/07/26/Ubantu-Ruby-MySQL-Nginx-Redmine部署记录/" title="下一篇: Ubuntu + Ruby + MySQL + Nginx + Redmine部署记录">
+                <i class="fa fa-angle-right"></i>
+            </a>
         
     </div>
 
