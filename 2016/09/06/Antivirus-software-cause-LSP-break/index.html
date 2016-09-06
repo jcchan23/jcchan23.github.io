@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="JCChan's Blog">
 <meta property="og:description" content="学校东区机房由于360杀毒软件与Sophos监控软件在一台机器上同时运行导致LSP协议不能正常运行，造成除360安全浏览器外所有浏览器均不能使用正常的网络记录排查。">
 <meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/images/LSP-Mistake/1.png">
-<meta property="og:updated_time" content="2016-09-06T13:30:02.534Z">
+<meta property="og:updated_time" content="2016-09-06T13:33:44.957Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="东区机房浏览器问题记录排查">
 <meta name="twitter:description" content="学校东区机房由于360杀毒软件与Sophos监控软件在一台机器上同时运行导致LSP协议不能正常运行，造成除360安全浏览器外所有浏览器均不能使用正常的网络记录排查。">
@@ -140,13 +140,13 @@
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
+                        <li>Menu</li>
+                        <li>Tags</li>
                         
-                        <li>友情链接</li>
+                        <li>Friends</li>
                         
                         
-                        <li>关于我</li>
+                        <li>About Me</li>
                         
                     </ul>
                 </div>
@@ -272,7 +272,7 @@
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
       <div class="body-wrap"><article id="post-Antivirus-software-cause-LSP-break" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -318,7 +318,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开学第一周老大有数据库课，在东区的机房内有上机实验课，结果第一周就在群里反映学校东区的机房无法使用IE浏览器，而新下载安装的Chrome<br>浏览器和Firefox浏览器也不能正常使用，唯独只有360安全浏览器能正常使用。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于东区机房的机器使用的是一种系统控制软件下的操作系统，换句话说，类似于网吧控制软件“xx网管”一样，每次开机需要花大量的时间，因为相当于重装了一次系统和软件，供使用的操作系统是Windows7,WindowsXP以及CentOS6.3，这里其实给我们一个很重要的提示，<strong>不能做一些需要重启的修复动作。</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;于是便开始日常的排查步骤呗，网络是没问题的，正常的静态配置，然后dns地址正常，nslookup获得的域名与IP解析也是正常的，当然ping命令和tracert命令也是正常的，那么排查步骤到了这里很容易就能想到的一种情况——电脑内部的协议出问题了。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;解决方法也非常的简单，先试试重置浏览器，如果不行的话，再试试在管理员模式下netsh winsock reset，然后重启电脑就可以了，这个命令相当于重置电脑内部的网络协议，恢复到默认情况。对于正常的电脑来说，排查工作以及修复工作就到此结束了，但是由于这里由于使用了这种系统控制软件，一旦重启，相当于还原回去当前的状态了，所以这句话是无效的。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经过一段时间的排查(几乎就是老大上机的全部时间了……)，终于找到了原因，在360安全杀毒软件下有一个LSP修复，点进去查看到如下的画面：<br><img src="http://o9whp01jf.bkt.clouddn.com/images/LSP-Mistake/1.png" alt="图片1"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这就很明显了，360安全杀毒软件不认Sophos监控软件，两个软件之间发生了冲突，使得Sophos控制的LSP协议失效了。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;解决方法很容易，只要点击立即修复，就可以重置到LSP协议的默认情况了，这里会显示一片的绿色，带有大量的SystemRoot变量，再重新启动浏览器，发现问题已经解决了，所有浏览器均可以正常使用。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回来以后查看了一下这个LSP协议是个什么东西，某度偶尔良心的百科还是给出不错的解释：</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开学第一周老大有数据库课，在东区的机房内有上机实验课，结果第一周就在群里反映学校东区的机房无法使用IE浏览器，而新下载安装的Chrome浏览器和Firefox浏览器也不能正常使用，唯独只有360安全浏览器能正常使用。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于东区机房的机器使用的是一种系统控制软件下的操作系统，换句话说，类似于网吧控制软件“xx网管”一样，每次开机需要花大量的时间，因为相当于重装了一次系统和软件，供使用的操作系统是Windows7,WindowsXP以及CentOS6.3，这里其实给我们一个很重要的提示，<strong>不能做一些需要重启的修复动作。</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;于是便开始日常的排查步骤呗，网络是没问题的，正常的静态配置，然后dns地址正常，nslookup获得的域名与IP解析也是正常的，当然ping命令和tracert命令也是正常的，那么排查步骤到了这里很容易就能想到的一种情况——电脑内部的协议出问题了。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;解决方法也非常的简单，先试试重置浏览器，如果不行的话，再试试在管理员模式下netsh winsock reset，然后重启电脑就可以了，这个命令相当于重置电脑内部的网络协议，恢复到默认情况。对于正常的电脑来说，排查工作以及修复工作就到此结束了，但是由于这里由于使用了这种系统控制软件，一旦重启，相当于还原回去当前的状态了，所以这句话是无效的。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经过一段时间的排查(几乎就是老大上机的全部时间了……)，终于找到了原因，在360安全杀毒软件下有一个LSP修复，点进去查看到如下的画面：<br><img src="http://o9whp01jf.bkt.clouddn.com/images/LSP-Mistake/1.png" alt="图片1"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这就很明显了，360安全杀毒软件不认Sophos监控软件，两个软件之间发生了冲突，使得Sophos控制的LSP协议失效了。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;解决方法很容易，只要点击立即修复，就可以重置到LSP协议的默认情况了，这里会显示一片的绿色，带有大量的SystemRoot变量，再重新启动浏览器，发现问题已经解决了，所有浏览器均可以正常使用。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回来以后查看了一下这个LSP协议是个什么东西，某度偶尔良心的百科还是给出不错的解释：</p>
 <blockquote>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LSP即分层服务提供商，Winsock 作为应用程序的Windows 的网络套接字工具，可以由称为“分层服务提供商”的机制进行扩展。Winsock LSP 可用于非常广泛的实用用途，包括Internet 家长控制 (parental control) 和 Web 内容筛选。在以前版本的 Windows XP中，删除不正确的（也称为“buggy”）LSP 可能会导致注册表中的 Winsock 目录损坏，潜在地导致所有网络连接的丢失。LSP就是TCP/IP等协议的接口．LSP用在正途上可以方便程序员们编写监视系统网络通讯情况的Sniffer，可是现在常见的LSP都被用于浏览器劫持。</p>
 </blockquote>
@@ -347,7 +347,7 @@
 </article>
 
     <div id="toc" class="toc-article">
-        <strong class="toc-title">文章目录</strong>
+        <strong class="toc-title">Contents</strong>
         
             
         
@@ -363,10 +363,10 @@
         }
     </style>
 
-    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
 
     <script>
-        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
     </script>
 
 
@@ -424,13 +424,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
         
 
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/09/06/How-to-config-Eclipse-environment/" title="下一篇: Eclipse Java开发环境的搭建">
+            <a href="/2016/09/06/How-to-config-Eclipse-environment/" title="Next: Eclipse Java开发环境的搭建">
                 <i class="fa fa-angle-right"></i>
             </a>
         
@@ -453,14 +453,14 @@
                 2016 JCChan
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
                 
@@ -469,7 +469,7 @@
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        <span id="page-visit"  title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
                 
@@ -523,9 +523,9 @@ MathJax.Hub.Queue(function() {
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script>
     // Open in New Window
