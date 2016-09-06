@@ -17,7 +17,7 @@
 
 <meta name="description" content="简单的Eclipse开发环境配置">
 <meta property="og:type" content="article">
-<meta property="og:title" content="How-to-config-Eclipse-environment">
+<meta property="og:title" content="Eclipse Java开发环境的搭建">
 <meta property="og:url" content="http://yoursite.com/2016/09/06/How-to-config-Eclipse-environment/index.html">
 <meta property="og:site_name" content="JCChan's Blog">
 <meta property="og:description" content="简单的Eclipse开发环境配置">
@@ -37,9 +37,9 @@
 <meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/14.png">
 <meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/15.png">
 <meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/16.png">
-<meta property="og:updated_time" content="2016-09-06T04:47:07.590Z">
+<meta property="og:updated_time" content="2016-09-06T04:54:04.666Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="How-to-config-Eclipse-environment">
+<meta name="twitter:title" content="Eclipse Java开发环境的搭建">
 <meta name="twitter:description" content="简单的Eclipse开发环境配置">
 <meta name="twitter:image" content="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/1.png">
 
@@ -73,7 +73,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>How-to-config-Eclipse-environment | JCChan&#39;s Blog</title>
+<title>Eclipse Java开发环境的搭建 | JCChan&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -308,7 +308,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      How-to-config-Eclipse-environment
+      Eclipse Java开发环境的搭建
     </h1>
   
 
@@ -334,10 +334,10 @@
       
           
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;工作室的老人家们和小朋友们组成了一个Java开发学习团队，想起之前在暑假项目中学过一点Java基础知识，便加入了团队里，尽量跟着他们的步伐吧，毕竟方向不太一致，只是想提高一下自己的编程水平而已。<br>既然要学习Java，少不了就是IDE的环境配置了，之前在暑假做项目的时候用的是Eclipse，于是记录一下当时的配置方法给小朋友。</p>
-<h3 id="一、下载软件"><a href="#一、下载软件" class="headerlink" title="一、下载软件"></a>一、下载软件</h3><p>1.下载两个软件，jdk以及eclipse，先说jdk，可以到oracle的官网上找<br><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="external">访问这个地址链接到Java下载页面</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选择JavaSE Development Kit 8u102的Windows X64位，Java的环境一共有好几个版本，比如SE和EE，对于初学期还是建议使用SE。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/1.png" alt="图片1"><br><a href="https://www.eclipse.org/downloads/" target="_blank" rel="external">访问这个地址链接到Eclipse下载页面</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IDE有很多，个人觉得Eclipse是比较不错的，而且有不少Java的扩展插件可以使用。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/2.png" alt="图片2"></p>
-<h3 id="二、安装Java和Eclipse"><a href="#二、安装Java和Eclipse" class="headerlink" title="二、安装Java和Eclipse"></a>二、安装Java和Eclipse</h3><p>1.下载好以后，我们先安装Java，这里用的虚拟机做示范，版本也是相对旧一些，不过步骤相同。Java的安装还是比较简单的，直接下一步就好了，如果有固态可以直接默认地址，没有的话，可以改成D盘什么的，不过以防万一，最好还是不要有中文路径。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/3.png" alt="图片3"><br>2.Eclipse安装也是比较简单，注意选择Eclipse IDE for Java Developers就可以了，弄好安装路径，就可以点击Install了。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/4.png" alt="图片4"></p>
-<h3 id="三、配置环境变量"><a href="#三、配置环境变量" class="headerlink" title="三、配置环境变量"></a>三、配置环境变量</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于初学者，可能比较难的就是配置环境变量，其实说白了环境变量就是一些系统的路径，在Linux上，为了使系统命令全局生效，需要export一些全局环境变量，让系统可以知道从哪里识别这句命令，简单来说，系统不认识java这个命令啊，怎么办？我们就需要告诉它，你到这个路径下去查阅java这个命令是怎样操作的，类似于字典中的目录吧，然后字典中的内容就是系统执行的跟java这个命令的程序吧，再返回结果值，这个思想在windows下也是相同的。<br>1.Java一共要配置3个环境变量，%JAVA_HOME%、%CLASSPATH%以及系统自带的%Path%，由于配置环境变量只与Java软件相关，我们可以在等待Eclipse的安装过程中配置它。<br>2.右键“计算机”，点击属性，打开到查看系统的界面。选择“高级系统设置”。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/5.png" alt="图片5"><br>3.弹出的窗口中选择环境变量。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/6.png" alt="图片6"><br>4.看到下面的系统变量，新建一个系统变量，变量名为JAVA_HOME，变量值为你的jdk安装的路径，在我这里是“C:\Program Files\Java\jdk1.8.0_77”<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/7.png" alt="图片7"><br>5.再新建一个系统变量，变量名为CLASSPATH，变量值为双引号内的内容，注意分号前面有一个点。<br>“.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;”<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/8.png" alt="图片8"><br>6.最后是要修正系统变量Path，这里在Windows7下会比较的不方便，注意不要删除了系统原来的变量值，然后再在变量值的最后面先输入一个英文的分号，再输入这样子的路径“%JAVA_HOME%\bin”，然后再加一个英文的分号，再输入这样子的路径“%JAVA_HOME%\jre\bin”,然后就是一路确定了。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/9.png" alt="图片9"><br>7.输入win键，然后按r键调出运行框，输入cmd，打开命令提示符。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/10.png" alt="图片10"><br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/11.png" alt="图片11"><br>8.输入java，然后按回车，看会不会有下图的输出，如果有，代表安装成功。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/12.png" alt="图片12"><br>9.输入javac，然后按回车，看会不会有下图的输出，如果有，代表环境变量配置成功。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/13.png" alt="图片13"><br>10.最后等待Eclipse安装完成便可以了打开了。</p>
-<h3 id="四、配置Eclipse护眼主题"><a href="#四、配置Eclipse护眼主题" class="headerlink" title="四、配置Eclipse护眼主题"></a>四、配置Eclipse护眼主题</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于长时间需要对着Eclipse IDE，而默认的IDE是白色背景的，非常的伤眼睛，因此一般的程序员都会将IDE的背景调整成黑色的，再配置代码的字号，主题等。<br>1.打开Eclipse后看到上方选项卡，选择Window，然后选择Preferences，展开General，选择Appearance，这里把Theme调成Dark♂，就可以变成黑色背景了。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/14.png" alt="图片14"><br>2.在General的Appearance中有一个Colors and Fonts，里面有一个Text Font，通过Edit可以调整代码的字号，一般我比较喜欢14号。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/15.png" alt="图片15"><br>3.最后可以选择安装前人写好的插件，比如我比较喜欢Sublime主题的代码，就上网找找有没有设置教程，找到了一篇。<br><a href="http://www.tuicool.com/articles/7vABjiA" target="_blank" rel="external">Eclipse使用sublime主题</a></p>
+<h3 id="下载软件"><a href="#下载软件" class="headerlink" title="下载软件"></a>下载软件</h3><p>1.下载两个软件，jdk以及eclipse，先说jdk，可以到oracle的官网上找<br><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="external">访问这个地址链接到Java下载页面</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选择JavaSE Development Kit 8u102的Windows X64位，Java的环境一共有好几个版本，比如SE和EE，对于初学期还是建议使用SE。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/1.png" alt="图片1"><br><a href="https://www.eclipse.org/downloads/" target="_blank" rel="external">访问这个地址链接到Eclipse下载页面</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IDE有很多，个人觉得Eclipse是比较不错的，而且有不少Java的扩展插件可以使用。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/2.png" alt="图片2"></p>
+<h3 id="安装Java和Eclipse"><a href="#安装Java和Eclipse" class="headerlink" title="安装Java和Eclipse"></a>安装Java和Eclipse</h3><p>1.下载好以后，我们先安装Java，这里用的虚拟机做示范，版本也是相对旧一些，不过步骤相同。Java的安装还是比较简单的，直接下一步就好了，如果有固态可以直接默认地址，没有的话，可以改成D盘什么的，不过以防万一，最好还是不要有中文路径。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/3.png" alt="图片3"><br>2.Eclipse安装也是比较简单，注意选择Eclipse IDE for Java Developers就可以了，弄好安装路径，就可以点击Install了。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/4.png" alt="图片4"></p>
+<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于初学者，可能比较难的就是配置环境变量，其实说白了环境变量就是一些系统的路径，在Linux上，为了使系统命令全局生效，需要export一些全局环境变量，让系统可以知道从哪里识别这句命令，简单来说，系统不认识java这个命令啊，怎么办？我们就需要告诉它，你到这个路径下去查阅java这个命令是怎样操作的，类似于字典中的目录吧，然后字典中的内容就是系统执行的跟java这个命令的程序吧，再返回结果值，这个思想在windows下也是相同的。<br>1.Java一共要配置3个环境变量，%JAVA_HOME%、%CLASSPATH%以及系统自带的%Path%，由于配置环境变量只与Java软件相关，我们可以在等待Eclipse的安装过程中配置它。<br>2.右键“计算机”，点击属性，打开到查看系统的界面。选择“高级系统设置”。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/5.png" alt="图片5"><br>3.弹出的窗口中选择环境变量。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/6.png" alt="图片6"><br>4.看到下面的系统变量，新建一个系统变量，变量名为JAVA_HOME，变量值为你的jdk安装的路径，在我这里是“C:\Program Files\Java\jdk1.8.0_77”<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/7.png" alt="图片7"><br>5.再新建一个系统变量，变量名为CLASSPATH，变量值为双引号内的内容，注意分号前面有一个点。<br>“.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;”<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/8.png" alt="图片8"><br>6.最后是要修正系统变量Path，这里在Windows7下会比较的不方便，注意不要删除了系统原来的变量值，然后再在变量值的最后面先输入一个英文的分号，再输入这样子的路径“%JAVA_HOME%\bin”，然后再加一个英文的分号，再输入这样子的路径“%JAVA_HOME%\jre\bin”,然后就是一路确定了。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/9.png" alt="图片9"><br>7.输入win键，然后按r键调出运行框，输入cmd，打开命令提示符。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/10.png" alt="图片10"><br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/11.png" alt="图片11"><br>8.输入java，然后按回车，看会不会有下图的输出，如果有，代表安装成功。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/12.png" alt="图片12"><br>9.输入javac，然后按回车，看会不会有下图的输出，如果有，代表环境变量配置成功。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/13.png" alt="图片13"><br>10.最后等待Eclipse安装完成便可以了打开了。</p>
+<h3 id="配置Eclipse护眼主题"><a href="#配置Eclipse护眼主题" class="headerlink" title="配置Eclipse护眼主题"></a>配置Eclipse护眼主题</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于长时间需要对着Eclipse IDE，而默认的IDE是白色背景的，非常的伤眼睛，因此一般的程序员都会将IDE的背景调整成黑色的，再配置代码的字号，主题等。<br>1.打开Eclipse后看到上方选项卡，选择Window，然后选择Preferences，展开General，选择Appearance，这里把Theme调成Dark♂，就可以变成黑色背景了。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/14.png" alt="图片14"><br>2.在General的Appearance中有一个Colors and Fonts，里面有一个Text Font，通过Edit可以调整代码的字号，一般我比较喜欢14号。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/15.png" alt="图片15"><br>3.最后可以选择安装前人写好的插件，比如我比较喜欢Sublime主题的代码，就上网找找有没有设置教程，找到了一篇。<br><a href="http://www.tuicool.com/articles/7vABjiA" target="_blank" rel="external">Eclipse使用sublime主题</a></p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这样子我们的Eclipse基本上就配置完全了，最后展示一下我的Eclipse工作环境。<br><img src="http://o9whp01jf.bkt.clouddn.com/image/Configure-EclipseIDE/16.png" alt="图片16"></p>
 
       
@@ -365,7 +365,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、下载软件"><span class="toc-number">1.</span> <span class="toc-text">一、下载软件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、安装Java和Eclipse"><span class="toc-number">2.</span> <span class="toc-text">二、安装Java和Eclipse</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、配置环境变量"><span class="toc-number">3.</span> <span class="toc-text">三、配置环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、配置Eclipse护眼主题"><span class="toc-number">4.</span> <span class="toc-text">四、配置Eclipse护眼主题</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#下载软件"><span class="toc-number">1.</span> <span class="toc-text">下载软件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Java和Eclipse"><span class="toc-number">2.</span> <span class="toc-text">安装Java和Eclipse</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置环境变量"><span class="toc-number">3.</span> <span class="toc-text">配置环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置Eclipse护眼主题"><span class="toc-number">4.</span> <span class="toc-text">配置Eclipse护眼主题</span></a></li></ol>
         
     </div>
     <style>
@@ -401,7 +401,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"How-to-config-Eclipse-environment　| JCChan's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Eclipse Java开发环境的搭建　| JCChan's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -417,7 +417,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/09/06/How-to-config-Eclipse-environment/" data-title="How-to-config-Eclipse-environment" data-url="http://yoursite.com/2016/09/06/How-to-config-Eclipse-environment/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/09/06/How-to-config-Eclipse-environment/" data-title="Eclipse Java开发环境的搭建" data-url="http://yoursite.com/2016/09/06/How-to-config-Eclipse-environment/"></div>
     <script>
         var duoshuoQuery = {short_name:"jcchan23"};
         var loadComment = function(){
@@ -452,7 +452,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/09/06/How-to-config-Eclipse-environment/">How-to-config-Eclipse-environment</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/25/How-to-install-wireshark-with-sourcecode-in-CentOS/">CentOS源码安装Wireshark</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/26/Ubantu-Ruby-MySQL-Nginx-Redmine部署记录/">Ubuntu + Ruby + MySQL + Nginx + Redmine部署记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/12/二进制反码求和运算/">二进制反码求和运算</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/11/由VMnet引起的browser-sync故障解决方案/">由VMnet引起的browser-sync故障解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/Gen8折腾日记（一）/">Gen8折腾日记（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/06/hello-world/">Hello World</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/09/06/How-to-config-Eclipse-environment/">Eclipse Java开发环境的搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/25/How-to-install-wireshark-with-sourcecode-in-CentOS/">CentOS源码安装Wireshark</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/26/Ubantu-Ruby-MySQL-Nginx-Redmine部署记录/">Ubuntu + Ruby + MySQL + Nginx + Redmine部署记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/12/二进制反码求和运算/">二进制反码求和运算</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/11/由VMnet引起的browser-sync故障解决方案/">由VMnet引起的browser-sync故障解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/Gen8折腾日记（一）/">Gen8折腾日记（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/06/hello-world/">Hello World</a></li></ul>
 
 
 
