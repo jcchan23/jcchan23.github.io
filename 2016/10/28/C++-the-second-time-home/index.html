@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html >
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="JCChan" />
+
+
+
+<meta name="description" content="第二次上机作业，有一些特别有意思的题目。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++第二次上机作业">
+<meta property="og:url" content="http://yoursite.com/2016/10/28/C++-the-second-time-home/index.html">
+<meta property="og:site_name" content="JCChan's Blog">
+<meta property="og:description" content="第二次上机作业，有一些特别有意思的题目。">
+<meta property="og:updated_time" content="2016-10-28T15:31:29.402Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++第二次上机作业">
+<meta name="twitter:description" content="第二次上机作业，有一些特别有意思的题目。">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="JCChan&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>C++第二次上机作业 | JCChan&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/head.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">JCChan</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/categories/others">随笔</a></li>
+                        
+                            <li><a href="/categories/Chemistry">化学</a></li>
+                        
+                            <li><a href="/categories/Maths">数学</a></li>
+                        
+                            <li><a href="/categories/Computer">计算机</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" href="https://github.com/jcchan23" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/chen-jian-wen-87" title="知乎"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matlab/">Matlab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Networks/">Networks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Origin/">Origin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/格式/">格式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/装机/">装机</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://ce.sysu.edu.cn/hope">厚朴〖HOPE〗工作室</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">化学、数学、计算机</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">JCChan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/head.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">JCChan</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/others">随笔</a></li>
+                
+                    <li><a href="/categories/Chemistry">化学</a></li>
+                
+                    <li><a href="/categories/Maths">数学</a></li>
+                
+                    <li><a href="/categories/Computer">计算机</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/jcchan23" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/chen-jian-wen-87" title="知乎"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-C++-the-second-time-home" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/28/C++-the-second-time-home/" class="article-date">
+      <time datetime="2016-10-28T15:08:25.000Z" itemprop="datePublished">2016-10-28</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      C++第二次上机作业
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Maths/">Maths</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.输入一个两整数，要求将该数逆序输出。例如，输入68，输出86。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="comment">/*</span></div><div class="line">1.输入一个两位整数，要求将该数逆序输出。</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> input;	<span class="comment">//	定义要输入的整数</span></div><div class="line">	<span class="keyword">int</span> digit, unit;	<span class="comment">//	定义十位数和个位数</span></div><div class="line">	<span class="comment">//	为了让程序可以重复输入输出，使用循环</span></div><div class="line">	<span class="keyword">while</span> (<span class="number">1</span>) &#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入一个两位整数(10-99):"</span>;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; input;</div><div class="line">		<span class="comment">//	绝对值超过100的数字不符合题目要求</span></div><div class="line">		<span class="keyword">if</span> (input &gt;= <span class="number">100</span> || input &lt;= <span class="number">-100</span>) &#123;</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"你输入的数字不是两位整数，请重新输入"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">			<span class="comment">//	清除cin流的缓存，方便下次输入不会有问题。</span></div><div class="line">			<span class="built_in">cin</span>.clear();</div><div class="line">			<span class="built_in">cin</span>.sync();</div><div class="line">			<span class="keyword">continue</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="comment">//	input整除10就能取出十位数</span></div><div class="line">			digit = input / <span class="number">10</span>;</div><div class="line">			<span class="comment">//	input减去十位数乘以10就是个位数</span></div><div class="line">			unit = input - digit * <span class="number">10</span>;</div><div class="line">			<span class="comment">//	重新组合输出数字</span></div><div class="line">			<span class="built_in">cout</span> &lt;&lt; unit * <span class="number">10</span> + digit &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">/*</span></div><div class="line">输出测试：</div><div class="line">-568	"你输入的数字不是两位整数，请重新输入"</div><div class="line">-89		-98</div><div class="line">89		98</div><div class="line">7		70</div><div class="line">-6		-60</div><div class="line">589		"你输入的数字不是两位整数，请重新输入"</div><div class="line">可以循环输入，每次都会有提示："请输入一个两位整数(10-99):"</div><div class="line">*/</div></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.求PI，求PI的公式如下：<br>$$ \frac{π}{4}≈1-\frac{1}{3}+\frac{1}{5}-\frac{1}{7}+……=\sum_{n=1}^∞(-1)^{n-1}\frac{1}{2n-1} $$</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;ctime&gt;</span>		<span class="comment">//	引入clock_t类</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iomanip&gt;</span>	<span class="comment">//	显示小数点的位数用的头文件</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">double</span> <span class="keyword">const</span> EPS = <span class="number">1e-9</span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">clock_t</span> start, finish;	<span class="comment">//	引入记录程序运行时间的对象</span></div><div class="line">	start = clock();	<span class="comment">// start对象执行clock()方法，开始计时</span></div><div class="line">	<span class="keyword">double</span> sum = <span class="number">0</span>;</div><div class="line">	<span class="keyword">double</span> k = <span class="number">1</span>;</div><div class="line">	<span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">	<span class="keyword">int</span> flag = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span> (k / i &gt;= EPS) &#123;</div><div class="line">		<span class="keyword">if</span> (i % <span class="number">4</span> == <span class="number">1</span>) &#123;</div><div class="line">			sum = sum + k / i;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			sum = sum - k / i;</div><div class="line">		&#125;</div><div class="line">		i = i + <span class="number">2</span>;</div><div class="line">		flag++;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">double</span> Sum = <span class="number">4</span> * sum;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"π的值是："</span> &lt;&lt; setprecision(<span class="number">10</span>)&lt;&lt; Sum &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; EPS &lt;&lt; <span class="string">"精度下共执行了"</span> &lt;&lt; flag &lt;&lt; <span class="string">"次循环"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	finish = clock();	<span class="comment">//	finish对象执行clock()方法，结束计时。</span></div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"花费的时间是："</span>&lt;&lt; finish - start &lt;&lt; <span class="string">"/"</span> &lt;&lt; CLOCKS_PER_SEC &lt;&lt; <span class="string">"(s)"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">/*</span></div><div class="line">	实现的代码不难写，但是为了效率的问题，对EPS测试了几个常数，并记录了实验结果。</div><div class="line">	π的值是：3.141572654</div><div class="line">	1e-05精度下共执行了50000次循环</div><div class="line">	花费的时间是：2/1000(s)</div><div class="line">	π的值是：3.141590654</div><div class="line">	1e-06精度下共执行了500000次循环</div><div class="line">	花费的时间是：9/1000(s)</div><div class="line">	π的值是：3.141592454</div><div class="line">	1e-07精度下共执行了5000000次循环</div><div class="line">	花费的时间是：76/1000(s)</div><div class="line">	π的值是：3.141592634</div><div class="line">	1e-08精度下共执行了50000000次循环</div><div class="line">	花费的时间是：742/1000(s)</div><div class="line">	π的值是：3.141592652</div><div class="line">	1e-09精度下共执行了500000000次循环</div><div class="line">	花费的时间是：7392/1000(s)</div><div class="line">	到了1e-10时，循环数又翻10倍，花费的时间也会是10倍，70s的等待已经是到了不能忍受的范围。</div><div class="line">	因此纵观以上取得精度以及准确性，可以取1e-08或者1e-09作为近似值。</div><div class="line">*/</div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.编写一个判断素数的函数，在主函数中输入一个整数n,调用判素数的函数，在主函数中输出判断结果。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="comment">//	函数的声明</span></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isprime</span><span class="params">(<span class="keyword">int</span> prime)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> test;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入一个整数:"</span>;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; test;</div><div class="line">	<span class="keyword">if</span> (isprime(test)) &#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; test &lt;&lt; <span class="string">"是质数"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; test &lt;&lt; <span class="string">"不是质数"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isprime</span><span class="params">(<span class="keyword">int</span> prime)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (prime == <span class="number">2</span>) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (prime % <span class="number">2</span> == <span class="number">0</span>) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> temp = <span class="number">3</span>; temp &lt;= prime / <span class="number">2</span>; temp = temp + <span class="number">2</span>) &#123;</div><div class="line">			<span class="keyword">if</span> (prime%temp == <span class="number">0</span>) &#123;</div><div class="line">				<span class="built_in">cout</span> &lt;&lt; prime &lt;&lt; <span class="string">"="</span> &lt;&lt; temp &lt;&lt; <span class="string">"*"</span> &lt;&lt; prime / temp &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">				<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.编写一个判润年的函数，在主函数中输入一个年份year,调用判润年的函数，在主函数中输出判断结果。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isleapyear</span><span class="params">(<span class="keyword">int</span> year)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (year % <span class="number">4</span> != <span class="number">0</span>) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (year % <span class="number">100</span> == <span class="number">0</span>) &#123;</div><div class="line">		<span class="keyword">if</span> (year % <span class="number">400</span> == <span class="number">0</span>) &#123;</div><div class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> year;</div><div class="line">	<span class="keyword">while</span> (!<span class="built_in">cin</span>.fail()) &#123;</div><div class="line">		<span class="built_in">cin</span>.clear();</div><div class="line">		<span class="built_in">cin</span>.sync();</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入一个年份："</span>;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; year;</div><div class="line">		<span class="keyword">if</span> (isleapyear(year)) &#123;</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; year &lt;&lt; <span class="string">"年是闰年！可以找铎神领取红包！"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; year &lt;&lt; <span class="string">"年不是闰年，但是也可以找铎神领取红包！"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"你输入的不是年份，请重新运行程序！"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.通过键盘输入一个实数，要求按四舍五入的规则保留两位小数并输出。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="comment">/*</span></div><div class="line">	不论输入的是多少位小数，我们需要的是保留两位小数，所以需要接触到的关键点是小数点后第三位。</div><div class="line">	四舍五入版</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">rounding</span><span class="params">(<span class="keyword">double</span> number)</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> integer = <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(number);	<span class="comment">//	取输入实数的整数部分</span></div><div class="line">	<span class="keyword">double</span> knumber = number * <span class="number">100</span>;	<span class="comment">//将需要判断第三位小数点移动到第一位。</span></div><div class="line">	<span class="keyword">int</span> kinteger = <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(knumber);	<span class="comment">//	取得增大100倍以后的整数，到时是输出的主体</span></div><div class="line">	<span class="keyword">double</span> dnumber = knumber-kinteger;	<span class="comment">//	取剩余的小数部分</span></div><div class="line">	<span class="keyword">if</span> (<span class="built_in">abs</span>(dnumber) &lt; <span class="number">0.5</span>) &#123;</div><div class="line">		<span class="keyword">return</span>	kinteger / <span class="number">100.0</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">if</span> (dnumber &gt; <span class="number">0</span>) &#123;</div><div class="line">			<span class="keyword">return</span> kinteger / <span class="number">100.0</span> + <span class="number">0.01</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">return</span> kinteger / <span class="number">100.0</span> - <span class="number">0.01</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">double</span> number;</div><div class="line">	<span class="keyword">double</span> result;</div><div class="line">	<span class="keyword">while</span> (!<span class="built_in">cin</span>.fail()) &#123;</div><div class="line">		<span class="built_in">cin</span>.clear();</div><div class="line">		<span class="built_in">cin</span>.sync();</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入一个实数："</span>;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; number;</div><div class="line">		result = rounding(number);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; number &lt;&lt; <span class="string">"经过四舍五入以后的结果是"</span> &lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="comment">/*</span></div><div class="line">	不论输入的是多少位小数，我们需要的是保留两位小数，所以需要接触到的关键点是小数点后第三位。</div><div class="line">	四舍六入五成双版(常见于分析化学有效位数取舍)。</div><div class="line">	规则：</div><div class="line">	对于位数很多的近似数，当有效位数确定后，其后面多余的数字应该舍去，只保留有效数字最末一位，这种修约（舍入）规则是“四舍六入五成双”，</div><div class="line">	也即“4舍6入5凑偶”这里“四”是指≤4 时舍去，"六"是指≥6时进上，</div><div class="line">	"五"指的是根据5后面的数字来定，当5后有数时，舍5入1；</div><div class="line">	当5后无有效数字时，</div><div class="line">	需要分两种情况来讲：①5前为奇数，舍5入1；②5前为偶数，舍5不进。（0是偶数）</div><div class="line">	由于计算机中大量的浮点数都是带有很多位的，为了体现四舍六入五成双的算法。</div><div class="line">	根据题目需要的2位小数，我统一截取4位小数开始计算。</div><div class="line">	这样子会有一个bug,比如9.82501,因为截取了4位小数，所以修正出来是9.82,正确答案是9.83。</div><div class="line">	但是只是为了演示，实际上必须是取定位数来统一输入，再用这个算法。</div><div class="line">	可以再优化为要求输入小数的位数或判断输入数据的位数，但是这需要到数组和字符串的知识。</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">intercept</span><span class="params">(<span class="keyword">double</span> number)</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> integer = <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(number);	<span class="comment">//	取输入实数的整数部分</span></div><div class="line">	<span class="keyword">double</span> knumber = number * <span class="number">10000</span>;	<span class="comment">//	将所需要的部分全部化为一个整数</span></div><div class="line">	<span class="keyword">int</span> kinteger = <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(knumber);	<span class="comment">//	截取整数部分</span></div><div class="line">	<span class="keyword">double</span> dnumber = kinteger / <span class="number">10000.0</span>;	<span class="comment">//	取得所需要的数。</span></div><div class="line">	<span class="keyword">return</span> dnumber;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">rounding</span><span class="params">(<span class="keyword">double</span> number)</span> </span>&#123;</div><div class="line">	<span class="keyword">double</span> temp = intercept(number);	<span class="comment">//	截取所需要判断的数字，应该已经告知此时的数字有4位。</span></div><div class="line">	<span class="keyword">int</span> ktemp = <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(temp * <span class="number">10000</span>);</div><div class="line">	<span class="keyword">int</span> integer_result = <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(temp);	<span class="comment">//	输出结果的整数部分</span></div><div class="line">	<span class="keyword">double</span>	digital_result = temp - integer_result;	<span class="comment">//	剩余的小数部分</span></div><div class="line">	<span class="keyword">int</span> judge_number = (((ktemp % <span class="number">100000</span>) % <span class="number">10000</span>) % <span class="number">1000</span>) % <span class="number">100</span>;	<span class="comment">//	为了能取到最后低的两位数。</span></div><div class="line">	<span class="keyword">if</span> (judge_number != <span class="number">50</span>) &#123;</div><div class="line">		<span class="keyword">if</span> (judge_number &lt;= <span class="number">49</span>) &#123;</div><div class="line">			<span class="keyword">return</span> integer_result + (<span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(digital_result * <span class="number">100</span>)) / <span class="number">100.0</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">return</span> integer_result + (<span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(digital_result * <span class="number">100</span>)) / <span class="number">100.0</span> + <span class="number">0.01</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">if</span> ((ktemp / <span class="number">100</span>) % <span class="number">2</span> == <span class="number">0</span>) &#123;	<span class="comment">//	倒数第3位是偶数的时候，此时应该不进位</span></div><div class="line">			<span class="keyword">return</span> integer_result + (<span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(digital_result * <span class="number">100</span>)) / <span class="number">100.0</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">return</span> integer_result + (<span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(digital_result * <span class="number">100</span>)) / <span class="number">100.0</span> + <span class="number">0.01</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">double</span> number;</div><div class="line">	<span class="keyword">double</span> result;</div><div class="line">	<span class="keyword">while</span> (!<span class="built_in">cin</span>.fail()) &#123;</div><div class="line">		<span class="built_in">cin</span>.clear();</div><div class="line">		<span class="built_in">cin</span>.sync();</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入一个实数："</span>;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; number;</div><div class="line">		result = rounding(number);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; number &lt;&lt; <span class="string">"经过四舍六入五成双以后的结果是"</span> &lt;&lt; result &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/10/28/Origin-user-defined-function-fitting/">
+                    Origin使用自定义函数拟合曲线函数
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/10/22/C++-the-eigth-week-homework/">
+                    C++第八周作业
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"C++第二次上机作业　| JCChan's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/10/28/C++-the-second-time-home/" data-title="C++第二次上机作业" data-url="http://yoursite.com/2016/10/28/C++-the-second-time-home/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"jcchan23"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/10/28/Origin-user-defined-function-fitting/" title="上一篇: Origin使用自定义函数拟合曲线函数">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/10/22/C++-the-eigth-week-homework/" title="下一篇: C++第八周作业">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/05/NAT-behind-FAT-Server-Deployment-Notes/">NAT后的FTP服务器部署笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/05/the-algothrim-of-matrix-transpose/">C++写矩阵的转置</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/05/the-algothrim-of-continued-fraction/">连分数近似算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/05/two-interesting-algothrim-questions/">两个有趣的算法问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/28/Origin-user-defined-function-fitting/">Origin使用自定义函数拟合曲线函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/28/C++-the-second-time-home/">C++第二次上机作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/22/C++-the-eigth-week-homework/">C++第八周作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/C++-the-sixth-week-homework/">C++第六周作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/03/C++-the-fifth-week-homework/">C++第五周作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/26/C++-the-first-time-homework/">C++第一次上机作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/23/matlab-the-fourth-week-homework/">Matlab第四周上机作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/06/Antivirus-software-cause-LSP-break/">东区机房浏览器问题记录排查</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/06/How-to-config-Eclipse-environment/">Eclipse Java开发环境的搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/25/How-to-install-wireshark-with-sourcecode-in-CentOS/">CentOS源码安装Wireshark</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/26/Ubantu-Ruby-MySQL-Nginx-Redmine部署记录/">Ubuntu + Ruby + MySQL + Nginx + Redmine部署记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/12/二进制反码求和运算/">二进制反码求和运算</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/11/由VMnet引起的browser-sync故障解决方案/">由VMnet引起的browser-sync故障解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/Gen8折腾日记（一）/">Gen8折腾日记（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 JCChan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+             title: "a.article-title, .article-more-link a", 
+             post: ".article-entry a[href], .copyright a[href]", 
+             tags: ".article-tag a", 
+             categories: ".article-category a, a.tag-list-link", 
+             articleNav: "#article-nav a, #post-nav-button a", 
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+             menu: ".header-menu a", 
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

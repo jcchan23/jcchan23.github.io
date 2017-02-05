@@ -15,23 +15,18 @@
 
 
 
-<meta name="description" content="前端组的小伙伴报告了一个关于browser-sync服务器不能访问的问题，经检查原来是VMnet引起的错误，网上也比较少见，故记录于此。">
+<meta name="description" content="用C++实现了矩阵的原地转置算法。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="由VMnet引起的browser-sync故障解决方案">
-<meta property="og:url" content="http://yoursite.com/2016/07/11/由VMnet引起的browser-sync故障解决方案/index.html">
+<meta property="og:title" content="C++写矩阵的转置">
+<meta property="og:url" content="http://yoursite.com/2017/02/05/the-algothrim-of-matrix-transpose/index.html">
 <meta property="og:site_name" content="JCChan's Blog">
-<meta property="og:description" content="前端组的小伙伴报告了一个关于browser-sync服务器不能访问的问题，经检查原来是VMnet引起的错误，网上也比较少见，故记录于此。">
-<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/1.png">
-<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/2.png">
-<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/3.png">
-<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/4.png">
-<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/5.png">
-<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/6.png">
-<meta property="og:updated_time" content="2016-09-14T05:55:40.091Z">
+<meta property="og:description" content="用C++实现了矩阵的原地转置算法。">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/images/the-algothrim-of-matrix-transpose/1.png">
+<meta property="og:updated_time" content="2017-02-05T07:44:12.531Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="由VMnet引起的browser-sync故障解决方案">
-<meta name="twitter:description" content="前端组的小伙伴报告了一个关于browser-sync服务器不能访问的问题，经检查原来是VMnet引起的错误，网上也比较少见，故记录于此。">
-<meta name="twitter:image" content="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/1.png">
+<meta name="twitter:title" content="C++写矩阵的转置">
+<meta name="twitter:description" content="用C++实现了矩阵的原地转置算法。">
+<meta name="twitter:image" content="http://o9whp01jf.bkt.clouddn.com/images/the-algothrim-of-matrix-transpose/1.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -63,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>由VMnet引起的browser-sync故障解决方案 | JCChan&#39;s Blog</title>
+<title>C++写矩阵的转置 | JCChan&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -279,11 +274,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-由VMnet引起的browser-sync故障解决方案" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-the-algothrim-of-matrix-transpose" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/07/11/由VMnet引起的browser-sync故障解决方案/" class="article-date">
-      <time datetime="2016-07-11T15:24:10.000Z" itemprop="datePublished">2016-07-11</time>
+      <a href="/2017/02/05/the-algothrim-of-matrix-transpose/" class="article-date">
+      <time datetime="2017-02-05T07:36:38.000Z" itemprop="datePublished">2017-02-05</time>
 </a>
 
 
@@ -298,7 +293,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      由VMnet引起的browser-sync故障解决方案
+      C++写矩阵的转置
     </h1>
   
 
@@ -307,13 +302,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Computer/">Computer</a>
+    <a class="article-category-link" href="/categories/Maths/">Maths</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Networks/">Networks</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -323,19 +318,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;今天晚上，前端组的小伙伴问我说能不能帮忙看看他的电脑为什么在安装了browser-sync插件以后，正常启动服务以后却无法通过手机访问，经过简单的排查，发现竟然是由VMnet虚拟网卡引起的网络故障，遂记录下来。也正好把整个browser-sync插件的安装过程说一下。</p>
-<p>1.部署好git环境以及Node.js的安装，这个非常简单，在此就不多做解释了。</p>
-<p>2.登录 <a href="http://www.browsersync.cn" target="_blank" rel="external">http://www.browsersync.cn</a> 网站，按照安装提示进行安装  </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g browser-sync</div></pre></td></tr></table></figure>
-<p>在安装的过程中还发现一些你们都懂的原因连不上npm服务器，随改用淘宝的镜像站点，修改链接<a href="http://cnodejs.org/topic/4f9904f9407edba21468f31e" target="_blank" rel="external">http://cnodejs.org/topic/4f9904f9407edba21468f31e</a><br><img src="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/1.png" alt="图片1"></p>
-<p>3.在某个英文目录下建立起一个文件夹，作为放置待响应式测试的站点的根目录，注意这里的路径都不能有中文，由于是测试，我直接在桌面上建立一个test文件夹，进来以后运行命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install --save-dev browser-sync</div></pre></td></tr></table></figure>
-<p><img src="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/2.png" alt="图片2"></p>
-<p>4.下载网站上给的同步测试包，解压缩，进入下一级目录。<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/3.png" alt="图片3"><br><img src="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/4.png" alt="图片4"></p>
-<p>5.运行命令<code>browser-sync start --server -files &quot;*&quot;</code>,代表监听本目录下所有文件。<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/5.png" alt="图片5"></p>
-<p>6.若是正常情况下，就会返回如下提示。<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/6.png" alt="图片6"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;小伙伴今晚在这里的返回提示是一个<strong>169.254.0.0/16</strong>的地址，这是一种叫做本地链路地址，用于当计算机没有插入网线时，网卡给自己<strong>临时自动分配</strong>的一个地址，而小伙伴当前使用的网络地址当然不会是这个，因此导致了问题。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;既然browser-sync服务器识别并应用到了这个地址，说明本机上至少是有一块网卡使用着这个地址，打开<strong>网络与共享中心 → 更改适配器设置 → 网卡</strong>，一张张网卡看过去，马上就发现了由于VMnet1使用了这个地址，因此browser-sync服务器就指示到这里来了，禁用掉这两个网卡，再重新跑一遍步骤5，手机上就能打开了。</p>
-<p>7.最后说说两个使用事项吧。<br>(1) <strong>手机端和电脑端一定要使用同一个网段</strong>，比如连接到同样一个wifi下面，若电脑端直接连接wifi，手机端用流量的话，在不做端口转发的前提下是不能正常使用的。<br>(2) <strong>有一个根文件夹作为监听的根目录</strong>，那么就可以在根目录下面根据需要监听文件了。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bug在宿舍重现不出来<em>(:з」∠)</em>，估计应该只是个别电脑问题而已，小伙伴们若是碰到了可以稍微注意一下。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于任意非n阶矩阵的转置，用c++应该怎么写代码，思考了一下，发现并没有那么简单，上网找到了一个比较好的算法，叫做矩阵原地转置矩阵算法。基于别人的代码，改写成可以使用指针动态分配内存的方法。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;先放传送门：<a href="http://www.jb51.net/article/53715.htm" target="_blank" rel="external">C++实现矩阵原地转置算法的实现</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;原理并不难，那篇文章非常的详细，我不再赘述，下面把改写好的代码发出来。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*************************************************************************</span></div><div class="line">&gt; File Name: matrix_transpose.cpp</div><div class="line">&gt; Author: SongLee</div><div class="line">&gt; Modified: JCChan</div><div class="line">************************************************************************/</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span> </span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="comment">/* 后继 */</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">getNext</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> m, <span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> (i%n)*m + i / n;</div><div class="line">&#125;</div><div class="line"><span class="comment">/* 前驱 */</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">getPre</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> m, <span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> (i%m)*n + i / m;</div><div class="line">&#125;</div><div class="line"><span class="comment">/* 处理以下标i为起点的环 */</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">movedata</span><span class="params">(<span class="keyword">int</span> *mtx, <span class="keyword">int</span> i, <span class="keyword">int</span> m, <span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> temp = mtx[i]; <span class="comment">// 暂存 </span></div><div class="line">	<span class="keyword">int</span> cur = i;    <span class="comment">// 当前下标 </span></div><div class="line">	<span class="keyword">int</span> pre = getPre(cur, m, n);</div><div class="line">	<span class="comment">// 从最后一个数开始，获得它的前驱，直到前驱的值和最后一位值相等，相当于交换的逆过程</span></div><div class="line">	<span class="keyword">while</span> (pre != i)</div><div class="line">	&#123;</div><div class="line">		mtx[cur] = mtx[pre];</div><div class="line">		cur = pre;</div><div class="line">		pre = getPre(cur, m, n);</div><div class="line">	&#125;</div><div class="line">	mtx[cur] = temp;</div><div class="line">&#125;</div><div class="line"><span class="comment">/* 转置，即循环处理所有环 */</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">transpose</span><span class="params">(<span class="keyword">int</span> *mtx, <span class="keyword">int</span> m, <span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;m*n; ++i)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">int</span> next = getNext(i, m, n);</div><div class="line">		<span class="keyword">while</span> (next &gt; i) <span class="comment">// 若存在后继小于i说明重复 </span></div><div class="line">			next = getNext(next, m, n);</div><div class="line">		<span class="keyword">if</span> (next == i)  <span class="comment">// 处理当前环  </span></div><div class="line">			movedata(mtx, i, m, n);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">(<span class="keyword">int</span> *mtx, <span class="keyword">int</span> row, <span class="keyword">int</span> column)</span> </span>&#123;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; i++) &#123;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; column; j++) &#123;</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入矩阵的第"</span> &lt;&lt; i + <span class="number">1</span> &lt;&lt; <span class="string">"行第"</span> &lt;&lt; j + <span class="number">1</span> &lt;&lt; <span class="string">"个元素："</span>;</div><div class="line">			<span class="comment">//	根据矩阵的坐标推算它在一维数组中的位置。</span></div><div class="line">			<span class="built_in">cin</span> &gt;&gt; *(mtx + column*i + j);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">/* 输出矩阵 */</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> *mtx, <span class="keyword">int</span> m, <span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;m*n; ++i)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span> ((i + <span class="number">1</span>) % n == <span class="number">0</span>)</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; mtx[i] &lt;&lt; <span class="string">"\n"</span>;</div><div class="line">		<span class="keyword">else</span></div><div class="line">			<span class="built_in">cout</span> &lt;&lt; mtx[i] &lt;&lt; <span class="string">" "</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">/* 测试 */</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> row, column;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入矩阵的行数："</span>;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; row;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入矩阵的列数："</span>;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; column;</div><div class="line">	<span class="keyword">int</span> *matrix = <span class="keyword">new</span> <span class="keyword">int</span>[row*column];</div><div class="line">	input(matrix, row, column);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"Before matrix transposition:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	print(matrix, row, column);</div><div class="line">	transpose(matrix, row, column);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"After matrix transposition:"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	print(matrix, column, row);</div><div class="line">	<span class="keyword">delete</span>[] matrix;</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果如下：<br><img src="http://o9whp01jf.bkt.clouddn.com/images/the-algothrim-of-matrix-transpose/1.png" alt="图片1"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于n阶方阵来说，情况则简单的多。同样放上代码。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">move</span><span class="params">(<span class="keyword">int</span> *matrix, <span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> i, j, k;</div><div class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i&lt;n; i++)</div><div class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j&lt;i; j++)</div><div class="line">		&#123;</div><div class="line">			k = *(matrix + i*n + j);</div><div class="line">			*(matrix + i*n + j) = *(matrix + j*n + i);</div><div class="line">			*(matrix + j*n + i) = k;</div><div class="line">		&#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> n, i, j;</div><div class="line">	<span class="keyword">int</span> *p;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入矩阵的维数："</span>;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">	p = <span class="keyword">new</span> <span class="keyword">int</span>[n*n];</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"输入矩阵的元素"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i&lt;n; i++)</div><div class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j&lt;n; j++)</div><div class="line">		&#123;</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"第"</span> &lt;&lt; i + <span class="number">1</span> &lt;&lt; <span class="string">"行第"</span> &lt;&lt; j + <span class="number">1</span></div><div class="line">				&lt;&lt; <span class="string">"个元素为："</span>;</div><div class="line">			<span class="built_in">cin</span> &gt;&gt; p[i*n + j];</div><div class="line">		&#125;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"输入的矩阵的为："</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i&lt;n; i++)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j&lt;n; j++)</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; p[i*n + j] &lt;&lt; <span class="string">" "</span>;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	move(p, n);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"转置后的矩阵的为："</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i&lt;n; i++)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j&lt;n; j++)</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; p[i*n + j] &lt;&lt; <span class="string">" "</span>;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">delete</span>[] p;</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -348,15 +332,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/07/12/二进制反码求和运算/">
-                    二进制反码求和运算
+                <a href="/2017/02/05/NAT-behind-FAT-Server-Deployment-Notes/">
+                    NAT后的FTP服务器部署笔记
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/07/07/Gen8折腾日记（一）/">
-                    Gen8折腾日记（一）
+                <a href="/2017/02/05/the-algothrim-of-continued-fraction/">
+                    连分数近似算法
                 </a>
             </div>
         
@@ -404,7 +388,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"由VMnet引起的browser-sync故障解决方案　| JCChan's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"C++写矩阵的转置　| JCChan's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -420,7 +404,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/07/11/由VMnet引起的browser-sync故障解决方案/" data-title="由VMnet引起的browser-sync故障解决方案" data-url="http://yoursite.com/2016/07/11/由VMnet引起的browser-sync故障解决方案/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/02/05/the-algothrim-of-matrix-transpose/" data-title="C++写矩阵的转置" data-url="http://yoursite.com/2017/02/05/the-algothrim-of-matrix-transpose/"></div>
     <script>
         var duoshuoQuery = {short_name:"jcchan23"};
         var loadComment = function(){
@@ -443,7 +427,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/07/12/二进制反码求和运算/" title="上一篇: 二进制反码求和运算">
+            <a href="/2017/02/05/NAT-behind-FAT-Server-Deployment-Notes/" title="上一篇: NAT后的FTP服务器部署笔记">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -451,7 +435,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/07/07/Gen8折腾日记（一）/" title="下一篇: Gen8折腾日记（一）">
+            <a href="/2017/02/05/the-algothrim-of-continued-fraction/" title="下一篇: 连分数近似算法">
                 <i class="fa fa-angle-right"></i>
             </a>
         

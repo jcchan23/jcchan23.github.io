@@ -15,23 +15,35 @@
 
 
 
-<meta name="description" content="前端组的小伙伴报告了一个关于browser-sync服务器不能访问的问题，经检查原来是VMnet引起的错误，网上也比较少见，故记录于此。">
+<meta name="description" content="最近有不少人问我怎么在Origin中对自定义函数进行拟合，综合了一下，写成这篇文章。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="由VMnet引起的browser-sync故障解决方案">
-<meta property="og:url" content="http://yoursite.com/2016/07/11/由VMnet引起的browser-sync故障解决方案/index.html">
+<meta property="og:title" content="Origin使用自定义函数拟合曲线函数">
+<meta property="og:url" content="http://yoursite.com/2016/10/28/Origin-user-defined-function-fitting/index.html">
 <meta property="og:site_name" content="JCChan's Blog">
-<meta property="og:description" content="前端组的小伙伴报告了一个关于browser-sync服务器不能访问的问题，经检查原来是VMnet引起的错误，网上也比较少见，故记录于此。">
-<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/1.png">
-<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/2.png">
-<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/3.png">
-<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/4.png">
-<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/5.png">
-<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/6.png">
-<meta property="og:updated_time" content="2016-09-14T05:55:40.091Z">
+<meta property="og:description" content="最近有不少人问我怎么在Origin中对自定义函数进行拟合，综合了一下，写成这篇文章。">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/1.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/3.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/4.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/5.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/6.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/7.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/8.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/9.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/10.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/11.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/12.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/13.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/14.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/15.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/16.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/17.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/1.jpg">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/18.png">
+<meta property="og:updated_time" content="2016-10-28T16:03:58.581Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="由VMnet引起的browser-sync故障解决方案">
-<meta name="twitter:description" content="前端组的小伙伴报告了一个关于browser-sync服务器不能访问的问题，经检查原来是VMnet引起的错误，网上也比较少见，故记录于此。">
-<meta name="twitter:image" content="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/1.png">
+<meta name="twitter:title" content="Origin使用自定义函数拟合曲线函数">
+<meta name="twitter:description" content="最近有不少人问我怎么在Origin中对自定义函数进行拟合，综合了一下，写成这篇文章。">
+<meta name="twitter:image" content="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/1.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -63,7 +75,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>由VMnet引起的browser-sync故障解决方案 | JCChan&#39;s Blog</title>
+<title>Origin使用自定义函数拟合曲线函数 | JCChan&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -279,11 +291,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-由VMnet引起的browser-sync故障解决方案" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Origin-user-defined-function-fitting" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/07/11/由VMnet引起的browser-sync故障解决方案/" class="article-date">
-      <time datetime="2016-07-11T15:24:10.000Z" itemprop="datePublished">2016-07-11</time>
+      <a href="/2016/10/28/Origin-user-defined-function-fitting/" class="article-date">
+      <time datetime="2016-10-28T15:32:23.000Z" itemprop="datePublished">2016-10-28</time>
 </a>
 
 
@@ -298,7 +310,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      由VMnet引起的browser-sync故障解决方案
+      Origin使用自定义函数拟合曲线函数
     </h1>
   
 
@@ -307,13 +319,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Computer/">Computer</a>
+    <a class="article-category-link" href="/categories/Chemistry/">Chemistry</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Networks/">Networks</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Origin/">Origin</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -323,20 +335,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;今天晚上，前端组的小伙伴问我说能不能帮忙看看他的电脑为什么在安装了browser-sync插件以后，正常启动服务以后却无法通过手机访问，经过简单的排查，发现竟然是由VMnet虚拟网卡引起的网络故障，遂记录下来。也正好把整个browser-sync插件的安装过程说一下。</p>
-<p>1.部署好git环境以及Node.js的安装，这个非常简单，在此就不多做解释了。</p>
-<p>2.登录 <a href="http://www.browsersync.cn" target="_blank" rel="external">http://www.browsersync.cn</a> 网站，按照安装提示进行安装  </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g browser-sync</div></pre></td></tr></table></figure>
-<p>在安装的过程中还发现一些你们都懂的原因连不上npm服务器，随改用淘宝的镜像站点，修改链接<a href="http://cnodejs.org/topic/4f9904f9407edba21468f31e" target="_blank" rel="external">http://cnodejs.org/topic/4f9904f9407edba21468f31e</a><br><img src="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/1.png" alt="图片1"></p>
-<p>3.在某个英文目录下建立起一个文件夹，作为放置待响应式测试的站点的根目录，注意这里的路径都不能有中文，由于是测试，我直接在桌面上建立一个test文件夹，进来以后运行命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install --save-dev browser-sync</div></pre></td></tr></table></figure>
-<p><img src="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/2.png" alt="图片2"></p>
-<p>4.下载网站上给的同步测试包，解压缩，进入下一级目录。<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/3.png" alt="图片3"><br><img src="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/4.png" alt="图片4"></p>
-<p>5.运行命令<code>browser-sync start --server -files &quot;*&quot;</code>,代表监听本目录下所有文件。<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/5.png" alt="图片5"></p>
-<p>6.若是正常情况下，就会返回如下提示。<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/6.png" alt="图片6"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;小伙伴今晚在这里的返回提示是一个<strong>169.254.0.0/16</strong>的地址，这是一种叫做本地链路地址，用于当计算机没有插入网线时，网卡给自己<strong>临时自动分配</strong>的一个地址，而小伙伴当前使用的网络地址当然不会是这个，因此导致了问题。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;既然browser-sync服务器识别并应用到了这个地址，说明本机上至少是有一块网卡使用着这个地址，打开<strong>网络与共享中心 → 更改适配器设置 → 网卡</strong>，一张张网卡看过去，马上就发现了由于VMnet1使用了这个地址，因此browser-sync服务器就指示到这里来了，禁用掉这两个网卡，再重新跑一遍步骤5，手机上就能打开了。</p>
-<p>7.最后说说两个使用事项吧。<br>(1) <strong>手机端和电脑端一定要使用同一个网段</strong>，比如连接到同样一个wifi下面，若电脑端直接连接wifi，手机端用流量的话，在不做端口转发的前提下是不能正常使用的。<br>(2) <strong>有一个根文件夹作为监听的根目录</strong>，那么就可以在根目录下面根据需要监听文件了。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bug在宿舍重现不出来<em>(:з」∠)</em>，估计应该只是个别电脑问题而已，小伙伴们若是碰到了可以稍微注意一下。</p>
-
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最近应该是六叔的物化理论作业要交了吧，很多人问我六叔的作业里面有两道题要怎么进行图像函数的拟合。综合起来的问题主要有两个：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. 知道图像的准确拟合方程，但是不知道怎么拟合。(这个是本文的重点)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. 不知道图像的准确拟合方程，也不知道怎么拟合，这个我可以稍微提供一个拟合的方向。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;先从不知道图像的准确拟合方程开始吧，当你拿到一组数据时，你肯定是先看横纵坐标写的是什么，在19题的第二问里面，要求蒸发焓和热力学温度的关系，学过物化的都知道，肯定是克劳修斯-克拉贝龙方程才能出现这两个变量的关系。因此这里我们就要利用这个方程对我们的数据进行变形。<br>$$ \ln \frac{p}{p^ø}=\frac{△_p H^m}{R}(\frac{1}{373}-\frac{1}{T}) $$<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这就很明显了嘛，把我们得到的蒸气压除以标准状态下的气压，它的对数和-1/T成线性关系，接着就不用我说了吧。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数学建模的其中一个思路是根据已有的经验公式进行改进和修正啊，因为建模也要符合基本法啊，不能随便就上个算符吧。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18题我留着后面说，先把19题的第一问的完整拟合过程在这里写一遍。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. 根据已有的拟合形式将所需要的数据处理好，19题的公式是：<br>$$ \lg p=A-\frac{B}{T-C} $$<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要的自变量是热力学温度T，因变量是log10(p)，先整理好，这个在Excel里面是很容易的事情。</p>
+<center><img src="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/1.png" alt="图片1"></center><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. 打开Origin，我的是2015，不同版本操作大同小异，打开Analysis→ Fitting→ Nonlinear Curve Fit→ Open dialog。<br><center><img src="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/3.png" alt="图片2"></center><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. 在Category里面选择User Defined，可见Origin的拟合函数也是类似于Matlab的M文件一样可以自己编写。<br><center><img src="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/4.png" alt="图片3"></center><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. 当然是New一个函数咯，不是New一个对象。<br><center><img src="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/5.png" alt="图片4"></center><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. 从这张图开始，注意看左边的Hints，这个比网上的所谓的教程不知道高到哪里去了。从Hints中可以看到，要输入函数名，后缀名是FDF，然后是函数模型，Explicit是指明确的，Function Type是表达式，也就是所谓的y=f(x)的形式，可以看到还能选Equlations，左边的Hints告诉我们，这种类型是处理只有一个自变量的。<br><center><img src="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/6.png" alt="图片5"></center><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6. 点击Next，这个界面是输入自变量，因变量，参数的名字，感天谢地我的数理统计是英文版的，这里直接阅读无压力，可以看到，多个参数时用逗号分隔。<br><center><img src="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/7.png" alt="图片6"></center><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7. 这一个界面是整个过程最关键的部分，自定义函数的拟合过程中最重要的就是初值的选取，这里我们先按照要求把函数的形式输入。注意到左边的Hints，Fixed是说如果初值选取的不好的时候也不能变参数的值，显然不符合我们的意思，所以我们这里都不勾选。Fixed用在已经确定了某些参数的范围的时候。接着是初值的尝试，看到了下面的Quick Check了吗，这里是要我们选取不同的ABC作为初值，使得我们输入一个T的时候，跑出来的结果接近我们测试出来的数据值。<br><center><img src="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/8.png" alt="图片7"></center><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8. 经过漫长的测试，我测试出了一组值，只要接近就可以，不需要完全吻合，然后点击Next。<br><center><img src="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/9.png" alt="图片8"></center><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9. 这个界面也是非常的重要，刚才是测试一个点，现在就是需要将一个点变成一组数值，使得我们的函数尽可能匹配多的测试值，我们点击红色框框中的按钮，打开代码界面。<br><center><img src="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/10.png" alt="图片9"></center><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10. 看到这个界面，一股浓浓的C++代码风格袭来……，确实长的很像C++，但是又混有Matlab的风格，根据Matlab的思路，很容易就想到这个Vector存储的就是Matlab的矩阵中的值，至于这些double类型的，明显就是数字啦，这里提示我们，Code to be executed to initialized parameters，代码将在初始化参数以后执行。我们要把我们的表达式输入进去，使得vector能存储尽可能多而接近的测试值，根据变量存储的名字，很容易就知道输入的是什么东西。<br><center><img src="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/11.png" alt="图片10"></center><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11. 点击左上方的Compile，也就是编译，果然是C++风格的代码……，看到编译成功，如果失败的话请仔细检查是不是少打了什么东西，不过以逗号作为每行结尾也是反人类……<br><center><img src="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/12.png" alt="图片11"></center><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;12.然后关闭代码窗口，看到这里多来一串这样的符号，然后点击Next，一路Next直到Finish。<br><center><img src="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/13.png" alt="图片12"></center><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;13. Finish以后回到这个界面，然后点击红色方框中的按钮，这个是指Fit untiled Converged，也就是根据Chi-Square Test，直到满足条件以后才能函数收敛，点击一次就可以了。可以看到提示，Fit may be Converged。<br><center><img src="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/14.png" alt="图片13"></center><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;14. 点击Fit，我们就能看到一条很漂亮的拟合曲线了，R-Square还是0.99997哦，相信这个拟合应该满足要求了，接下来小伙伴就知道怎么做了吧。<br><center><img src="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/15.png" alt="图片14"></center><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;好了开始研究18题，18题里面原来是没有公式的，但是不少小伙伴拿到答案，答案里面是一种很奇怪的拟合方式，并且还有迭代什么的，其实本质上也不难，也是利用刚才的方法，只不过这里就多了好几步，其中一个是在第5步输入参数名时要把常量名字输入，这里比如说是sigma，然后在尝试初值的时候要将Constant界面的sigma的值输入为0.07275，才能开始尝试初值。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;按照上述的步骤开始做自定义函数拟合，得到的界面如下。这里的Iteration Algorithm就是答案里所写的方法，不过这个Fit did not Converge是什么情况啊，我试了很多次都不行，包括答案给的初值以及自己试的初值，后来硬着头皮直接Fit，发现也能够Fit的出来，只是。<br><center><img src="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/16.png" alt="图片15"></center><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一个是根据上述的Fit出来的结果，不觉得这个0.996瞬间low了很多了吗，而且它还是未收敛的，换句话说，肯定存在一个形式比它更好的式子满足要求。<br><center><img src="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/17.png" alt="图片16"></center><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们回头看看式子，你看到了ln(1+x)，你看到这个难道真的不会想到用泰勒展开吗，用一下不就啥问题都解决了吗，而且多项式拟合在Origin里是有快捷键的啊！<br><center><img src="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/1.jpg" alt="图片17"></center><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据Analysis→ Fitting→ Polynormal Fit，随手试了2,3,4三个数，至少这3个数拟合出来的R-Square都比那个自定义函数的高，其中3又是最高的那一个，因此我们只要选3次多项式作为拟合值就好了啊，当然咯，能够用泰勒展开式的前提，是余项要趋于0，因此，泰勒展开式也不能随便乱用。<br><center><img src="http://o9whp01jf.bkt.clouddn.com/image/Origin-fitting/18.png" alt="图片18"></center>
       
     </div>
     
@@ -348,15 +348,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/07/12/二进制反码求和运算/">
-                    二进制反码求和运算
+                <a href="/2017/02/05/two-interesting-algothrim-questions/">
+                    两个有趣的算法问题
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/07/07/Gen8折腾日记（一）/">
-                    Gen8折腾日记（一）
+                <a href="/2016/10/28/C++-the-second-time-home/">
+                    C++第二次上机作业
                 </a>
             </div>
         
@@ -404,7 +404,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"由VMnet引起的browser-sync故障解决方案　| JCChan's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Origin使用自定义函数拟合曲线函数　| JCChan's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -420,7 +420,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/07/11/由VMnet引起的browser-sync故障解决方案/" data-title="由VMnet引起的browser-sync故障解决方案" data-url="http://yoursite.com/2016/07/11/由VMnet引起的browser-sync故障解决方案/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/10/28/Origin-user-defined-function-fitting/" data-title="Origin使用自定义函数拟合曲线函数" data-url="http://yoursite.com/2016/10/28/Origin-user-defined-function-fitting/"></div>
     <script>
         var duoshuoQuery = {short_name:"jcchan23"};
         var loadComment = function(){
@@ -443,7 +443,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/07/12/二进制反码求和运算/" title="上一篇: 二进制反码求和运算">
+            <a href="/2017/02/05/two-interesting-algothrim-questions/" title="上一篇: 两个有趣的算法问题">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -451,7 +451,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/07/07/Gen8折腾日记（一）/" title="下一篇: Gen8折腾日记（一）">
+            <a href="/2016/10/28/C++-the-second-time-home/" title="下一篇: C++第二次上机作业">
                 <i class="fa fa-angle-right"></i>
             </a>
         

@@ -15,23 +15,16 @@
 
 
 
-<meta name="description" content="前端组的小伙伴报告了一个关于browser-sync服务器不能访问的问题，经检查原来是VMnet引起的错误，网上也比较少见，故记录于此。">
+<meta name="description" content="C++第六周的作业，开始要写自定义函数了，由于这周作业比较多，就没有多研究进去了。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="由VMnet引起的browser-sync故障解决方案">
-<meta property="og:url" content="http://yoursite.com/2016/07/11/由VMnet引起的browser-sync故障解决方案/index.html">
+<meta property="og:title" content="C++第六周作业">
+<meta property="og:url" content="http://yoursite.com/2016/10/12/C++-the-sixth-week-homework/index.html">
 <meta property="og:site_name" content="JCChan's Blog">
-<meta property="og:description" content="前端组的小伙伴报告了一个关于browser-sync服务器不能访问的问题，经检查原来是VMnet引起的错误，网上也比较少见，故记录于此。">
-<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/1.png">
-<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/2.png">
-<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/3.png">
-<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/4.png">
-<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/5.png">
-<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/6.png">
-<meta property="og:updated_time" content="2016-09-14T05:55:40.091Z">
+<meta property="og:description" content="C++第六周的作业，开始要写自定义函数了，由于这周作业比较多，就没有多研究进去了。">
+<meta property="og:updated_time" content="2016-10-12T12:47:54.437Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="由VMnet引起的browser-sync故障解决方案">
-<meta name="twitter:description" content="前端组的小伙伴报告了一个关于browser-sync服务器不能访问的问题，经检查原来是VMnet引起的错误，网上也比较少见，故记录于此。">
-<meta name="twitter:image" content="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/1.png">
+<meta name="twitter:title" content="C++第六周作业">
+<meta name="twitter:description" content="C++第六周的作业，开始要写自定义函数了，由于这周作业比较多，就没有多研究进去了。">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -63,7 +56,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>由VMnet引起的browser-sync故障解决方案 | JCChan&#39;s Blog</title>
+<title>C++第六周作业 | JCChan&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -279,11 +272,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-由VMnet引起的browser-sync故障解决方案" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-C++-the-sixth-week-homework" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/07/11/由VMnet引起的browser-sync故障解决方案/" class="article-date">
-      <time datetime="2016-07-11T15:24:10.000Z" itemprop="datePublished">2016-07-11</time>
+      <a href="/2016/10/12/C++-the-sixth-week-homework/" class="article-date">
+      <time datetime="2016-10-12T11:35:09.000Z" itemprop="datePublished">2016-10-12</time>
 </a>
 
 
@@ -298,7 +291,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      由VMnet引起的browser-sync故障解决方案
+      C++第六周作业
     </h1>
   
 
@@ -307,13 +300,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Computer/">Computer</a>
+    <a class="article-category-link" href="/categories/Maths/">Maths</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Networks/">Networks</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -323,20 +316,14 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;今天晚上，前端组的小伙伴问我说能不能帮忙看看他的电脑为什么在安装了browser-sync插件以后，正常启动服务以后却无法通过手机访问，经过简单的排查，发现竟然是由VMnet虚拟网卡引起的网络故障，遂记录下来。也正好把整个browser-sync插件的安装过程说一下。</p>
-<p>1.部署好git环境以及Node.js的安装，这个非常简单，在此就不多做解释了。</p>
-<p>2.登录 <a href="http://www.browsersync.cn" target="_blank" rel="external">http://www.browsersync.cn</a> 网站，按照安装提示进行安装  </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g browser-sync</div></pre></td></tr></table></figure>
-<p>在安装的过程中还发现一些你们都懂的原因连不上npm服务器，随改用淘宝的镜像站点，修改链接<a href="http://cnodejs.org/topic/4f9904f9407edba21468f31e" target="_blank" rel="external">http://cnodejs.org/topic/4f9904f9407edba21468f31e</a><br><img src="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/1.png" alt="图片1"></p>
-<p>3.在某个英文目录下建立起一个文件夹，作为放置待响应式测试的站点的根目录，注意这里的路径都不能有中文，由于是测试，我直接在桌面上建立一个test文件夹，进来以后运行命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install --save-dev browser-sync</div></pre></td></tr></table></figure>
-<p><img src="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/2.png" alt="图片2"></p>
-<p>4.下载网站上给的同步测试包，解压缩，进入下一级目录。<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/3.png" alt="图片3"><br><img src="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/4.png" alt="图片4"></p>
-<p>5.运行命令<code>browser-sync start --server -files &quot;*&quot;</code>,代表监听本目录下所有文件。<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/5.png" alt="图片5"></p>
-<p>6.若是正常情况下，就会返回如下提示。<br><img src="http://o9whp01jf.bkt.clouddn.com/Images/vmnet_Browser_sync/6.png" alt="图片6"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;小伙伴今晚在这里的返回提示是一个<strong>169.254.0.0/16</strong>的地址，这是一种叫做本地链路地址，用于当计算机没有插入网线时，网卡给自己<strong>临时自动分配</strong>的一个地址，而小伙伴当前使用的网络地址当然不会是这个，因此导致了问题。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;既然browser-sync服务器识别并应用到了这个地址，说明本机上至少是有一块网卡使用着这个地址，打开<strong>网络与共享中心 → 更改适配器设置 → 网卡</strong>，一张张网卡看过去，马上就发现了由于VMnet1使用了这个地址，因此browser-sync服务器就指示到这里来了，禁用掉这两个网卡，再重新跑一遍步骤5，手机上就能打开了。</p>
-<p>7.最后说说两个使用事项吧。<br>(1) <strong>手机端和电脑端一定要使用同一个网段</strong>，比如连接到同样一个wifi下面，若电脑端直接连接wifi，手机端用流量的话，在不做端口转发的前提下是不能正常使用的。<br>(2) <strong>有一个根文件夹作为监听的根目录</strong>，那么就可以在根目录下面根据需要监听文件了。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bug在宿舍重现不出来<em>(:з」∠)</em>，估计应该只是个别电脑问题而已，小伙伴们若是碰到了可以稍微注意一下。</p>
-
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.在程序中定义一个int型变量，赋予1~100的值，要求用户猜这个数，比较两个数的大小，把结果提示给用户，直到猜对位置，分别使用while和do……while来实现。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">	用while实现</div><div class="line">*/</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> n,m;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"请出题者输入一个数(1~100): "</span>;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"请猜题者输入数字(1~100):"</span>;</div><div class="line">	<span class="keyword">while</span> (!<span class="built_in">cin</span>.fail()) &#123;</div><div class="line">		<span class="built_in">cin</span>.clear();</div><div class="line">		<span class="built_in">cin</span>.sync();</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; m;</div><div class="line">		<span class="keyword">if</span> (m &lt; n) &#123;</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"输入数字比既定数字小，请重新输入:"</span>;</div><div class="line">			<span class="keyword">continue</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (m &gt; n) &#123;</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"输入数字比既定数字大，请重新输入:"</span>;</div><div class="line">			<span class="keyword">continue</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"恭喜你猜对了数字，记得找铎神领取红包！"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">/*</span></div><div class="line">	用do……while实现</div><div class="line">*/</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> n, m;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"请出题者输入一个数(1~100): "</span>;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"请猜题者输入数字(1~100):"</span>;</div><div class="line">	<span class="keyword">do</span>&#123;</div><div class="line">		<span class="built_in">cin</span>.clear();</div><div class="line">		<span class="built_in">cin</span>.sync();</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; m;</div><div class="line">		<span class="keyword">if</span> (m &lt; n) &#123;</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"输入数字比既定数字小，请重新输入:"</span>;</div><div class="line">			<span class="keyword">continue</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (m &gt; n) &#123;</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"输入数字比既定数字大，请重新输入:"</span>;</div><div class="line">			<span class="keyword">continue</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"恭喜你猜对了数字，记得找铎神领取红包！"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">	&#125; <span class="keyword">while</span> (!<span class="built_in">cin</span>.fail());</div><div class="line">	<span class="comment">//	让结果显示的代码，不要马上闪退结束。</span></div><div class="line">	getchar();</div><div class="line">	getchar();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.输出九九乘法表</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iomanip&gt;</span>	<span class="comment">//	为了引入setw()控制输出宽度</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">9</span>; i++) &#123;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= <span class="number">9</span>; j++) &#123;</div><div class="line">			<span class="comment">//	setw(2)为了输出整齐</span></div><div class="line">			<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">"*"</span> &lt;&lt; j &lt;&lt; <span class="string">"="</span> &lt;&lt; setw(<span class="number">2</span>) &lt;&lt; i*j &lt;&lt; <span class="string">" "</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//	输出完一列以后就可以换行</span></div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.完成函数，参数为两个unsigned short int型数，返回值为第一个参数除以第二个参数的结果，数据类型为short int;如果第二个参数为0，则返回值为-1，在主程序中实现输入输出。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="function"><span class="keyword">short</span> <span class="keyword">int</span> <span class="title">transfun</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">short</span> <span class="keyword">int</span> n1 , <span class="keyword">unsigned</span> <span class="keyword">short</span> <span class="keyword">int</span> n2)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">unsigned</span> <span class="keyword">short</span> <span class="keyword">int</span> n1, n2;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入第一个数："</span>;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n1;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入第二个数："</span>;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n2;</div><div class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"返回值是"</span>&lt;&lt;transfun(n1, n2)&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">short</span> <span class="keyword">int</span> <span class="title">transfun</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">short</span> <span class="keyword">int</span> n1, <span class="keyword">unsigned</span> <span class="keyword">short</span> <span class="keyword">int</span> n2)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (n2 == <span class="number">0</span>) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> n1 / n2;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.编写函数把华氏温度转成摄氏温度</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="comment">//	摄氏度转华氏度的函数的声明</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">CelTransFah</span><span class="params">(<span class="keyword">double</span> Fah)</span></span>;</div><div class="line"><span class="comment">//	主函数</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">double</span> Fah;</div><div class="line">	<span class="keyword">while</span> (!<span class="built_in">cin</span>.fail()) &#123;</div><div class="line">		<span class="built_in">cin</span>.clear();</div><div class="line">		<span class="built_in">cin</span>.sync();</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入一个华氏温度:"</span>;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; Fah;</div><div class="line">		CelTransFah(Fah);</div><div class="line">	&#125;</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//	函数方法</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">CelTransFah</span><span class="params">(<span class="keyword">double</span> Fah)</span> </span>&#123;</div><div class="line">	<span class="keyword">double</span> Cel;</div><div class="line">	Cel = (Fah - <span class="number">32.0</span>)*<span class="number">5.0</span> / <span class="number">9.0</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"相应的摄氏温度为："</span> &lt;&lt; Cel &lt;&lt; <span class="string">"°C"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     
@@ -348,15 +335,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/07/12/二进制反码求和运算/">
-                    二进制反码求和运算
+                <a href="/2016/10/22/C++-the-eigth-week-homework/">
+                    C++第八周作业
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/07/07/Gen8折腾日记（一）/">
-                    Gen8折腾日记（一）
+                <a href="/2016/10/03/C++-the-fifth-week-homework/">
+                    C++第五周作业
                 </a>
             </div>
         
@@ -404,7 +391,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"由VMnet引起的browser-sync故障解决方案　| JCChan's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"C++第六周作业　| JCChan's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -420,7 +407,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/07/11/由VMnet引起的browser-sync故障解决方案/" data-title="由VMnet引起的browser-sync故障解决方案" data-url="http://yoursite.com/2016/07/11/由VMnet引起的browser-sync故障解决方案/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/10/12/C++-the-sixth-week-homework/" data-title="C++第六周作业" data-url="http://yoursite.com/2016/10/12/C++-the-sixth-week-homework/"></div>
     <script>
         var duoshuoQuery = {short_name:"jcchan23"};
         var loadComment = function(){
@@ -443,7 +430,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/07/12/二进制反码求和运算/" title="上一篇: 二进制反码求和运算">
+            <a href="/2016/10/22/C++-the-eigth-week-homework/" title="上一篇: C++第八周作业">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -451,7 +438,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/07/07/Gen8折腾日记（一）/" title="下一篇: Gen8折腾日记（一）">
+            <a href="/2016/10/03/C++-the-fifth-week-homework/" title="下一篇: C++第五周作业">
                 <i class="fa fa-angle-right"></i>
             </a>
         
