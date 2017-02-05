@@ -15,13 +15,23 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+<meta name="description" content="实验室的人需要部署一个FTP服务器进行实验数据的存储，中间查找了不少资料，整理成这篇笔记，供以后查阅。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NAT后的FTP服务器部署笔记">
+<meta property="og:url" content="http://yoursite.com/2017/02/05/NAT-behind-FAT-Server-Deployment-Notes/index.html">
 <meta property="og:site_name" content="JCChan's Blog">
-<meta property="og:updated_time" content="2016-09-14T05:55:40.020Z">
+<meta property="og:description" content="实验室的人需要部署一个FTP服务器进行实验数据的存储，中间查找了不少资料，整理成这篇笔记，供以后查阅。">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/images/NAT-behind-FAT-Server-Deployment-Notes/1.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/images/NAT-behind-FAT-Server-Deployment-Notes/2.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/images/NAT-behind-FAT-Server-Deployment-Notes/3.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/images/NAT-behind-FAT-Server-Deployment-Notes/4.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/images/NAT-behind-FAT-Server-Deployment-Notes/5.png">
+<meta property="og:image" content="http://o9whp01jf.bkt.clouddn.com/images/NAT-behind-FAT-Server-Deployment-Notes/6.png">
+<meta property="og:updated_time" content="2017-02-05T03:42:35.645Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
+<meta name="twitter:title" content="NAT后的FTP服务器部署笔记">
+<meta name="twitter:description" content="实验室的人需要部署一个FTP服务器进行实验数据的存储，中间查找了不少资料，整理成这篇笔记，供以后查阅。">
+<meta name="twitter:image" content="http://o9whp01jf.bkt.clouddn.com/images/NAT-behind-FAT-Server-Deployment-Notes/1.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -53,7 +63,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>about | JCChan&#39;s Blog</title>
+<title>NAT后的FTP服务器部署笔记 | JCChan&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -63,7 +73,7 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -269,11 +279,11 @@
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
-      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-NAT-behind-FAT-Server-Deployment-Notes" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/about/index.html" class="article-date">
-      <time datetime="2016-07-05T15:48:08.000Z" itemprop="datePublished">2016-07-05</time>
+      <a href="/2017/02/05/NAT-behind-FAT-Server-Deployment-Notes/" class="article-date">
+      <time datetime="2017-02-05T01:55:40.000Z" itemprop="datePublished">2017-02-05</time>
 </a>
 
 
@@ -288,7 +298,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      about
+      NAT后的FTP服务器部署笔记
     </h1>
   
 
@@ -296,8 +306,16 @@
       
       <div class="article-info article-info-post">
         
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Computer/">Computer</a>
+    </div>
+
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -305,26 +323,16 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <style>
-    .article-meta { display: none; }
-    #container .article .article-title { padding-right: 0; }
-    .article-header {
-        padding: 0;
-        padding-top: 26px;
-        border-left: none;
-        text-align: center;
-    }
-    .article-header:hover { border-left: none; }
-    .article-title { font-size: 1.6em }
-    .article-entry hr { margin: 0;}
-    .article-meta,
-    #container .article-info-post.article-info { display: none;}
-    #container .article .article-title { padding: 0; }
-</style>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前记：好久没在这里更新文章了，感觉这里写文章虽然不方便，但是每当自己的一篇文章完成时还是成就感满满了，还是要重新捡起在这里写博客的习惯吧，毕竟本科毕业以后这里就成了我唯一写东西的地方了。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;寒假开始以后，过年之前有一个任务，为实验室的人搭建一个FTP，用之前部署好的物理服务器。这本就是网管干的活，干呗，思来想去，为了方便，决定还是采取Linux转发器+Windows服务器的形式，比较方便管理。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;先说说总体的配置吧。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1) Linux转发器，两个网卡，配有一个公网IP一个私有IP，私有IP就是该网段的网关。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(2) Windows服务器，FTP服务器，配有一个网卡，私有IP，配有两块存储分区，第一个分区是系统分区，第二个分区是存储分区，用FileZilla Server作为服务器。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;简单来说，这次的配置里面最为重要的是配置好NAT的部分。Linux的转发之前已经配置并部署好了，因此只需要部署好FTP服务器，写好Linux上面防火墙的配置即可。</p>
+<h3 id="拓扑图"><a href="#拓扑图" class="headerlink" title="拓扑图"></a>拓扑图</h3><p><img src="http://o9whp01jf.bkt.clouddn.com/images/NAT-behind-FAT-Server-Deployment-Notes/1.png" alt="图片1"></p>
+<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><p>1.先将Linux转发器以及Windows服务器部署上去物理服务器上面，安装好软件，是使得可以远程控制。<br><img src="http://o9whp01jf.bkt.clouddn.com/images/NAT-behind-FAT-Server-Deployment-Notes/2.png" alt="图片2"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我这里是用了XShell去远程控制Linux路由器。<br><img src="http://o9whp01jf.bkt.clouddn.com/images/NAT-behind-FAT-Server-Deployment-Notes/3.png" alt="图片3"><br>2.Linux路由器和Windows服务器上按照拓扑图的要求设置好IP地址、子网掩码、默认网关、DNS地址等等。进行Ping测试，确保能连接成功。<br><img src="http://o9whp01jf.bkt.clouddn.com/images/NAT-behind-FAT-Server-Deployment-Notes/4.png" alt="图片4"><br><img src="http://o9whp01jf.bkt.clouddn.com/images/NAT-behind-FAT-Server-Deployment-Notes/5.png" alt="图片5"></p>
+<h3 id="NAT的配置"><a href="#NAT的配置" class="headerlink" title="NAT的配置"></a>NAT的配置</h3><p>1.参考网络上面给的文档，要先打开内核路由转发的功能，更改配置文件<code>/etc/sysctl.conf</code>里面的<code>net.ipv4.ip_forward</code>设置为1<br><img src="http://o9whp01jf.bkt.clouddn.com/images/NAT-behind-FAT-Server-Deployment-Notes/6.png" alt="图片6"><br>2.写Linux的iptables规则，使用命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /etc/sysconfig/iptables</div></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;里面加入两条即可。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-A PREROUTING <span class="_">-d</span> 172.22.83.63/32 -p tcp -m tcp --dport 21 -j DNAT --to-destination 192.168.100.7:21</div><div class="line">-A POSTROUTING <span class="_">-s</span> 192.168.100.0/24 -o eth0 -j SNAT --to-source 172.22.83.63</div></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;稍微解释一下，按照师兄给我的讲解的是。PREROUTING和POSTROUTING是针对网卡来说的，现在外网过来的数据包要进入内网，根据NAT的规则，我们需要将目的地址从路由器的地址转化为私有的内部地址，因此这里也是这样写的，-d代表目的地址，目的端口是21，映射到内网的192.168.100.7的21端口，换言之，将发往172.22.83.63:21的数据包在Linux路由器这里映射为192.168.100.7:21，使用PREROUTING。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;内网出去外网时，按照NAT的规则，我们需要将源地址(此时的源地址为内部主机的私有地址)进行修改，使用路由器的地址代替，才能正确的发送数据包。<br>3.重启Linux iptables。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service iptables restart</div></pre></td></tr></table></figure></p>
+<h3 id="FTP主动模式和被动模式"><a href="#FTP主动模式和被动模式" class="headerlink" title="FTP主动模式和被动模式"></a>FTP主动模式和被动模式</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果按照上述配置完以后，应该还是无法访问的，当时这里困扰了我相当长的时间，后来师兄给我的提示，他让我想想FTP的传输模式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FTP一共有两种传输模式，主动模式和被动模式，先说说默认的情况下，FTP Client是使用被动模式进行连接的。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FTP被动模式工作原理：在三次握手的过程中，FTP Server监听着自己的21端口<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1) FTP Client使用端口号x(x&gt;1024)向FTP Server的21端口发起连接请求，同时监听x+1端口，发送PASV命令，告知自己处于被动模式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(2) FTP Server发送确认包，同时发送自己的一个可用端口号y。(PORT y)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(3) FTP Client使用x+1端口去连接FTP Server的y端口，传输数据。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FTP主动模式工作原理：在三次握手的过程中，FTP Server监听着自己的21端口。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1) FTP Client使用端口号x(x&gt;1024)向FTP Server的21端口发起连接请求，同时监听x+1端口，发送PORT命令，告知自己处于主动模式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(2) FTP Server发送确认包，使用本地FTP端口(通常是20)来连接x+1端口，进行数据传输。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因此从上可以知道，这个主动与被动是相对于Server端的来说的。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在NAT的过程中，由于默认是使用被动模式进行数据传输，我们不知道Server端使用什么端口号去连接，全部端口开放这个不现实，也不安全。因此，为了让我们的iptables支持我们的ftp，根据网上的资料，需要加载两个模块。<code>nf_nat_ftp</code>、<code>nf_conntrack_ftp</code>。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最后我们使用命令:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">modprobe nf_conntrack_ftp</div><div class="line">modprobe nf_nat_ftp</div></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;还可以使用命令<code>lsmod | grep ftp</code>查看是否已经加载，若已经加载即可。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了使得模块的加载不随着防火墙重启而消失，我们可以加入配置文件中。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vi /etc/sysconfig/iptables-config</div><div class="line"><span class="comment">#在配置文件中加入两句话。</span></div><div class="line">IPTABLES_MODULES=<span class="string">"nf_conntrack_ftp"</span></div><div class="line">IPTABLES_MODULES=<span class="string">"nf_nat_ftp"</span></div></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;保存并测试ftp即可。</p>
 
-
-          
-        
       
     </div>
     
@@ -333,8 +341,42 @@
     
 
 
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/10/03/C++-the-fifth-week-homework/">
+                    C++第五周作业
+                </a>
+            </div>
+        
+    </nav>
+
   
 </article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#拓扑图"><span class="toc-number">1.</span> <span class="toc-text">拓扑图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装步骤"><span class="toc-number">2.</span> <span class="toc-text">安装步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NAT的配置"><span class="toc-number">3.</span> <span class="toc-text">NAT的配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FTP主动模式和被动模式"><span class="toc-number">4.</span> <span class="toc-text">FTP主动模式和被动模式</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
+
+    <script>
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
+    </script>
 
 
 
@@ -352,7 +394,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"about　| JCChan's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"NAT后的FTP服务器部署笔记　| JCChan's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -368,7 +410,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="about/index.html" data-title="about" data-url="http://yoursite.com/about/index.html"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/02/05/NAT-behind-FAT-Server-Deployment-Notes/" data-title="NAT后的FTP服务器部署笔记" data-url="http://yoursite.com/2017/02/05/NAT-behind-FAT-Server-Deployment-Notes/"></div>
     <script>
         var duoshuoQuery = {short_name:"jcchan23"};
         var loadComment = function(){
@@ -386,6 +428,24 @@
 </div>
     
 
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/10/03/C++-the-fifth-week-homework/" title="Next: C++第五周作业">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/05/NAT-behind-FAT-Server-Deployment-Notes/">NAT后的FTP服务器部署笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/03/C++-the-fifth-week-homework/">C++第五周作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/26/C++-the-first-time-homework/">C++第一次上机作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/23/matlab-the-fourth-week-homework/">Matlab第四周上机作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/06/Antivirus-software-cause-LSP-break/">东区机房浏览器问题记录排查</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/06/How-to-config-Eclipse-environment/">Eclipse Java开发环境的搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/25/How-to-install-wireshark-with-sourcecode-in-CentOS/">CentOS源码安装Wireshark</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/26/Ubantu-Ruby-MySQL-Nginx-Redmine部署记录/">Ubuntu + Ruby + MySQL + Nginx + Redmine部署记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/12/二进制反码求和运算/">二进制反码求和运算</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/11/由VMnet引起的browser-sync故障解决方案/">由VMnet引起的browser-sync故障解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/Gen8折腾日记（一）/">Gen8折腾日记（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/hello-world/">Hello World</a></li></ul>
 
 
 

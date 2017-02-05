@@ -15,13 +15,16 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+<meta name="description" content="这学期选的Matlab课程，这一周的上机作业难度明显比前两周难的多，因此记录下来，供以后复习参考。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Matlab第四周上机作业">
+<meta property="og:url" content="http://yoursite.com/2016/09/23/matlab-the-fourth-week-homework/index.html">
 <meta property="og:site_name" content="JCChan's Blog">
-<meta property="og:updated_time" content="2016-09-14T05:55:40.020Z">
+<meta property="og:description" content="这学期选的Matlab课程，这一周的上机作业难度明显比前两周难的多，因此记录下来，供以后复习参考。">
+<meta property="og:updated_time" content="2016-10-11T11:49:41.140Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
+<meta name="twitter:title" content="Matlab第四周上机作业">
+<meta name="twitter:description" content="这学期选的Matlab课程，这一周的上机作业难度明显比前两周难的多，因此记录下来，供以后复习参考。">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -53,7 +56,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>about | JCChan&#39;s Blog</title>
+<title>Matlab第四周上机作业 | JCChan&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -63,7 +66,7 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -269,11 +272,11 @@
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
-      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-matlab-the-fourth-week-homework" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/about/index.html" class="article-date">
-      <time datetime="2016-07-05T15:48:08.000Z" itemprop="datePublished">2016-07-05</time>
+      <a href="/2016/09/23/matlab-the-fourth-week-homework/" class="article-date">
+      <time datetime="2016-09-23T11:58:51.000Z" itemprop="datePublished">2016-09-23</time>
 </a>
 
 
@@ -288,7 +291,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      about
+      Matlab第四周上机作业
     </h1>
   
 
@@ -296,8 +299,16 @@
       
       <div class="article-info article-info-post">
         
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Maths/">Maths</a>
+    </div>
+
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Matlab/">Matlab</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -305,26 +316,18 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <style>
-    .article-meta { display: none; }
-    #container .article .article-title { padding-right: 0; }
-    .article-header {
-        padding: 0;
-        padding-top: 26px;
-        border-left: none;
-        text-align: center;
-    }
-    .article-header:hover { border-left: none; }
-    .article-title { font-size: 1.6em }
-    .article-entry hr { margin: 0;}
-    .article-meta,
-    #container .article-info-post.article-info { display: none;}
-    #container .article .article-title { padding: 0; }
-</style>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.创建一个10*10的矩阵，矩阵所有对角元素为1，其余元素为10~20之间(包括10和20)的均匀分布随机数，并得出该矩阵中大于13且小于18的元素个数，同时求得这些元素的平均数。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">A=unifrnd(<span class="number">10</span>,<span class="number">20</span>,<span class="number">10</span>,<span class="number">10</span>); <span class="comment">%   产生一个10*10的由10到20均匀分布的矩阵</span></div><div class="line"><span class="comment">%   eye()产生了一个单位对角矩阵</span></div><div class="line"><span class="comment">%   logical将1的数值转成矩阵的位置</span></div><div class="line"><span class="comment">%   带上A以后就可以确定是哪些元素要赋值为1</span></div><div class="line">A(logical(<span class="built_in">eye</span>(<span class="built_in">size</span>(A))))=<span class="number">1</span>;</div><div class="line"><span class="comment">%   找符合条件的元素，并返回元素的索引</span></div><div class="line">B=<span class="built_in">find</span>(A&gt;<span class="number">13</span>&amp;A&lt;<span class="number">18</span>);</div><div class="line"><span class="comment">%   计算长度</span></div><div class="line">C=<span class="built_in">length</span>(B);</div><div class="line"><span class="comment">%   求均值</span></div><div class="line">D=mean(C);</div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.用mesh函数做出函数f(x,y)=-[xsin(9πy)+ycos(25πx)+20]在x^2+y^2≤10的图像。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">%   定义三个符号变量</span></div><div class="line">syms x y t;</div><div class="line"><span class="comment">%   给定t的范围，数学上类似于转成极坐标来计算</span></div><div class="line">t=<span class="built_in">linspace</span>(<span class="number">-1</span>,<span class="number">1</span>);</div><div class="line">x=<span class="built_in">sqrt</span>(<span class="number">10</span>)*<span class="built_in">cos</span>(t);</div><div class="line">y=<span class="built_in">sqrt</span>(<span class="number">10</span>)*<span class="built_in">sin</span>(t);</div><div class="line"><span class="comment">%   在范围定好以后给定变量</span></div><div class="line">[xx,yy]=<span class="built_in">meshgrid</span>(x,y);</div><div class="line"><span class="comment">%   函数表达式</span></div><div class="line">f_xy=<span class="number">-1</span>*(xx*<span class="built_in">sin</span>(<span class="number">9</span>*<span class="built_in">pi</span>*yy)+yy*<span class="built_in">cos</span>(<span class="number">25</span>*<span class="built_in">pi</span>*xx)+<span class="number">20</span>);</div><div class="line"><span class="comment">%   初级的不能再初级的画图...</span></div><div class="line">mesh(xx,yy,f_xy);</div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.生成30阶的希尔伯特矩阵A，并剔除矩阵的第3到10行，剔除矩阵的4到13列，得到矩阵B，再逆序选取矩阵B的1到10行，顺序选取矩阵的2到11列，得到新矩阵C。(hilb(n))</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">%	生成一个30阶的希尔伯特矩阵</span></div><div class="line">A=<span class="built_in">hilb</span>(<span class="number">30</span>);</div><div class="line"><span class="comment">%	删除3到10行</span></div><div class="line">A(<span class="number">3</span>:<span class="number">10</span>,:)=[];</div><div class="line"><span class="comment">%	再删除4到13列</span></div><div class="line">A(:,<span class="number">4</span>:<span class="number">13</span>)=[];</div><div class="line"><span class="comment">%	得到的新矩阵猴，逆序索引，从第10到第1行，步长为-1，从2到11列，默认步长为1.</span></div><div class="line">C=A(<span class="number">10</span>:<span class="number">-1</span>:<span class="number">1</span>,<span class="number">2</span>:<span class="number">11</span>);</div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.解常微分方程组(1)dx/dt+2x-dy/dt=10cos(t),x(0)=2;(2)dx/dt+dy/dt+2y=4e^(-2t),y(0)=2，并作出y-x(横坐标为x，纵坐标为y)在t∈(0,10)之间的图像(时间间距尽量小)</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">%	定义三个符号变量</span></div><div class="line">syms x y t;</div><div class="line"><span class="comment">%	解微分方程组</span></div><div class="line">[x,y]=dsolve(<span class="string">'Dx+2*x-Dy=10*cos(t)'</span>,<span class="string">'Dx+Dy+2*y=4*exp(-2*t)'</span>,<span class="string">'x(0)=2'</span>,<span class="string">'y(0)=2'</span>);</div><div class="line"><span class="comment">%	将得到的通解里面将符号变成可用于计算的数字</span></div><div class="line">X=subs(x,<span class="string">'t'</span>,<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">10</span>);</div><div class="line">Y=subs(y,<span class="string">'t'</span>,<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">10</span>);</div><div class="line"><span class="comment">%	将符号变量变成数值变量</span></div><div class="line">X=double(X);</div><div class="line">Y=double(Y);</div><div class="line"><span class="comment">%	初级的不能在初级的画图...</span></div><div class="line">plot(X,Y);</div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.解矩阵方程组H*X=B，H为100阶希尔伯特矩阵，X=(x1,x2,x3,……,x100)T,B=(1,2,3,……,100)T</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">%	定义一个100阶的希尔伯特矩阵</span></div><div class="line">H=<span class="built_in">hilb</span>(<span class="number">100</span>);</div><div class="line"><span class="comment">%	定义一个100*1的列向量</span></div><div class="line">B=<span class="built_in">ones</span>(<span class="number">100</span>,<span class="number">1</span>);</div><div class="line"><span class="comment">%	由于直接使用int(H)会引入奇异矩阵的误差，因此matlab里面有一个专门的命令invhilb()</span></div><div class="line"><span class="comment">%	专门解决希尔伯特矩阵求逆的问题。</span></div><div class="line">X=<span class="built_in">invhilb</span>(<span class="number">100</span>)*B;</div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;刚刚开始学matlab没有几天，对于画图部分还是不是特别熟悉，还在熟悉各种命令中，欢迎指教！</p>
 
-
-          
-        
       
     </div>
     
@@ -333,8 +336,48 @@
     
 
 
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/09/26/C++-the-first-time-homework/">
+                    C++第一次上机作业
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/09/06/Antivirus-software-cause-LSP-break/">
+                    东区机房浏览器问题记录排查
+                </a>
+            </div>
+        
+    </nav>
+
   
 </article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+            
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
+
+    <script>
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
+    </script>
 
 
 
@@ -352,7 +395,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"about　| JCChan's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Matlab第四周上机作业　| JCChan's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -368,7 +411,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="about/index.html" data-title="about" data-url="http://yoursite.com/about/index.html"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/09/23/matlab-the-fourth-week-homework/" data-title="Matlab第四周上机作业" data-url="http://yoursite.com/2016/09/23/matlab-the-fourth-week-homework/"></div>
     <script>
         var duoshuoQuery = {short_name:"jcchan23"};
         var loadComment = function(){
@@ -386,6 +429,26 @@
 </div>
     
 
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/09/26/C++-the-first-time-homework/" title="Pre: C++第一次上机作业">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/09/06/Antivirus-software-cause-LSP-break/" title="Next: 东区机房浏览器问题记录排查">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/05/NAT-behind-FAT-Server-Deployment-Notes/">NAT后的FTP服务器部署笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/03/C++-the-fifth-week-homework/">C++第五周作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/26/C++-the-first-time-homework/">C++第一次上机作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/23/matlab-the-fourth-week-homework/">Matlab第四周上机作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/06/Antivirus-software-cause-LSP-break/">东区机房浏览器问题记录排查</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/06/How-to-config-Eclipse-environment/">Eclipse Java开发环境的搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/25/How-to-install-wireshark-with-sourcecode-in-CentOS/">CentOS源码安装Wireshark</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/26/Ubantu-Ruby-MySQL-Nginx-Redmine部署记录/">Ubuntu + Ruby + MySQL + Nginx + Redmine部署记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/12/二进制反码求和运算/">二进制反码求和运算</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/11/由VMnet引起的browser-sync故障解决方案/">由VMnet引起的browser-sync故障解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/Gen8折腾日记（一）/">Gen8折腾日记（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/hello-world/">Hello World</a></li></ul>
 
 
 
