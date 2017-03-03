@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html >
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="JCChan" />
+
+
+
+<meta name="description" content="这学期开始学习数据结构了，打算自己实现每一种数据结构，争取做到尽可能高的可扩展性。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构-单链表">
+<meta property="og:url" content="http://yoursite.com/2017/03/03/single-Linked-List/index.html">
+<meta property="og:site_name" content="JCChan's Blog">
+<meta property="og:description" content="这学期开始学习数据结构了，打算自己实现每一种数据结构，争取做到尽可能高的可扩展性。">
+<meta property="og:updated_time" content="2017-03-03T08:56:02.256Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构-单链表">
+<meta name="twitter:description" content="这学期开始学习数据结构了，打算自己实现每一种数据结构，争取做到尽可能高的可扩展性。">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="JCChan&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>数据结构-单链表 | JCChan&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/head.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">JCChan</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/categories/others">随笔</a></li>
+                        
+                            <li><a href="/categories/Chemistry">化学</a></li>
+                        
+                            <li><a href="/categories/Maths">数学</a></li>
+                        
+                            <li><a href="/categories/Computer">计算机</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" href="https://github.com/jcchan23" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/chen-jian-wen-87" title="知乎"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DataStructure/">DataStructure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matlab/">Matlab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Networks/">Networks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Origin/">Origin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/格式/">格式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/装机/">装机</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://ce.sysu.edu.cn/hope">厚朴〖HOPE〗工作室</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">化学、数学、计算机</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">JCChan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/head.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">JCChan</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/others">随笔</a></li>
+                
+                    <li><a href="/categories/Chemistry">化学</a></li>
+                
+                    <li><a href="/categories/Maths">数学</a></li>
+                
+                    <li><a href="/categories/Computer">计算机</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/jcchan23" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/chen-jian-wen-87" title="知乎"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-single-Linked-List" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/03/single-Linked-List/" class="article-date">
+      <time datetime="2017-03-03T08:46:37.000Z" itemprop="datePublished">2017-03-03</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      数据结构-单链表
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Computer/">Computer</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DataStructure/">DataStructure</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;整个数据结构分为三个部分，Node类，LinkList类，SeqList类，Main函数，其中Main函数是测试两种链表的代码书写是否成立，LinkList类中的每个结点都是一个Node的实例，SeqList类单独成一例，用数组存储，已经写成模板的形式，我忘了以前不知道在哪里看过说用类模板的时候不能够将声明单独出来放在头文件中，所以我把声明和实现放在一起了。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Node.cpp<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> Node &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	Node() &#123;&#125;</div><div class="line">	Node(T data, Node&lt;T&gt; *ptr) :data(data), next(ptr) &#123;&#125;</div><div class="line">	~Node() &#123;&#125;</div><div class="line">	<span class="function">T <span class="title">getData</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">setData</span><span class="params">(T newData)</span></span>;</div><div class="line">	Node&lt;T&gt; *getNext();</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">setNext</span><span class="params">(Node&lt;T&gt; *ptr)</span></span>;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	T data;</div><div class="line">	Node&lt;T&gt; *next;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">T Node&lt;T&gt;::getData() &#123;</div><div class="line">	<span class="keyword">return</span> data;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> Node&lt;T&gt;::setData(T newData) &#123;</div><div class="line">	data = newData;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">Node&lt;T&gt; *Node&lt;T&gt;::getNext() &#123;</div><div class="line">	<span class="keyword">return</span> next;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> Node&lt;T&gt;::setNext(Node&lt;T&gt; *ptr) &#123;</div><div class="line">	next = ptr;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LinkList.cpp<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">"Node.cpp"</span></span></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> LinkList &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	LinkList();</div><div class="line">	LinkList(T <span class="built_in">array</span>[], <span class="keyword">int</span> n);</div><div class="line">	~LinkList();</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">printList</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Insert</span><span class="params">(<span class="keyword">int</span> i, T x)</span></span>;</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">Length</span><span class="params">()</span></span>;</div><div class="line">	<span class="function">T <span class="title">Get</span><span class="params">(<span class="keyword">int</span> i)</span></span>;</div><div class="line">	Node&lt;T&gt; *getFirst() &#123; <span class="keyword">return</span> first; &#125;;</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">Locate</span><span class="params">(T x)</span></span>;</div><div class="line">	<span class="function">T <span class="title">Delete</span><span class="params">(<span class="keyword">int</span> i)</span></span>;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">reverse</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(T x)</span></span>;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	Node&lt;T&gt; *first;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">LinkList&lt;T&gt;::LinkList() &#123;</div><div class="line">	first = <span class="keyword">new</span> Node&lt;T&gt;();</div><div class="line">	first-&gt;setNext(<span class="literal">NULL</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">//尾插法构造链表</span></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">LinkList&lt;T&gt;::LinkList(T <span class="built_in">array</span>[], <span class="keyword">int</span> n) &#123;</div><div class="line">	first = <span class="keyword">new</span> Node&lt;T&gt;();</div><div class="line">	<span class="comment">//first-&gt;setData(NULL);</span></div><div class="line">	first-&gt;setNext(<span class="literal">NULL</span>);</div><div class="line">	Node&lt;T&gt; *s, *r;</div><div class="line">	r = first;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</div><div class="line">		s = <span class="keyword">new</span> Node&lt;T&gt;;</div><div class="line">		s-&gt;setData(<span class="built_in">array</span>[i]);</div><div class="line">		r-&gt;setNext(s);</div><div class="line">		r = s;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//头插法构造链表</span></div><div class="line"><span class="comment">//template&lt;typename T&gt;</span></div><div class="line"><span class="comment">//LinkList&lt;T&gt;::LinkList(T array[], int n) &#123;</span></div><div class="line"><span class="comment">//	first = new Node&lt;T&gt;();</span></div><div class="line"><span class="comment">//	first-&gt;setData(NULL);</span></div><div class="line"><span class="comment">//	first-&gt;setNext(NULL);</span></div><div class="line"><span class="comment">//	Node&lt;T&gt; *s;</span></div><div class="line"><span class="comment">//	for (int i = 0; i &lt; n; i++) &#123;</span></div><div class="line"><span class="comment">//		s = new Node&lt;T&gt;;</span></div><div class="line"><span class="comment">//		s-&gt;setData(array[i]);</span></div><div class="line"><span class="comment">//		s-&gt;setNext(first-&gt;getNext());</span></div><div class="line"><span class="comment">//		first-&gt;setNext(s);</span></div><div class="line"><span class="comment">//	&#125;</span></div><div class="line"><span class="comment">//&#125;</span></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">LinkList&lt;T&gt;::~LinkList() &#123;</div><div class="line">	<span class="keyword">while</span> (first != <span class="literal">NULL</span>) &#123;</div><div class="line">		Node&lt;T&gt; *q = first;</div><div class="line">		first = first-&gt;getNext();</div><div class="line">		<span class="keyword">delete</span> q;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> LinkList&lt;T&gt;::printList() &#123;</div><div class="line">	Node&lt;T&gt; *p = first-&gt;getNext();</div><div class="line">	<span class="keyword">while</span> (p != <span class="literal">NULL</span>) &#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; p-&gt;getData() &lt;&lt; <span class="string">" "</span>;</div><div class="line">		p = p-&gt;getNext();</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> LinkList&lt;T&gt;::Insert(<span class="keyword">int</span> index, T x) &#123;</div><div class="line">	Node&lt;T&gt; *p = first;</div><div class="line">	Node&lt;T&gt; *s;</div><div class="line">	<span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span> (p != <span class="literal">NULL</span> &amp;&amp; count &lt; index - <span class="number">1</span>) &#123;</div><div class="line">		p = p-&gt;getNext();</div><div class="line">		count++;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (p == <span class="literal">NULL</span>) &#123;</div><div class="line">		<span class="keyword">throw</span> <span class="string">"在插入的位置前面有空结点，不能在所需序号处插入结点！"</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		s = <span class="keyword">new</span> Node&lt;T&gt;;</div><div class="line">		s-&gt;setData(x);</div><div class="line">		s-&gt;setNext(p-&gt;getNext());</div><div class="line">		p-&gt;setNext(s);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">int</span> LinkList&lt;T&gt;::Length() &#123;</div><div class="line">	<span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">	Node&lt;T&gt; *p = first-&gt;getNext();</div><div class="line">	<span class="keyword">while</span> (p != <span class="literal">NULL</span>) &#123;</div><div class="line">		count++;</div><div class="line">		p = p-&gt;getNext();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> count;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">T LinkList&lt;T&gt;::Get(<span class="keyword">int</span> index) &#123;</div><div class="line">	Node&lt;T&gt; *p = first-&gt;getNext();</div><div class="line">	<span class="keyword">int</span> count = <span class="number">1</span>;</div><div class="line">	<span class="keyword">while</span> (p != <span class="literal">NULL</span> &amp;&amp; count &lt; index) &#123;</div><div class="line">		p = p-&gt;getNext();</div><div class="line">		count++;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (p == <span class="literal">NULL</span>) &#123;</div><div class="line">		<span class="keyword">throw</span> <span class="string">"该位置为空结点！"</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> p-&gt;getData();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">int</span> LinkList&lt;T&gt;::Locate(T x) &#123;</div><div class="line">	Node&lt;T&gt; *p = first-&gt;getNext();</div><div class="line">	<span class="keyword">int</span> count = <span class="number">1</span>;</div><div class="line">	<span class="keyword">while</span> (p != <span class="literal">NULL</span>) &#123;</div><div class="line">		<span class="keyword">if</span> (p-&gt;getData() == x) &#123;</div><div class="line">			<span class="keyword">return</span> count;</div><div class="line">		&#125;</div><div class="line">		p = p-&gt;getNext();</div><div class="line">		count++;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">T LinkList&lt;T&gt;::Delete(<span class="keyword">int</span> index) &#123;</div><div class="line">	Node&lt;T&gt; *p = first;</div><div class="line">	<span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span> (p != <span class="literal">NULL</span> &amp;&amp; count &lt; index - <span class="number">1</span>) &#123;</div><div class="line">		p = p-&gt;getNext();</div><div class="line">		count++;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (p == <span class="literal">NULL</span> || p-&gt;getNext() == <span class="literal">NULL</span>) &#123;</div><div class="line">		<span class="keyword">throw</span> <span class="string">"被删的结点不存在！"</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		Node&lt;T&gt; *q = p-&gt;getNext();</div><div class="line">		T x = q-&gt;getData();</div><div class="line">		p-&gt;setNext(q-&gt;getNext());</div><div class="line">		<span class="keyword">delete</span> q;</div><div class="line">		<span class="keyword">return</span> x;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> LinkList&lt;T&gt;::reverse() &#123;</div><div class="line">	<span class="comment">//头结点</span></div><div class="line">	Node&lt;T&gt; *p = first;</div><div class="line">	<span class="comment">//第一个结点</span></div><div class="line">	Node&lt;T&gt; *q = p-&gt;getNext();</div><div class="line">	Node&lt;T&gt; *r;</div><div class="line">	<span class="keyword">while</span> (q-&gt;getNext() != <span class="literal">NULL</span>) &#123;</div><div class="line">		r = q-&gt;getNext();</div><div class="line">		<span class="keyword">if</span> (q == first-&gt;getNext()) &#123;</div><div class="line">			q-&gt;setNext(<span class="literal">NULL</span>);</div><div class="line">			p = q;</div><div class="line">			q = r;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="comment">//p-&gt;q-&gt;r</span></div><div class="line">			q-&gt;setNext(p);</div><div class="line">			p = q;</div><div class="line">			q = r;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	q-&gt;setNext(p);</div><div class="line">	first-&gt;setNext(q);</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> LinkList&lt;T&gt;::add(T x) &#123;</div><div class="line">	<span class="keyword">int</span> length = Length();</div><div class="line">	Insert(length+<span class="number">1</span>, x);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SeqList.cpp<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> MaxSize = <span class="number">10</span>;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> SeqList &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	SeqList() &#123; length = <span class="number">0</span>; &#125;</div><div class="line">	SeqList(T <span class="built_in">array</span>[], <span class="keyword">int</span> n);</div><div class="line">	~SeqList() &#123;&#125;</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">Length</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> length; &#125;</div><div class="line">	<span class="function">T <span class="title">Get</span><span class="params">(<span class="keyword">int</span> index)</span></span>;</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">Locate</span><span class="params">(T x)</span></span>;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Insert</span><span class="params">(<span class="keyword">int</span> index, T x)</span></span>;</div><div class="line">	<span class="function">T <span class="title">Delete</span><span class="params">(<span class="keyword">int</span> index)</span></span>;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">PrintList</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">reverse</span><span class="params">()</span></span>;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	T data[MaxSize];</div><div class="line">	<span class="keyword">int</span> length;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">SeqList&lt;T&gt;::SeqList(T <span class="built_in">array</span>[], <span class="keyword">int</span> n) &#123;</div><div class="line">	<span class="keyword">if</span> (n &gt; MaxSize) &#123;</div><div class="line">		<span class="keyword">throw</span> <span class="string">"数组的长度大于顺序表的长度！"</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</div><div class="line">			data[i] = <span class="built_in">array</span>[i];</div><div class="line">		&#125;</div><div class="line">		length = n;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">T SeqList&lt;T&gt;::Get(<span class="keyword">int</span> index) &#123;</div><div class="line">	<span class="keyword">if</span> (index &lt;  <span class="number">1</span> || index &gt; length) &#123;</div><div class="line">		<span class="keyword">throw</span> <span class="string">"索引值不正确！"</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> data[index - <span class="number">1</span>];</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">int</span> SeqList&lt;T&gt;::Locate(T x) &#123;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</div><div class="line">		<span class="keyword">if</span> (data[i] == x) &#123;</div><div class="line">			<span class="keyword">return</span> i + <span class="number">1</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> SeqList&lt;T&gt;::Insert(<span class="keyword">int</span> index, T x) &#123;</div><div class="line">	<span class="keyword">if</span> (length &gt;= MaxSize) &#123;</div><div class="line">		<span class="keyword">throw</span><span class="string">"顺序表已满！"</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (index &lt; <span class="number">1</span> || index &gt; length + <span class="number">1</span>) &#123;</div><div class="line">		<span class="keyword">throw</span><span class="string">"索引值超出当前已有数据位置!"</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = length; j &gt;= index; j--) &#123;</div><div class="line">			data[j] = data[j - <span class="number">1</span>];</div><div class="line">		&#125;</div><div class="line">		data[index - <span class="number">1</span>] = x;</div><div class="line">		length++;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">T SeqList&lt;T&gt;::Delete(<span class="keyword">int</span> index) &#123;</div><div class="line">	<span class="keyword">if</span> (length == <span class="number">0</span>) &#123;</div><div class="line">		<span class="keyword">throw</span> <span class="string">"顺序表长度为0！"</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(index &lt; <span class="number">1</span> || index &gt; length) &#123;</div><div class="line">		<span class="keyword">throw</span><span class="string">"索引表超出当前已有数据位置！"</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		T x = data[index - <span class="number">1</span>];</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = index; j &lt; length; j++) &#123;</div><div class="line">			data[j - <span class="number">1</span>] = data[j];</div><div class="line">		&#125;</div><div class="line">		length--;</div><div class="line">		<span class="keyword">return</span> x;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> SeqList&lt;T&gt;::PrintList() &#123;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; data[i] &lt;&lt; <span class="string">" "</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> SeqList&lt;T&gt;::reverse() &#123;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length / <span class="number">2</span> + <span class="number">1</span>; i++) &#123;</div><div class="line">		T temp = data[i];</div><div class="line">		data[i] = data[length - <span class="number">1</span> - i];</div><div class="line">		data[length - <span class="number">1</span> - i] = temp;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;main.cpp<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">"LinkList.cpp"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">"SeqList.cpp"</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="comment">/*</span></div><div class="line">	单链表main函数</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="comment">//构造测试</span></div><div class="line">	<span class="keyword">int</span> array1[] = &#123; <span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">12</span>,<span class="number">14</span>,<span class="number">16</span>,<span class="number">18</span>,<span class="number">20</span> &#125;;</div><div class="line">	<span class="keyword">int</span> array2[] = &#123; <span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">11</span>,<span class="number">13</span>,<span class="number">15</span>,<span class="number">16</span>,<span class="number">17</span>,<span class="number">19</span>,<span class="number">20</span> &#125;;</div><div class="line">	LinkList&lt;<span class="keyword">int</span>&gt; List1(array1, <span class="number">11</span>);</div><div class="line">	<span class="comment">//遍历测试</span></div><div class="line">	List1.printList();</div><div class="line">	LinkList&lt;<span class="keyword">int</span>&gt; List2(array2, <span class="number">11</span>);</div><div class="line">	<span class="comment">//遍历测试</span></div><div class="line">	List2.printList();</div><div class="line">	<span class="comment">//mergeLinkList(List1, List2);</span></div><div class="line">	<span class="comment">////Insert测试</span></div><div class="line">	<span class="comment">//try &#123;</span></div><div class="line">	<span class="comment">//	List.Insert(2, 6);</span></div><div class="line">	<span class="comment">//	List.Insert(7, 6);</span></div><div class="line">	<span class="comment">//	List.printList();</span></div><div class="line">	<span class="comment">//&#125;</span></div><div class="line">	<span class="comment">//catch (char *s) &#123;</span></div><div class="line">	<span class="comment">//	cout &lt;&lt; s &lt;&lt; endl;</span></div><div class="line">	<span class="comment">//&#125;</span></div><div class="line">	<span class="comment">////Length测试</span></div><div class="line">	<span class="comment">//cout &lt;&lt; "线性表的长度是：" &lt;&lt; List.Length() &lt;&lt; endl;</span></div><div class="line">	<span class="comment">////Get测试</span></div><div class="line">	<span class="comment">//try &#123;</span></div><div class="line">	<span class="comment">//	cout &lt;&lt; "第5位的数字是：" &lt;&lt; List.Get(5) &lt;&lt; endl;</span></div><div class="line">	<span class="comment">//	cout &lt;&lt; "第8位的数字是：" &lt;&lt; List.Get(8) &lt;&lt; endl;</span></div><div class="line">	<span class="comment">//&#125;</span></div><div class="line">	<span class="comment">//catch (char *s) &#123;</span></div><div class="line">	<span class="comment">//	cout &lt;&lt; s &lt;&lt; endl;</span></div><div class="line">	<span class="comment">//&#125;</span></div><div class="line">	<span class="comment">////Locate测试</span></div><div class="line">	<span class="comment">//cout &lt;&lt; List.Locate(6) &lt;&lt; endl;</span></div><div class="line">	<span class="comment">////Delete测试</span></div><div class="line">	<span class="comment">//try&#123;</span></div><div class="line">	<span class="comment">//	List.Delete(5);</span></div><div class="line">	<span class="comment">//	List.printList();</span></div><div class="line">	<span class="comment">//&#125;</span></div><div class="line">	<span class="comment">//catch (char *s) &#123;</span></div><div class="line">	<span class="comment">//	cout &lt;&lt; s &lt;&lt; endl;</span></div><div class="line">	<span class="comment">//&#125;</span></div><div class="line">	<span class="comment">//reverse测试</span></div><div class="line">	<span class="comment">//List.reverse();</span></div><div class="line">	<span class="comment">//List.printList();</span></div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">/*</span></div><div class="line">	顺序表main函数</div><div class="line">*/</div><div class="line"><span class="comment">//int main() &#123;</span></div><div class="line"><span class="comment">//	int array[] = &#123; 1,2,4,3,5,6,7 &#125;;</span></div><div class="line"><span class="comment">//	//测试</span></div><div class="line"><span class="comment">//	try &#123;</span></div><div class="line"><span class="comment">//		SeqList&lt;int&gt; List(array, 7);</span></div><div class="line"><span class="comment">//		List.PrintList();</span></div><div class="line"><span class="comment">//		cout &lt;&lt; "顺序表的长度是：" &lt;&lt; List.Length() &lt;&lt; endl;</span></div><div class="line"><span class="comment">//		cout &lt;&lt; "顺序表要查找的值是：" &lt;&lt; List.Get(3) &lt;&lt; endl;</span></div><div class="line"><span class="comment">//		cout &lt;&lt; "顺序表中3所在的位置是:" &lt;&lt; List.Locate(3) &lt;&lt; endl;</span></div><div class="line"><span class="comment">//		cout &lt;&lt; endl;</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//		List.Insert(4, 8);</span></div><div class="line"><span class="comment">//		List.PrintList();</span></div><div class="line"><span class="comment">//		cout &lt;&lt; "顺序表的长度是：" &lt;&lt; List.Length() &lt;&lt; endl;</span></div><div class="line"><span class="comment">//		cout &lt;&lt; endl;</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//		List.Delete(4);</span></div><div class="line"><span class="comment">//		List.PrintList();</span></div><div class="line"><span class="comment">//		cout &lt;&lt; "顺序表的长度是：" &lt;&lt; List.Length() &lt;&lt; endl;</span></div><div class="line"><span class="comment">//		cout &lt;&lt; endl;</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//		List.reverse();</span></div><div class="line"><span class="comment">//		List.PrintList();</span></div><div class="line"><span class="comment">//	&#125;</span></div><div class="line"><span class="comment">//	catch (char *s) &#123;</span></div><div class="line"><span class="comment">//		cout &lt;&lt; s &lt;&lt; endl;</span></div><div class="line"><span class="comment">//	&#125;</span></div><div class="line"><span class="comment">//	system("pause");</span></div><div class="line"><span class="comment">//	return 0;</span></div><div class="line"><span class="comment">//&#125;</span></div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/02/05/NAT-behind-FAT-Server-Deployment-Notes/">
+                    NAT后的FTP服务器部署笔记
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"数据结构-单链表　| JCChan's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/03/03/single-Linked-List/" data-title="数据结构-单链表" data-url="http://yoursite.com/2017/03/03/single-Linked-List/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"jcchan23"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/02/05/NAT-behind-FAT-Server-Deployment-Notes/" title="下一篇: NAT后的FTP服务器部署笔记">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/03/single-Linked-List/">数据结构-单链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/05/NAT-behind-FAT-Server-Deployment-Notes/">NAT后的FTP服务器部署笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/05/the-algothrim-of-matrix-transpose/">C++写矩阵的转置</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/05/the-algothrim-of-continued-fraction/">连分数近似算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/05/two-interesting-algothrim-questions/">两个有趣的算法问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/28/Origin-user-defined-function-fitting/">Origin使用自定义函数拟合曲线函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/28/C++-the-second-time-home/">C++第二次上机作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/22/C++-the-eigth-week-homework/">C++第八周作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/C++-the-sixth-week-homework/">C++第六周作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/03/C++-the-fifth-week-homework/">C++第五周作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/26/C++-the-first-time-homework/">C++第一次上机作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/23/matlab-the-fourth-week-homework/">Matlab第四周上机作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/06/Antivirus-software-cause-LSP-break/">东区机房浏览器问题记录排查</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/06/How-to-config-Eclipse-environment/">Eclipse Java开发环境的搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/25/How-to-install-wireshark-with-sourcecode-in-CentOS/">CentOS源码安装Wireshark</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/26/Ubantu-Ruby-MySQL-Nginx-Redmine部署记录/">Ubuntu + Ruby + MySQL + Nginx + Redmine部署记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/12/二进制反码求和运算/">二进制反码求和运算</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/11/由VMnet引起的browser-sync故障解决方案/">由VMnet引起的browser-sync故障解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/Gen8折腾日记（一）/">Gen8折腾日记（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 JCChan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+             title: "a.article-title, .article-more-link a", 
+             post: ".article-entry a[href], .copyright a[href]", 
+             tags: ".article-tag a", 
+             categories: ".article-category a, a.tag-list-link", 
+             articleNav: "#article-nav a, #post-nav-button a", 
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+             menu: ".header-menu a", 
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
