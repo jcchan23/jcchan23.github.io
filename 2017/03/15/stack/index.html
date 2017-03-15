@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html >
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="JCChan" />
+
+
+
+<meta name="description" content="栈相关的数据结构，一共有顺序栈、链栈、共享栈、指针栈(类似顺序栈)四种结构。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构-栈">
+<meta property="og:url" content="http://yoursite.com/2017/03/15/stack/index.html">
+<meta property="og:site_name" content="JCChan's Blog">
+<meta property="og:description" content="栈相关的数据结构，一共有顺序栈、链栈、共享栈、指针栈(类似顺序栈)四种结构。">
+<meta property="og:updated_time" content="2017-03-15T12:20:42.906Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构-栈">
+<meta name="twitter:description" content="栈相关的数据结构，一共有顺序栈、链栈、共享栈、指针栈(类似顺序栈)四种结构。">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="JCChan&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>数据结构-栈 | JCChan&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/head.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">JCChan</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/categories/others">随笔</a></li>
+                        
+                            <li><a href="/categories/Chemistry">化学</a></li>
+                        
+                            <li><a href="/categories/Maths">数学</a></li>
+                        
+                            <li><a href="/categories/Computer">计算机</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" href="https://github.com/jcchan23" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/chen-jian-wen-87" title="知乎"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DataStructure/">DataStructure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matlab/">Matlab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Networks/">Networks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Origin/">Origin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/格式/">格式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/装机/">装机</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://ce.sysu.edu.cn/hope">厚朴〖HOPE〗工作室</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">化学、数学、计算机</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">JCChan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/head.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">JCChan</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/others">随笔</a></li>
+                
+                    <li><a href="/categories/Chemistry">化学</a></li>
+                
+                    <li><a href="/categories/Maths">数学</a></li>
+                
+                    <li><a href="/categories/Computer">计算机</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/jcchan23" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/chen-jian-wen-87" title="知乎"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
+</nav>
+      <div class="body-wrap"><article id="post-stack" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/15/stack/" class="article-date">
+      <time datetime="2017-03-15T12:03:24.000Z" itemprop="datePublished">2017-03-15</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      数据结构-栈
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Computer/">Computer</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DataStructure/">DataStructure</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本次链栈用到的Node.cpp<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> Node &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	Node() &#123;&#125;</div><div class="line">	Node(T data, Node&lt;T&gt; *nextptr) :data(data), next(nextptr)&#123;</div><div class="line">	&#125;</div><div class="line">	~Node() &#123;&#125;</div><div class="line">	<span class="function">T <span class="title">getData</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">setData</span><span class="params">(T newData)</span></span>;</div><div class="line">	Node&lt;T&gt; *getNext();</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">setNext</span><span class="params">(Node&lt;T&gt; *ptr)</span></span>;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	T data;</div><div class="line">	Node&lt;T&gt; *next;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">T Node&lt;T&gt;::getData() &#123;</div><div class="line">	<span class="keyword">return</span> data;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> Node&lt;T&gt;::setData(T newData) &#123;</div><div class="line">	data = newData;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">Node&lt;T&gt; *Node&lt;T&gt;::getNext() &#123;</div><div class="line">	<span class="keyword">return</span> next;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> Node&lt;T&gt;::setNext(Node&lt;T&gt; *ptr) &#123;</div><div class="line">	next = ptr;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;顺序栈SeqStack.cpp<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> StackSize = <span class="number">10</span>;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> SeqStack &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	SeqStack() &#123; top = <span class="number">-1</span>; &#125;</div><div class="line">	~SeqStack() &#123;&#125;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Push</span><span class="params">(T x)</span></span>;</div><div class="line">	<span class="function">T <span class="title">Pop</span><span class="params">()</span></span>;</div><div class="line">	<span class="function">T <span class="title">GetTop</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">Empty</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">Full</span><span class="params">()</span></span>;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	T data[StackSize];</div><div class="line">	<span class="keyword">int</span> top;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> SeqStack&lt;T&gt;::Push(T x) &#123;</div><div class="line">	<span class="keyword">if</span> (Full()) &#123;</div><div class="line">		<span class="keyword">throw</span> <span class="string">"栈为满！"</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		data[++top] = x;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">T SeqStack&lt;T&gt;::Pop() &#123;</div><div class="line">	<span class="keyword">if</span> (Empty()) &#123;</div><div class="line">		<span class="keyword">throw</span> <span class="string">"栈为空！"</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> data[top--];</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">T SeqStack&lt;T&gt;::GetTop() &#123;</div><div class="line">	<span class="keyword">if</span> (Empty()) &#123;</div><div class="line">		<span class="keyword">throw</span> <span class="string">"栈为空！"</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> data[top];</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">bool</span> SeqStack&lt;T&gt;::Empty() &#123;</div><div class="line">	<span class="keyword">if</span> (top == <span class="number">-1</span>) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">bool</span> SeqStack&lt;T&gt;::Full() &#123;</div><div class="line">	<span class="keyword">if</span> (top == StackSize - <span class="number">1</span>) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;共享栈BothStack.cpp<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> StackSize = <span class="number">10</span>;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> BothStack &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	BothStack() &#123; top1 = <span class="number">-1</span>; top2 = StackSize; &#125;</div><div class="line">	~BothStack() &#123;&#125;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Push</span><span class="params">(<span class="keyword">int</span> i, T x)</span></span>;</div><div class="line">	<span class="function">T <span class="title">Pop</span><span class="params">(<span class="keyword">int</span> i)</span></span>;</div><div class="line">	<span class="function">T <span class="title">GetTop</span><span class="params">(<span class="keyword">int</span> i)</span></span>;</div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">Empty</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">Full</span><span class="params">()</span></span>;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	T data[StackSize];</div><div class="line">	<span class="keyword">int</span> top1, top2;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> BothStack&lt;T&gt;::Push(<span class="keyword">int</span> i, T x) &#123;</div><div class="line">	<span class="keyword">if</span> (top1 == top2 - <span class="number">1</span>) &#123;</div><div class="line">		<span class="keyword">throw</span> <span class="string">"栈为满！"</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (i == <span class="number">1</span>) &#123;</div><div class="line">		data[++top1] = x;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (i == <span class="number">2</span>) &#123;</div><div class="line">		data[--top2] = x;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">throw</span><span class="string">"输入的值有误，没有对应的栈！"</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">T BothStack&lt;T&gt;::Pop(<span class="keyword">int</span> i) &#123;</div><div class="line">	<span class="keyword">if</span> (i == <span class="number">1</span>) &#123;</div><div class="line">		<span class="keyword">if</span> (top1 == <span class="number">-1</span>) &#123;</div><div class="line">			<span class="keyword">throw</span><span class="string">"栈1为空！"</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">return</span> data[top1--];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (i == <span class="number">2</span>) &#123;</div><div class="line">		<span class="keyword">if</span> (top2 == StackSize) &#123;</div><div class="line">			<span class="keyword">throw</span><span class="string">"栈2为空！"</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">return</span> data[top2++];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">throw</span><span class="string">"输入的值有误，没有对应的栈！"</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">T BothStack&lt;T&gt;::GetTop(<span class="keyword">int</span> i) &#123;</div><div class="line">	<span class="keyword">if</span> (i == <span class="number">1</span>) &#123;</div><div class="line">		<span class="keyword">if</span> (top1 == <span class="number">-1</span>) &#123;</div><div class="line">			<span class="keyword">throw</span><span class="string">"栈1为空！"</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">return</span> data[top1];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (i == <span class="number">2</span>) &#123;</div><div class="line">		<span class="keyword">if</span> (top2 == StackSize) &#123;</div><div class="line">			<span class="keyword">throw</span><span class="string">"栈2为空！"</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">return</span> data[top2];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">throw</span><span class="string">"输入的值有误，没有对应的栈！"</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">bool</span> BothStack&lt;T&gt;::Empty() &#123;</div><div class="line">	<span class="keyword">if</span> (top1 == <span class="number">-1</span> &amp;&amp; top2 == StackSize) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">bool</span> BothStack&lt;T&gt;::Full() &#123;</div><div class="line">	<span class="keyword">if</span> (top1 == top2 - <span class="number">1</span>) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;链栈LinkStack.cpp<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">"Node.cpp"</span></span></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> LinkStack &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	LinkStack();</div><div class="line">	~LinkStack();</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Push</span><span class="params">(T x)</span></span>;</div><div class="line">	<span class="function">T <span class="title">Pop</span><span class="params">()</span></span>;</div><div class="line">	<span class="function">T <span class="title">GetTop</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">Empty</span><span class="params">()</span></span>;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	Node&lt;T&gt; *top;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">LinkStack&lt;T&gt;::LinkStack() &#123;</div><div class="line">	top = <span class="literal">NULL</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">LinkStack&lt;T&gt;::~LinkStack() &#123;</div><div class="line">	Node&lt;T&gt; *temp;</div><div class="line">	<span class="keyword">while</span> (top != <span class="literal">NULL</span>) &#123;</div><div class="line">		temp = top;</div><div class="line">		top = top-&gt;getNext();</div><div class="line">		<span class="keyword">delete</span> temp;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> LinkStack&lt;T&gt;::Push(T x) &#123;</div><div class="line">	Node&lt;T&gt; *temp = <span class="keyword">new</span> Node&lt;T&gt;;</div><div class="line">	temp-&gt;setData(x);</div><div class="line">	temp-&gt;setNext(top);</div><div class="line">	top = temp;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">T LinkStack&lt;T&gt;::Pop() &#123;</div><div class="line">	<span class="keyword">if</span> (Empty()) &#123;</div><div class="line">		<span class="keyword">throw</span><span class="string">"栈为空！"</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		T x = top-&gt;getData();</div><div class="line">		Node&lt;T&gt; *temp = top;</div><div class="line">		top = top-&gt;getNext();</div><div class="line">		<span class="keyword">delete</span> temp;</div><div class="line">		<span class="keyword">return</span> x;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">T LinkStack&lt;T&gt;::GetTop() &#123;</div><div class="line">	<span class="keyword">if</span> (Empty()) &#123;</div><div class="line">		<span class="keyword">throw</span><span class="string">"栈为空！"</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> top-&gt;getData();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">bool</span> LinkStack&lt;T&gt;::Empty() &#123;</div><div class="line">	<span class="keyword">if</span> (top == <span class="literal">NULL</span>) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;main.cpp<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">	顺序栈测试文件</div><div class="line">*/</div><div class="line"><span class="comment">//#include&lt;iosteam&gt;</span></div><div class="line"><span class="comment">//using namespace std;</span></div><div class="line"><span class="comment">//#include"SeqStack.cpp"</span></div><div class="line"><span class="comment">//int main() &#123;</span></div><div class="line"><span class="comment">//	SeqStack&lt;int&gt; stack;</span></div><div class="line"><span class="comment">//	int array[] = &#123; 1,2,3,4,5,6,7,8,9,10,11,12&#125;;</span></div><div class="line"><span class="comment">//	try &#123;</span></div><div class="line"><span class="comment">//		for (int i = 0; i &lt; 12; i++) &#123;</span></div><div class="line"><span class="comment">//			stack.Push(array[i]);</span></div><div class="line"><span class="comment">//		&#125;</span></div><div class="line"><span class="comment">//	&#125;</span></div><div class="line"><span class="comment">//	catch(char *s)&#123;</span></div><div class="line"><span class="comment">//		cout &lt;&lt; s &lt;&lt; endl;</span></div><div class="line"><span class="comment">//		while (!stack.Empty()) &#123;</span></div><div class="line"><span class="comment">//			cout &lt;&lt; stack.Pop() &lt;&lt; endl;</span></div><div class="line"><span class="comment">//		&#125;</span></div><div class="line"><span class="comment">//	&#125;</span></div><div class="line"><span class="comment">//	system("pause");</span></div><div class="line"><span class="comment">//	return 0;</span></div><div class="line"><span class="comment">//&#125;</span></div><div class="line"><span class="comment">/*</span></div><div class="line">	共享栈测试文件</div><div class="line">*/</div><div class="line"><span class="comment">//#include&lt;iosteam&gt;</span></div><div class="line"><span class="comment">//using namespace std;</span></div><div class="line"><span class="comment">//#include"BothStack.cpp"</span></div><div class="line"><span class="comment">//int main() &#123;</span></div><div class="line"><span class="comment">//	BothStack&lt;int&gt; bothstack;</span></div><div class="line"><span class="comment">//	int array[] = &#123; 1,2,3,4,5,6,7,8,9,10,11,12,13&#125;;</span></div><div class="line"><span class="comment">//	try &#123;</span></div><div class="line"><span class="comment">//		for (int i = 0; i &lt; 13; i++) &#123;</span></div><div class="line"><span class="comment">//			bothstack.Push(1,array[i]);</span></div><div class="line"><span class="comment">//			bothstack.Push(2, array[12 - i]);</span></div><div class="line"><span class="comment">//		&#125;</span></div><div class="line"><span class="comment">//	&#125;</span></div><div class="line"><span class="comment">//	catch (char *s) &#123;</span></div><div class="line"><span class="comment">//		cout &lt;&lt; s &lt;&lt; endl;</span></div><div class="line"><span class="comment">//		while (!bothstack.Empty()) &#123;</span></div><div class="line"><span class="comment">//			cout &lt;&lt; bothstack.Pop(1) &lt;&lt; " " &lt;&lt; bothstack.Pop(2) &lt;&lt; endl;</span></div><div class="line"><span class="comment">//		&#125;</span></div><div class="line"><span class="comment">//	&#125;</span></div><div class="line"><span class="comment">//	system("pause");</span></div><div class="line"><span class="comment">//	return 0;</span></div><div class="line"><span class="comment">//&#125;</span></div><div class="line"><span class="comment">/*</span></div><div class="line">	链栈测试文件</div><div class="line">*/</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">"LinkStack.cpp"</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	LinkStack&lt;<span class="keyword">int</span>&gt; linkstack;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		linkstack.Push(<span class="number">1</span>);</div><div class="line">		linkstack.Push(<span class="number">2</span>);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; linkstack.GetTop() &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; linkstack.Pop() &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; linkstack.Pop() &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; linkstack.Pop() &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">catch</span>(<span class="keyword">char</span> *s)&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (linkstack.Empty()) &#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"栈为空！"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这次的作业中还用的一种叫做指针栈的东西，指针栈是我起的名字，因为是一种通过指针实现的栈，即在内存中开辟一块连续的空间做栈的操作，与数组实现的会稍微有一些不同。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分析：其实本质上来说就是在一段连续的内存空间中实现一个栈，之前实现栈数据结构的时候使用的存储结构是数组，而这次使用的是指针。与数组存储不同的时候，这个时候的数指针不可以设置为-1，因为会产生指针指向越界，也不可以将指针设置超过最大值，也是会产生指针指向越界。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因此在这里我使用了两个指针，一个是bottom，另外一个是top。一个数据存放栈的最大值MaxLength，另外用两个标志FlagBottom和FlagTop，专门用于处理判定栈空和栈满时对应的位置是否存放有数据值。如果top==bottom并且FlagBottom为false，那么栈底就是真正的空，如果此时为True，证明栈底还是有数据的。如果top-bottom==MaxLength-1并且FlagTop为True，证明栈满了，如果为false，证明这个位置没有存放数据，可以继续放数据。需要注意的是，指针指向的是一个地址的开端，所以指向栈顶的时候要减去1的地址值，否则就会出现指针越界。通过这样指示实现不浪费空间，按照分配的内存大小来存放所需的数据量，代码实现如下。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PointerStack.cpp<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">class</span> PointerStack &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	PointerStack() &#123;&#125;;</div><div class="line">	PointerStack(<span class="keyword">int</span> n);</div><div class="line">	~PointerStack();</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(T data)</span></span>;</div><div class="line">	<span class="function">T <span class="title">pop</span><span class="params">()</span></span>;</div><div class="line">	<span class="function">T <span class="title">get</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">Full</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">Empty</span><span class="params">()</span></span>;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	T *bottom,*top;</div><div class="line">	<span class="comment">//记录长度</span></div><div class="line">	<span class="keyword">int</span> MaxLength;</div><div class="line">	<span class="comment">//标记栈底和栈顶数据空间是否有数据</span></div><div class="line">	<span class="keyword">bool</span> FlagBottom;</div><div class="line">	<span class="keyword">bool</span> FlagTop;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">PointerStack&lt;T&gt;::PointerStack(<span class="keyword">int</span> n) &#123;</div><div class="line">	bottom = <span class="keyword">new</span> T[n];</div><div class="line">	top = bottom;</div><div class="line">	FlagBottom = FlagTop = <span class="literal">false</span>;</div><div class="line">	MaxLength = n;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">PointerStack&lt;T&gt;::~PointerStack() &#123;</div><div class="line">	<span class="keyword">delete</span>[] bottom;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> PointerStack&lt;T&gt;::push(T data) &#123;</div><div class="line">	<span class="keyword">if</span> (Full()) &#123;<span class="keyword">throw</span> <span class="string">"栈满！"</span>;&#125;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (top == bottom) &#123;</div><div class="line">		*(top++) = data;</div><div class="line">		FlagBottom = <span class="literal">true</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//进入最后一个空白空间</span></div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(top - bottom == MaxLength - <span class="number">1</span>)&#123;</div><div class="line">		*top = data; </div><div class="line">		FlagTop = <span class="literal">true</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;*(top++) = data;&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">T PointerStack&lt;T&gt;::pop() &#123;</div><div class="line">	<span class="keyword">if</span> (Empty()) &#123;<span class="keyword">throw</span> <span class="string">"栈空！"</span>;&#125;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (top == bottom) &#123;</div><div class="line">		T data = *top;</div><div class="line">		FlagBottom = <span class="literal">false</span>;</div><div class="line">		<span class="keyword">return</span> data;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//进入最后一个空白空间</span></div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (top - bottom == MaxLength - <span class="number">1</span>) &#123;</div><div class="line">		T data = *(top--);</div><div class="line">		FlagTop = <span class="literal">false</span>;</div><div class="line">		<span class="keyword">return</span> data;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		T data = *(top--);</div><div class="line">		<span class="keyword">return</span> data;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line">T PointerStack&lt;T&gt;::get() &#123;</div><div class="line">	<span class="keyword">if</span> (Empty()) &#123;<span class="keyword">throw</span> <span class="string">"栈空！"</span>;&#125;</div><div class="line">	<span class="keyword">else</span> &#123;<span class="keyword">return</span> *top;&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">bool</span> PointerStack&lt;T&gt;::Empty() &#123;</div><div class="line">	<span class="keyword">if</span> ((top == bottom) &amp;&amp; !FlagBottom) &#123;<span class="keyword">return</span> <span class="literal">true</span>;&#125;</div><div class="line">	<span class="keyword">else</span> &#123;<span class="keyword">return</span> <span class="literal">false</span>;&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">bool</span> PointerStack&lt;T&gt;::Full() &#123;</div><div class="line">	<span class="keyword">if</span> ((top - bottom == MaxLength - <span class="number">1</span>)&amp;&amp; FlagTop) &#123;<span class="keyword">return</span> <span class="literal">true</span>;&#125;</div><div class="line">	<span class="keyword">else</span> &#123;<span class="keyword">return</span> <span class="literal">false</span>;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/03/15/queue/">
+                    数据结构-队列
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/03/15/double-and-cycle-linked-list/">
+                    数据结构-双链表与循环链表
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+            
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
+
+    <script>
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"数据结构-栈　| JCChan's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/03/15/stack/" data-title="数据结构-栈" data-url="http://yoursite.com/2017/03/15/stack/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"jcchan23"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/03/15/queue/" title="Pre: 数据结构-队列">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/03/15/double-and-cycle-linked-list/" title="Next: 数据结构-双链表与循环链表">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/15/queue/">数据结构-队列</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/15/stack/">数据结构-栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/15/double-and-cycle-linked-list/">数据结构-双链表与循环链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/03/single-Linked-List/">数据结构-单链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/05/NAT-behind-FAT-Server-Deployment-Notes/">NAT后的FTP服务器部署笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/05/the-algothrim-of-matrix-transpose/">C++写矩阵的转置</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/05/the-algothrim-of-continued-fraction/">连分数近似算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/05/two-interesting-algothrim-questions/">两个有趣的算法问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/28/Origin-user-defined-function-fitting/">Origin使用自定义函数拟合曲线函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/28/C++-the-second-time-home/">C++第二次上机作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/22/C++-the-eigth-week-homework/">C++第八周作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/C++-the-sixth-week-homework/">C++第六周作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/03/C++-the-fifth-week-homework/">C++第五周作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/26/C++-the-first-time-homework/">C++第一次上机作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/23/matlab-the-fourth-week-homework/">Matlab第四周上机作业</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/06/Antivirus-software-cause-LSP-break/">东区机房浏览器问题记录排查</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/06/How-to-config-Eclipse-environment/">Eclipse Java开发环境的搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/25/How-to-install-wireshark-with-sourcecode-in-CentOS/">CentOS源码安装Wireshark</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/26/Ubantu-Ruby-MySQL-Nginx-Redmine部署记录/">Ubuntu + Ruby + MySQL + Nginx + Redmine部署记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/12/二进制反码求和运算/">二进制反码求和运算</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/11/由VMnet引起的browser-sync故障解决方案/">由VMnet引起的browser-sync故障解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/Gen8折腾日记（一）/">Gen8折腾日记（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/01/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 JCChan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+             title: "a.article-title, .article-more-link a", 
+             post: ".article-entry a[href], .copyright a[href]", 
+             tags: ".article-tag a", 
+             categories: ".article-category a, a.tag-list-link", 
+             articleNav: "#article-nav a, #post-nav-button a", 
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+             menu: ".header-menu a", 
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
