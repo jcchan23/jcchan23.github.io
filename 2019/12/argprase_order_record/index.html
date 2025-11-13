@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jcchan23.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="今天在写代码的时候遇到了一个关于parser的一些小坑，记录在此备用。 我们知道在python中可以用argprase来传递一些参数给代码执行，来看下面的例子，假设现在有一个test文件夹，下面有3个python文件，分别用a.py；b.py；c.py来表示，目录树如下。 1234test├── a.py├── b.py├── c.py  每一个的初始代码为一个简单的print函数。 123456">
+    <meta name="description" content="今天在写代码的时候遇到了一个关于parser的一些小坑，记录在此备用。 我们知道在python中可以用argprase来传递一些参数给代码执行，来看下面的例子，假设现在有一个test文件夹，下面有3个python文件，分别用a.py；b.py；c.py来表示，目录树如下。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python中关于传递参数模块argprase的一些小坑.md">
 <meta property="og:url" content="http://jcchan23.github.io/2019/12/argprase_order_record/index.html">
 <meta property="og:site_name" content="JCChan&#39;s Blog">
-<meta property="og:description" content="今天在写代码的时候遇到了一个关于parser的一些小坑，记录在此备用。 我们知道在python中可以用argprase来传递一些参数给代码执行，来看下面的例子，假设现在有一个test文件夹，下面有3个python文件，分别用a.py；b.py；c.py来表示，目录树如下。 1234test├── a.py├── b.py├── c.py  每一个的初始代码为一个简单的print函数。 123456">
+<meta property="og:description" content="今天在写代码的时候遇到了一个关于parser的一些小坑，记录在此备用。 我们知道在python中可以用argprase来传递一些参数给代码执行，来看下面的例子，假设现在有一个test文件夹，下面有3个python文件，分别用a.py；b.py；c.py来表示，目录树如下。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://jcchan23.github.io/images/argprase_order_record/1.png">
 <meta property="og:image" content="http://jcchan23.github.io/images/argprase_order_record/2.png">
@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://jcchan23.github.io/images/argprase_order_record/6.png">
 <meta property="og:image" content="http://jcchan23.github.io/images/argprase_order_record/7.png">
 <meta property="article:published_time" content="2019-12-08T09:51:00.000Z">
-<meta property="article:modified_time" content="2025-11-13T03:49:54.613Z">
+<meta property="article:modified_time" content="2025-11-13T04:21:49.757Z">
 <meta property="article:author" content="JCChan">
 <meta property="article:tag" content="化学，数学，计算机">
 <meta name="twitter:card" content="summary">
@@ -212,7 +212,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-13 11:49:54" itemprop="dateModified" datetime="2025-11-13T11:49:54+08:00">2025-11-13</time>
+      <time title="修改时间：2025-11-13 12:21:49" itemprop="dateModified" datetime="2025-11-13T12:21:49+08:00">2025-11-13</time>
     </span>
 
   
@@ -226,6 +226,8 @@
     
     <div class="post-body" itemprop="articleBody"><p>今天在写代码的时候遇到了一个关于parser的一些小坑，记录在此备用。</p>
 <p>我们知道在python中可以用argprase来传递一些参数给代码执行，来看下面的例子，假设现在有一个test文件夹，下面有3个python文件，分别用a.py；b.py；c.py来表示，目录树如下。</p>
+<span id="more"></span>
+
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">test</span></span><br><span class="line">├── a.py</span><br><span class="line">├── b.py</span><br><span class="line">├── c.py</span><br></pre></td></tr></table></figure>
 
 <p>每一个的初始代码为一个简单的print函数。</p>
