@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jcchan23.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="更新 2025年11月13日注：时光境迁，Gen8放在工作室已经接近10年的时间，目前它仍然投入使用，但是已经开始出现硬件问题，我目前还没排查是否仍然是当初的硬件，估计是需要更换了。  2019年2月19日注：没想到时间过得那么快，Gen8已经在工作室投入生产环境2年多了，这2年多以来，2016-2017年我是比较关注Gen8的使用情况，它作为FTP服务器的备用服务器还是非常的不错的，在我毕业以后">
+    <meta name="description" content="前言放假伊始，老大订购了两台服务器，一台是Dell的R630，用于其他老师的实验室计算用途，另一台则是Gen8，并且一口气把想买的配件全部搞回来了，于是在假期的第一周就摸上了这台非常舒适安静的Gen8啦，本文主要写我们的改装计划以及虚拟化的部署过程，而在后面的计划中，我将虚拟服务器的部署过程交给了小朋友们当做练习，让他们熟悉Linux服务器。 老大有一句话说的特别好，凡是先谈项目需求，对，在列出装">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Gen8折腾日记.md">
 <meta property="og:url" content="http://jcchan23.github.io/2016/07/Gen8-diary/index.html">
 <meta property="og:site_name" content="JCChan&#39;s Blog">
-<meta property="og:description" content="更新 2025年11月13日注：时光境迁，Gen8放在工作室已经接近10年的时间，目前它仍然投入使用，但是已经开始出现硬件问题，我目前还没排查是否仍然是当初的硬件，估计是需要更换了。  2019年2月19日注：没想到时间过得那么快，Gen8已经在工作室投入生产环境2年多了，这2年多以来，2016-2017年我是比较关注Gen8的使用情况，它作为FTP服务器的备用服务器还是非常的不错的，在我毕业以后">
+<meta property="og:description" content="前言放假伊始，老大订购了两台服务器，一台是Dell的R630，用于其他老师的实验室计算用途，另一台则是Gen8，并且一口气把想买的配件全部搞回来了，于是在假期的第一周就摸上了这台非常舒适安静的Gen8啦，本文主要写我们的改装计划以及虚拟化的部署过程，而在后面的计划中，我将虚拟服务器的部署过程交给了小朋友们当做练习，让他们熟悉Linux服务器。 老大有一句话说的特别好，凡是先谈项目需求，对，在列出装">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://jcchan23.github.io/images/Gen8-diary/0.png">
 <meta property="og:image" content="http://jcchan23.github.io/images/Gen8-diary/1.jpg">
@@ -66,7 +66,7 @@
 <meta property="og:image" content="http://jcchan23.github.io/images/Gen8-diary/28_2.png">
 <meta property="og:image" content="http://jcchan23.github.io/images/Gen8-diary/28_3.png">
 <meta property="article:published_time" content="2016-07-07T02:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-13T03:20:06.659Z">
+<meta property="article:modified_time" content="2025-11-13T03:26:12.489Z">
 <meta property="article:author" content="JCChan">
 <meta property="article:tag" content="化学，数学，计算机">
 <meta name="twitter:card" content="summary">
@@ -168,7 +168,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0"><span class="nav-number">1.</span> <span class="nav-text">更新</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.</span> <span class="nav-text">部署步骤</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.</span> <span class="nav-text">部署步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0"><span class="nav-number">3.</span> <span class="nav-text">更新</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -181,7 +181,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -245,7 +245,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-13 11:20:06" itemprop="dateModified" datetime="2025-11-13T11:20:06+08:00">2025-11-13</time>
+      <time title="修改时间：2025-11-13 11:26:12" itemprop="dateModified" datetime="2025-11-13T11:26:12+08:00">2025-11-13</time>
     </span>
 
   
@@ -257,13 +257,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h1><ol>
-<li><p>2025年11月13日注：时光境迁，Gen8放在工作室已经接近10年的时间，目前它仍然投入使用，但是已经开始出现硬件问题，我目前还没排查是否仍然是当初的硬件，估计是需要更换了。</p>
-</li>
-<li><p>2019年2月19日注：没想到时间过得那么快，Gen8已经在工作室投入生产环境2年多了，这2年多以来，2016-2017年我是比较关注Gen8的使用情况，它作为FTP服务器的备用服务器还是非常的不错的，在我毕业以后，Gen8还发生过硬盘损坏的情况，当时已有备份，所以没有损失，现在据说Gen8是作为数码组存储拍摄的原片的用途，看上去挺好的，希望后面的网管组师弟师妹们能好好利用这台服务器。</p>
-</li>
-</ol>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>放假伊始，老大订购了两台服务器，一台是Dell的R630，用于其他老师的实验室计算用途，另一台则是Gen8，并且一口气把想买的配件全部搞回来了，于是在假期的第一周就摸上了这台非常舒适安静的Gen8啦，本文主要写我们的改装计划以及虚拟化的部署过程，而在后面的计划中，我将虚拟服务器的部署过程交给了小朋友们当做练习，让他们熟悉Linux服务器。</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>放假伊始，老大订购了两台服务器，一台是Dell的R630，用于其他老师的实验室计算用途，另一台则是Gen8，并且一口气把想买的配件全部搞回来了，于是在假期的第一周就摸上了这台非常舒适安静的Gen8啦，本文主要写我们的改装计划以及虚拟化的部署过程，而在后面的计划中，我将虚拟服务器的部署过程交给了小朋友们当做练习，让他们熟悉Linux服务器。</p>
 <p>老大有一句话说的特别好，凡是先谈项目需求，对，在列出装机配置之前，我们先来说说这次的需求，其实主要目的就是玩，Chiphell上面有一票子大神们两年来一直在各种折腾Gen8，然后在暑假之前工作室有两位师兄也凑单买了一台普通的Gen8，然后老大表示忍耐不住了，当即决定下单高配版，外加内存硬盘固态全部买齐，给我们这些小弟们玩！不过玩归玩，说到底其实还是利用它的存储，将高清资源集中在一起，方便工作室的小伙伴一起共享。</p>
 <span id="more"></span>
 
@@ -393,6 +387,12 @@
 <p><img src="/../images/Gen8-diary/28_2.png"></p>
 <p><img src="/../images/Gen8-diary/28_3.png"></p>
 <p>总结：总体来说，这是个最为简单的配置方案，由于还没测试磁盘读写性能怎么样，因此对于BIOS中的设置基本以默认为主，待小朋友把Linux ftp服务器部署好以后再慢慢的测试性能，根据性能可能会不断重新部署ESXi系统，也正好给小朋友们练练手部署这个系统。</p>
+<h1 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h1><ol>
+<li><p>2025年11月13日注：时光境迁，Gen8放在工作室已经接近10年的时间，目前它仍然投入使用，但是已经开始出现硬件问题，我目前还没排查是否仍然是当初的硬件，估计是需要更换了。</p>
+</li>
+<li><p>2019年2月19日注：没想到时间过得那么快，Gen8已经在工作室投入生产环境2年多了，这2年多以来，2016-2017年我是比较关注Gen8的使用情况，它作为FTP服务器的备用服务器还是非常的不错的，在我毕业以后，Gen8还发生过硬盘损坏的情况，当时已有备份，所以没有损失，现在据说Gen8是作为数码组存储拍摄的原片的用途，看上去挺好的，希望后面的网管组师弟师妹们能好好利用这台服务器。</p>
+</li>
+</ol>
 
     </div>
 
@@ -411,6 +411,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2019/12/argprase_order_record/" rel="next" title="python中关于传递参数模块argprase的一些小坑.md">
+                  python中关于传递参数模块argprase的一些小坑.md <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>

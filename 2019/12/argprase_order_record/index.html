@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jcchan23.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="今天在写代码的时候遇到了一个关于parser的一些小坑，记录在此备用。 我们知道在python中可以用argprase来传递一些参数给代码执行，来看下面的例子，假设现在有一个test文件夹，下面有3个python文件，分别用a.py；b.py；c.py来表示，目录树如下。 1234test├── a.py├── b.py├── c.py  每一个的初始代码为一个简单的print函数。 123456">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python中关于传递参数模块argprase的一些小坑.md">
+<meta property="og:url" content="http://jcchan23.github.io/2019/12/argprase_order_record/index.html">
+<meta property="og:site_name" content="JCChan&#39;s Blog">
+<meta property="og:description" content="今天在写代码的时候遇到了一个关于parser的一些小坑，记录在此备用。 我们知道在python中可以用argprase来传递一些参数给代码执行，来看下面的例子，假设现在有一个test文件夹，下面有3个python文件，分别用a.py；b.py；c.py来表示，目录树如下。 1234test├── a.py├── b.py├── c.py  每一个的初始代码为一个简单的print函数。 123456">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://jcchan23.github.io/images/argprase_order_record/1.png">
+<meta property="og:image" content="http://jcchan23.github.io/images/argprase_order_record/2.png">
+<meta property="og:image" content="http://jcchan23.github.io/images/argprase_order_record/3.png">
+<meta property="og:image" content="http://jcchan23.github.io/images/argprase_order_record/4.png">
+<meta property="og:image" content="http://jcchan23.github.io/images/argprase_order_record/5.png">
+<meta property="og:image" content="http://jcchan23.github.io/images/argprase_order_record/6.png">
+<meta property="og:image" content="http://jcchan23.github.io/images/argprase_order_record/7.png">
+<meta property="article:published_time" content="2019-12-08T09:51:00.000Z">
+<meta property="article:modified_time" content="2025-11-13T03:49:54.613Z">
+<meta property="article:author" content="JCChan">
+<meta property="article:tag" content="化学，数学，计算机">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jcchan23.github.io/images/argprase_order_record/1.png">
+
+
+<link rel="canonical" href="http://jcchan23.github.io/2019/12/argprase_order_record/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://jcchan23.github.io/2019/12/argprase_order_record/","path":"2019/12/argprase_order_record/","title":"python中关于传递参数模块argprase的一些小坑.md"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>python中关于传递参数模块argprase的一些小坑.md | JCChan's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">JCChan's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">JCChan</p>
+  <div class="site-description" itemprop="description">总结一些技术积累</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jcchan23.github.io/2019/12/argprase_order_record/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JCChan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JCChan's Blog">
+      <meta itemprop="description" content="总结一些技术积累">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="python中关于传递参数模块argprase的一些小坑.md | JCChan's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python中关于传递参数模块argprase的一些小坑.md
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-12-08 17:51:00" itemprop="dateCreated datePublished" datetime="2019-12-08T17:51:00+08:00">2019-12-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-11-13 11:49:54" itemprop="dateModified" datetime="2025-11-13T11:49:54+08:00">2025-11-13</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>今天在写代码的时候遇到了一个关于parser的一些小坑，记录在此备用。</p>
+<p>我们知道在python中可以用argprase来传递一些参数给代码执行，来看下面的例子，假设现在有一个test文件夹，下面有3个python文件，分别用a.py；b.py；c.py来表示，目录树如下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">test</span></span><br><span class="line">├── a.py</span><br><span class="line">├── b.py</span><br><span class="line">├── c.py</span><br></pre></td></tr></table></figure>
+
+<p>每一个的初始代码为一个简单的print函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#a.py</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">out_a</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;I am a.py&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    out_a()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#b.py</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">out_b</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;I am b.py&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    out_b()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#c.py</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">out_c</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;I am c.py&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    out_c()</span><br></pre></td></tr></table></figure>
+
+<p>现在在a.py中引入模块argprase，并定义一些简单的参数，代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line">parser = argparse.ArgumentParser()</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--first_parameter&#x27;</span>, default=<span class="string">&#x27;first&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--second_parameter&#x27;</span>, default=<span class="string">&#x27;second&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--third_flag&#x27;</span>, action=<span class="string">&#x27;store_true&#x27;</span>)</span><br><span class="line">args = parser.parse_args()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">out_a</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;I am a.py&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    out_a()</span><br></pre></td></tr></table></figure>
+
+<p>这里面简单说一下第3个参数，这也是我今天想记录文章的原因，这个参数是argparse里面提供的开关布尔选项，actions记录的是一个动作，意味着在调用这个函数的时候，如果在命令行添加这个参数，则该参数为True，如果不添加这个参数，则该参数为False，归纳起来为如下的两个图。</p>
+<p>这个是没有指定第3个参数的情况</p>
+<p><img src="/../images/argprase_order_record/1.png" alt="这个是没有指定第3个参数的情况"></p>
+<p>这个是指定第3个参数的情况</p>
+<p><img src="/../images/argprase_order_record/2.png" alt="这个是指定第3个参数的情况"></p>
+<p>对于这种开关布尔选项更为详细的介绍，可以参考知乎问题：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/56692630">Argparse中action的可选参数store_true,store_false到底是什么意思？</a></p>
+<p>到目前为止没有出现问题，接下来，我希望b.py也使用参数，并且还希望使用a.py里面的函数，因此我对b.py进行如下修改。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> a <span class="keyword">import</span> out_a</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line">parser = argparse.ArgumentParser()</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--fourth_parameter&#x27;</span>, default=<span class="string">&#x27;fourth&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--fifth_parameter&#x27;</span>, default=<span class="string">&#x27;fifth&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--sixth_flag&#x27;</span>, action=<span class="string">&#x27;store_true&#x27;</span>)</span><br><span class="line">args = parser.parse_args()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">out_b</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;I am b.py&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    out_b()</span><br><span class="line">    out_a()</span><br></pre></td></tr></table></figure>
+
+<p>然后同样的，我们分别用两种方式来测试b.py，效果如下。</p>
+<p>这个是不使用参数的情况</p>
+<p><img src="/../images/argprase_order_record/3.png" alt="这个是不使用参数的情况"></p>
+<p>这个是使用参数的情况</p>
+<p><img src="/../images/argprase_order_record/4.png" alt="这个是使用参数的情况"></p>
+<p>可以看到报错了，当时我看到这里的时候想了很久，排除了拼写错误的情况以后，观察这里面的输出，发现看到的是a.py当中的3个参数，而不是b.py当中设置的参数，于是我将a.py和b.py的参数表打印出来，看到这样子的结果。</p>
+<p>输出两个python文件的参数表</p>
+<p><img src="/../images/argprase_order_record/5.png" alt="输出两个python文件的参数表"></p>
+<p>可以发现尽管我使用的是<code>from a import out_a</code>，但依然引入了a.py当中的参数表，并且后引入的b.py的参数表没有办法覆盖掉。下面在c.py中同样引入3个参数，然后引入b.py的方法，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> b <span class="keyword">import</span> out_b</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line">parser = argparse.ArgumentParser()</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--seventh_parameter&#x27;</span>, default=<span class="string">&#x27;seventh&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--eighth_parameter&#x27;</span>, default=<span class="string">&#x27;eighth&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--ninth_flag&#x27;</span>, action=<span class="string">&#x27;store_true&#x27;</span>)</span><br><span class="line">args = parser.parse_args()</span><br><span class="line"><span class="built_in">print</span>(args)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">out_c</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;I am c.py&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    out_c()</span><br><span class="line">    out_b()</span><br></pre></td></tr></table></figure>
+
+<p>效果如下</p>
+<p>不使用任何参数调用c.py</p>
+<p><img src="/../images/argprase_order_record/6.png" alt="不使用任何参数调用c.py"></p>
+<p>看到有3个参数列表输出就知道c.py的参数也是无效的了，验证一下。</p>
+<p>使用参数调用c.py</p>
+<p><img src="/../images/argprase_order_record/7.png" alt="使用参数调用c.py"></p>
+<p>解决方案：</p>
+<p>其实只需要将所有的参数表放到同一个文件里面就可以了，比如utils.py，由于这里是同一个文件夹下的3个文件，在import调用的时候就只需要初始化一次所有参数就可以使用了，有点类似于C语言当中的全局变量，因为这个东西排查了一个下午，也是有点恼火了。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2016/07/Gen8-diary/" rel="prev" title="Gen8折腾日记.md">
+                  <i class="fa fa-angle-left"></i> Gen8折腾日记.md
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/08/dynamic_rnn-to-nn_gru-record/" rel="next" title="dynamic_rnn转nn.GRU详细记录.md">
+                  dynamic_rnn转nn.GRU详细记录.md <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">JCChan</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
