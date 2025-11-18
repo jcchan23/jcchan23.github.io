@@ -19,27 +19,34 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jcchan23.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+    <meta name="description" content="前言今天晚上，前端组的小伙伴问我说能不能帮忙看看他的电脑为什么在安装了browser-sync插件以后，正常启动服务以后却无法通过手机访问，经过简单的排查，发现竟然是由VMnet虚拟网卡引起的网络故障，遂记录下来。也正好把整个browser-sync插件的安装过程说一下。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://jcchan23.github.io/2016/07/hello-world/index.html">
+<meta property="og:title" content="由VMnet引起的browser-sync故障解决方案">
+<meta property="og:url" content="http://jcchan23.github.io/2016/07/vmnet-to-browser_sync/index.html">
 <meta property="og:site_name" content="JCChan&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta property="og:description" content="前言今天晚上，前端组的小伙伴问我说能不能帮忙看看他的电脑为什么在安装了browser-sync插件以后，正常启动服务以后却无法通过手机访问，经过简单的排查，发现竟然是由VMnet虚拟网卡引起的网络故障，遂记录下来。也正好把整个browser-sync插件的安装过程说一下。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2016-07-01T02:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-13T03:25:46.648Z">
+<meta property="og:image" content="http://jcchan23.github.io/images/vmnet-to-browser_sync/1.png">
+<meta property="og:image" content="http://jcchan23.github.io/images/vmnet-to-browser_sync/2.png">
+<meta property="og:image" content="http://jcchan23.github.io/images/vmnet-to-browser_sync/3.png">
+<meta property="og:image" content="http://jcchan23.github.io/images/vmnet-to-browser_sync/4.png">
+<meta property="og:image" content="http://jcchan23.github.io/images/vmnet-to-browser_sync/5.png">
+<meta property="og:image" content="http://jcchan23.github.io/images/vmnet-to-browser_sync/6.png">
+<meta property="article:published_time" content="2016-07-11T04:28:00.000Z">
+<meta property="article:modified_time" content="2025-11-13T06:13:57.112Z">
 <meta property="article:author" content="JCChan">
 <meta property="article:tag" content="化学，数学，计算机">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jcchan23.github.io/images/vmnet-to-browser_sync/1.png">
 
 
-<link rel="canonical" href="http://jcchan23.github.io/2016/07/hello-world/">
+<link rel="canonical" href="http://jcchan23.github.io/2016/07/vmnet-to-browser_sync/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://jcchan23.github.io/2016/07/hello-world/","path":"2016/07/hello-world/","title":"Hello World"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://jcchan23.github.io/2016/07/vmnet-to-browser_sync/","path":"2016/07/vmnet-to-browser_sync/","title":"由VMnet引起的browser-sync故障解决方案"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Hello World | JCChan's Blog</title>
+<title>由VMnet引起的browser-sync故障解决方案 | JCChan's Blog</title>
   
 
 
@@ -128,7 +135,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -169,7 +176,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jcchan23.github.io/2016/07/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://jcchan23.github.io/2016/07/vmnet-to-browser_sync/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -182,12 +189,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Hello World | JCChan's Blog">
+      <meta itemprop="name" content="由VMnet引起的browser-sync故障解决方案 | JCChan's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          由VMnet引起的browser-sync故障解决方案
         </h1>
 
         <div class="post-meta-container">
@@ -198,14 +205,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2016-07-01 10:00:00" itemprop="dateCreated datePublished" datetime="2016-07-01T10:00:00+08:00">2016-07-01</time>
+      <time title="创建时间：2016-07-11 12:28:00" itemprop="dateCreated datePublished" datetime="2016-07-11T12:28:00+08:00">2016-07-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-13 11:25:46" itemprop="dateModified" datetime="2025-11-13T11:25:46+08:00">2025-11-13</time>
+      <time title="修改时间：2025-11-13 14:13:57" itemprop="dateModified" datetime="2025-11-13T14:13:57+08:00">2025-11-13</time>
     </span>
 
   
@@ -217,21 +224,45 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今天晚上，前端组的小伙伴问我说能不能帮忙看看他的电脑为什么在安装了browser-sync插件以后，正常启动服务以后却无法通过手机访问，经过简单的排查，发现竟然是由VMnet虚拟网卡引起的网络故障，遂记录下来。也正好把整个browser-sync插件的安装过程说一下。</p>
 <span id="more"></span>
 
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<ol>
+<li><p>部署好git环境以及Node.js的安装，这个非常简单，在此就不多做解释了。</p>
+</li>
+<li><p>登录 <a target="_blank" rel="noopener" href="http://www.browsersync.cn/">http://www.browsersync.cn</a> 网站，按照安装提示进行安装。</p>
+</li>
+</ol>
+<p>在安装的过程中还发现翻墙的原因连不上npm服务器，随改用淘宝的镜像站点，修改链接<a href = "http://cnodejs.org/topic/4f9904f9407edba21468f31e">http://cnodejs.org/topic/4f9904f9407edba21468f31e</a></p>
+<p><code>npm install -g browser-sync</code></p>
+<p><img src="/../images/vmnet-to-browser_sync/1.png"></p>
+<ol start="3">
+<li>在某个英文目录下建立起一个文件夹，作为放置待响应式测试的站点的根目录，注意这里的路径都不能有中文，由于是测试，我直接在桌面上建立一个test文件夹，进来以后运行命令。</li>
+</ol>
+<p><code>npm install --save-dev browser-sync</code></p>
+<p><img src="/../images/vmnet-to-browser_sync/2.png"></p>
+<ol start="4">
+<li>下载网站上给的同步测试包，解压缩，进入下一级目录。</li>
+</ol>
+<p><img src="/../images/vmnet-to-browser_sync/3.png"></p>
+<p><img src="/../images/vmnet-to-browser_sync/4.png"></p>
+<ol start="5">
+<li>运行命令，这个命令的意思是监听本目录下所有文件。</li>
+</ol>
+<p><code>browser-sync start --server -files &quot;*&quot;</code></p>
+<p><img src="/../images/vmnet-to-browser_sync/5.png"></p>
+<ol start="6">
+<li>若是正常情况下，就会返回如下提示。</li>
+</ol>
+<p><img src="/../images/vmnet-to-browser_sync/6.png"></p>
+<p>小伙伴今晚在这里的返回提示是一个169.254.0.0&#x2F;16的地址，这是一种叫做本地链路地址，用于当计算机没有插入网线时，网卡给自己临时自动分配的一个地址，而小伙伴当前使用的网络地址当然不会是这个，因此导致了问题。</p>
+<p>既然browser-sync服务器识别并应用到了这个地址，说明本机上至少是有一块网卡使用着这个地址，打开网络与共享中心 → 更改适配器设置 → 网卡，一张张网卡看过去，马上就发现了由于VMnet1使用了这个地址，因此browser-sync服务器就指示到这里来了，禁用掉这两个网卡，再重新跑一遍步骤5，手机上就能打开了。</p>
+<ol start="7">
+<li>最后说说两个使用事项吧。</li>
+</ol>
+<p>(1) 手机端和电脑端一定要使用同一个网段，比如连接到同样一个wifi下面，若电脑端直接连接wifi，手机端用流量的话，在不做端口转发的前提下是不能正常使用的。</p>
+<p>(2) 有一个根文件夹作为监听的根目录，那么就可以在根目录下面根据需要监听文件了。</p>
+<p>Bug在宿舍重现不出来(:з」∠)，估计应该只是个别电脑问题而已，小伙伴们若是碰到了可以稍微注意一下。</p>
 
     </div>
 
@@ -245,10 +276,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2016/07/Gen8-diary/" rel="prev" title="Gen8折腾日记">
+                  <i class="fa fa-angle-left"></i> Gen8折腾日记
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2016/07/Gen8-diary/" rel="next" title="Gen8折腾日记">
-                  Gen8折腾日记 <i class="fa fa-angle-right"></i>
+                <a href="/2016/07/Binary-complement-sum-operation/" rel="next" title="二进制反码求和运算">
+                  二进制反码求和运算 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
